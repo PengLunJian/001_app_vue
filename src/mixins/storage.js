@@ -31,7 +31,6 @@ export default {
         wx.clearStorageSync();
       } catch (e) {
         console.log(e);
-        // Do something when catch error
       }
     },
     getStorageInfoSync() {
@@ -47,6 +46,6 @@ export default {
     }
   },
   created() {
-    console.log('created in mixin');
+    console.log('created in storage');
   }
 };

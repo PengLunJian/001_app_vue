@@ -1,10 +1,16 @@
 import apis from '../apis';
+import * as $ajax from '../ajax';
 import * as actionTypes from './actionTypes';
 
-export const ajaxSelectLogin =({commit})=>{
+/**
+ *
+ * @param commit
+ * @returns {Promise<any>}
+ */
+export const ajaxSelectLogin = ({commit}, params) => {
   commit(actionTypes.SELECT_LOGIN_REQUEST);
   return new Promise((resolve, reject) => {
-    axios.post(apis.selectLogin)
+    $ajax.post(apis.selectLogin, params)
       .then((res) => {
         res = res || {};
         const {data, success} = res;
@@ -21,3 +27,37 @@ export const ajaxSelectLogin =({commit})=>{
       });
   });
 };
+
+const ajaxPromiseMethod1 = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(10)
+    }, 5000);
+  });
+}
+
+const ajaxPromiseMethod2 = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(20)
+    }, 3000);
+  });
+}
+
+export const ajaxPromiseAll = () => {
+  return new Promise((resolve, reject) => {
+    $ajax.all([
+      ajaxPromiseMethod1(),
+      ajaxPromiseMethod2()
+    ])
+      .then((res) => {
+        res = res || {};
+        resolve(res);
+        console.log(res);
+      })
+      .catch((err) => {
+        reject(err);
+        console.log(err);
+      })
+  });
+}

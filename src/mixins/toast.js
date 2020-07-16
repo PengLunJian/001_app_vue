@@ -7,7 +7,7 @@ export default {
   methods: {
     showToast(title, icon) {
       uni.showToast({
-        title: title || '正在加载',
+        title,
         icon: icon || 'none'
       });
     }
