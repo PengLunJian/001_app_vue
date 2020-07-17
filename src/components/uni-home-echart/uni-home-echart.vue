@@ -5,7 +5,7 @@
       </view>
       <view class="module-body">
         <view class="echart">
-          <canvas canvas-id="canvasColumn" id="canvasColumn" class="charts"/>
+          <canvas canvas-id="canvasColumn" width="750" id="canvasColumn" class="charts"/>
         </view>
       </view>
       <view class="module-footer">
@@ -30,25 +30,25 @@
       showColumn(canvasId, chartData) {
         new uCharts({
           $this: this,
-          canvasId: canvasId,
+          canvasId,
           type: 'column',
           legend: true,
-          fontSize: 11,
-          background: '#FFFFFF',
+          fontSize: 6,
           pixelRatio: 2,
           animation: true,
-          categories: chartData.categories,
+          background: '#FFFFFF',
           series: chartData.series,
+          categories: chartData.categories,
           xAxis: {
             disableGrid: true,
           },
           yAxis: {},
           dataLabel: true,
-          width: 750,
+          width: 375,
           height: 400,
           extra: {
             column: {
-              width: this.cWidth * this.pixelRatio * 0.45 / chartData.categories.length
+              width: 20
             }
           }
         });

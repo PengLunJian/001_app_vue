@@ -6,6 +6,7 @@
       </view>
       <view class="body">
         <uni-home-info/>
+        <uni-home-echart/>
       </view>
       <view class="footer"></view>
     </view>

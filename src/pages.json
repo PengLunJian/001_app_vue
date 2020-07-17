@@ -16,7 +16,13 @@
       }
     },
     {
-      "path": "pages/payment/index",
+      "path": "pages/mine/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/record/index",
       "style": {
         "navigationBarTitleText": "收款"
       }
@@ -27,5 +33,31 @@
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#007AFF",
+    "borderStyle": "black",
+    "backgroundColor": "#F8F8F8",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "assets/images/tab-icon01.png",
+        "selectedIconPath": "assets/images/tab-icon01-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/record/index",
+        "iconPath": "assets/images/tab-icon02.png",
+        "selectedIconPath": "assets/images/tab-icon02-active.png",
+        "text": "对账"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "iconPath": "assets/images/tab-icon03.png",
+        "selectedIconPath": "assets/images/tab-icon03-active.png",
+        "text": "我的"
+      }
+    ]
   }
 }
