@@ -5,32 +5,31 @@ const controller = {
   ...mapActions([
     'ajaxSelectLogin'
   ]),
-  onHandleEmpty() {
-    let result = false;
+  onHandleCheckEmpty() {
     const {username, password} = this;
-    if (!username) {
-      this.showToast('请输入手机号');
-    } else if (!password) {
-      this.showToast('请输入登录密码');
-    } else {
-      result = true;
-    }
-    return result;
+    this.isDisable = !(username && password);
   },
-  onHandleLogin() {
-    if (this.onHandleEmpty()) {
-      this.showLoading();
-      // this.navigateTo($routes.INDEX.path);
-    }
+  onHandlePassword() {
+    this.navigateTo($routes.PASSWORD.path);
+  },
+  onHandleSelectLogin() {
+    const {isDisable} = this;
+    this.navigateTo($routes.INDEX.path);
+    // if (!isDisable) {
+    //   this.exeAjaxSelectLogin();
+    // }
   },
   exeAjaxSelectLogin() {
+    this.showLoading();
     this.ajaxSelectLogin()
       .then((res) => {
+        this.hideLoading();
         console.log(res);
       })
       .catch((err) => {
+        this.hideLoading();
         console.log(err);
-      })
+      });
   }
 }
 

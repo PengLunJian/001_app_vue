@@ -19,10 +19,14 @@ export const request = (url, method, params) => {
       timeout,
       data: params,
       success: (res) => {
-        resolve(res);
+        setTimeout(() => {
+          resolve(res);
+        }, 500);
       },
       fail: (err) => {
-        reject(err);
+        setTimeout(() => {
+          reject(err);
+        }, 500);
       }
     });
   });
