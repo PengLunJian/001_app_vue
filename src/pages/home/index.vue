@@ -5,8 +5,8 @@
         <view class="title"></view>
       </view>
       <view class="body">
-        <uni-home-info/>
-        <uni-home-echart/>
+        <custom-base/>
+        <custom-item/>
       </view>
       <view class="footer"></view>
     </view>
@@ -14,8 +14,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import uniHomeInfo from '../../components/uni-home-info/uni-home-info';
-  import uniHomeEchart from '../../components/uni-home-echart/uni-home-echart';
+  import customBase from './components/custom-base/custom-base';
+  import customItem from './components/custom-item/custom-item';
   import Loading from '../../mixins/loading';
   import Toast from '../../mixins/toast';
   import Route from '../../mixins/route';
@@ -23,8 +23,8 @@
 
   export default {
     components: {
-      uniHomeInfo,
-      uniHomeEchart
+      customBase,
+      customItem
     },
     data() {
       return {}

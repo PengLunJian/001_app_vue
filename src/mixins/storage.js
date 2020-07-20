@@ -5,7 +5,7 @@ export default {
   methods: {
     setItem(key, value) {
       try {
-        wx.setStorageSync(key, value);
+        uni.setStorageSync(key, value);
       } catch (e) {
         console.log(e);
       }
@@ -13,7 +13,7 @@ export default {
     getItem(key) {
       let value = null;
       try {
-        value = wx.getStorageSync(key);
+        value = uni.getStorageSync(key);
       } catch (e) {
         console.log(e);
       }
@@ -21,14 +21,14 @@ export default {
     },
     removeItem(key) {
       try {
-        wx.removeStorageSync(key);
+        uni.removeStorageSync(key);
       } catch (e) {
         console.log(e);
       }
     },
     clearStorage() {
       try {
-        wx.clearStorageSync();
+        uni.clearStorageSync();
       } catch (e) {
         console.log(e);
       }
@@ -36,7 +36,7 @@ export default {
     getStorageInfoSync() {
       let result = 0;
       try {
-        const res = wx.getStorageInfoSync();
+        const res = uni.getStorageInfoSync();
         const {currentSize} = res;
         result = currentSize;
       } catch (e) {

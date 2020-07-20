@@ -46,14 +46,17 @@
 
 <script>
   export default {
-    name: "uni-home-info",
+    name: "custom-base",
+    data() {
+      return {}
+    },
     props: {},
     methods: {}
   }
 </script>
 
 <style lang="less">
-  @import "../../assets/less/common";
+  @import "../../../../assets/less/common";
 
   .module {
     .module-content {

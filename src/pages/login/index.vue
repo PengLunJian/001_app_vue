@@ -19,7 +19,7 @@
           <label class="form-text" @click="onHandlePassword">忘记密码?</label>
         </view>
         <view class="form-group">
-          <view class="btn btn-login" :class="{disable:isDisable}" @click="onHandleSelectLogin">登录</view>
+          <view class="btn btn-login" :class="{disable:isDisable}" @click="onHandleLogin">登录</view>
         </view>
       </view>
       <view class="footer"></view>

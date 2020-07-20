@@ -10,7 +10,7 @@
       }
     },
     {
-      "path": "pages/index/index",
+      "path": "pages/home/index",
       "style": {
         "navigationStyle": "custom"
       }
@@ -22,32 +22,62 @@
       }
     },
     {
-      "path": "pages/record/index",
+      "path": "pages/list/index",
       "style": {
-        "navigationBarTitleText": "收款"
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/service/index",
+      "style": {
+        "navigationBarTitleText": "我的客服"
+      }
+    },
+    {
+      "path": "pages/voice/index",
+      "style": {
+        "navigationBarTitleText": "语音播报"
+      }
+    },
+    {
+      "path": "pages/print/index",
+      "style": {
+        "navigationBarTitleText": "打印设置"
+      }
+    },
+    {
+      "path": "pages/suggest/index",
+      "style": {
+        "navigationBarTitleText": "意见反馈"
+      }
+    },
+    {
+      "path": "pages/about/index",
+      "style": {
+        "navigationBarTitleText": "关于我们"
       }
     }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FAFAFA"
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#007AFF",
     "borderStyle": "black",
+    "selectedColor": "#007AFF",
     "backgroundColor": "#F8F8F8",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/home/index",
         "iconPath": "assets/images/tab-icon01.png",
         "selectedIconPath": "assets/images/tab-icon01-active.png",
         "text": "首页"
       },
       {
-        "pagePath": "pages/record/index",
+        "pagePath": "pages/list/index",
         "iconPath": "assets/images/tab-icon02.png",
         "selectedIconPath": "assets/images/tab-icon02-active.png",
         "text": "对账"

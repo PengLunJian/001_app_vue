@@ -2,24 +2,16 @@
   <view class="container">
     <view class="content">
       <view class="header"></view>
-      <view class="body">
-        <custom-user/>
-        <custom-list/>
-      </view>
+      <view class="body"></view>
       <view class="footer"></view>
     </view>
   </view>
 </template>
 
 <script type="text/ecmascript-6">
-  import CustomList from "./components/custom-list/custom-list";
-  import CustomUser from "./components/custom-user/custom-user";
 
   export default {
-    components: {
-      CustomUser,
-      CustomList
-    },
+    components: {},
     data() {
       return {}
     },

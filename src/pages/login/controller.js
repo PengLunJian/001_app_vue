@@ -12,12 +12,12 @@ const controller = {
   onHandlePassword() {
     this.navigateTo($routes.PASSWORD.path);
   },
-  onHandleSelectLogin() {
+  onHandleLogin() {
     const {isDisable} = this;
-    this.navigateTo($routes.INDEX.path);
-    // if (!isDisable) {
-    //   this.exeAjaxSelectLogin();
-    // }
+    if (!isDisable) {
+      this.reLaunch ($routes.HOME.path);
+      // this.exeAjaxSelectLogin();
+    }
   },
   exeAjaxSelectLogin() {
     this.showLoading();
