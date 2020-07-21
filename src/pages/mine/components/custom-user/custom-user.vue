@@ -1,5 +1,5 @@
 <template>
-  <view class="module">
+  <view class="module" @click="onHandleUser">
     <view class="module-content">
       <view class="module-header"></view>
       <view class="module-body">
@@ -23,11 +23,14 @@
   </view>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+  import Route from '../../../../mixins/route';
+  import * as $routes from '../../../../router';
   import lazyImage from '../../../../components/lazy-image/lazy-image';
 
   export default {
     name: "custom-user",
+    mixins: [Route],
     data() {
       return {
         src: require('../../../../assets/images/user@2x.png')
@@ -37,7 +40,11 @@
       lazyImage
     },
     props: {},
-    methods: {}
+    methods: {
+      onHandleUser() {
+        this.navigateTo($routes.USER.path);
+      }
+    }
   }
 </script>
 

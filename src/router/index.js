@@ -19,13 +19,8 @@ export const MINE = {
 };
 
 export const SERVICE = {
-  name: '我的客服',
+  name: '在线客服',
   path: '/pages/service/index'
-};
-
-export const VOICE = {
-  name: '语音播报',
-  path: '/pages/voice/index'
 };
 
 export const SUGGEST = {
@@ -41,4 +36,14 @@ export const PRINT = {
 export const ABOUT = {
   name: '关于我们',
   path: '/pages/about/index'
+};
+
+export const USER = {
+  name: '个人资料',
+  path: '/pages/user/index'
+};
+
+export const LOAN = {
+  name: '贷款申请',
+  path: '/pages/loan/index'
 };

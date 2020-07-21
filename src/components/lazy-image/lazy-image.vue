@@ -22,7 +22,7 @@
     props: {
       url: {
         type: String,
-        default: require('../../assets/images/logo@2x.png')
+        default: require('./images/logo@2x.png')
       },
       src: {
         type: String,

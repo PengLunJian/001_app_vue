@@ -35,10 +35,6 @@
             path: $routes.SERVICE.path
           },
           {
-            name: $routes.VOICE.name,
-            path: $routes.VOICE.path
-          },
-          {
             name: $routes.PRINT.name,
             path: $routes.PRINT.path
           },

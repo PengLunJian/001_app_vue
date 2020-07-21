@@ -18,7 +18,7 @@
     {
       "path": "pages/mine/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "个人中心"
       }
     },
     {
@@ -31,12 +31,6 @@
       "path": "pages/service/index",
       "style": {
         "navigationBarTitleText": "我的客服"
-      }
-    },
-    {
-      "path": "pages/voice/index",
-      "style": {
-        "navigationBarTitleText": "语音播报"
       }
     },
     {
@@ -56,6 +50,18 @@
       "style": {
         "navigationBarTitleText": "关于我们"
       }
+    },
+    {
+      "path": "pages/user/index",
+      "style": {
+        "navigationBarTitleText": "个人资料"
+      }
+    },
+    {
+      "path": "pages/loan/index",
+      "style": {
+        "navigationBarTitleText": "贷款申请"
+      }
     }
   ],
   "globalStyle": {
@@ -65,27 +71,30 @@
     "backgroundColor": "#FAFAFA"
   },
   "tabBar": {
-    "color": "#7A7E83",
-    "borderStyle": "black",
-    "selectedColor": "#007AFF",
-    "backgroundColor": "#F8F8F8",
+    "height": "55px",
+    "color": "#999999",
+    "fontSize": "12px",
+    "iconWidth": "40px",
+    "borderStyle": "white",
+    "selectedColor": "#0095FF",
+    "backgroundColor": "#FFFFFF",
     "list": [
       {
         "pagePath": "pages/home/index",
-        "iconPath": "assets/images/tab-icon01.png",
-        "selectedIconPath": "assets/images/tab-icon01-active.png",
+        "iconPath": "static/images/tab-icon01.png",
+        "selectedIconPath": "static/images/tab-icon01-active.png",
         "text": "首页"
       },
       {
         "pagePath": "pages/list/index",
-        "iconPath": "assets/images/tab-icon02.png",
-        "selectedIconPath": "assets/images/tab-icon02-active.png",
+        "iconPath": "static/images/tab-icon02.png",
+        "selectedIconPath": "static/images/tab-icon02-active.png",
         "text": "对账"
       },
       {
         "pagePath": "pages/mine/index",
-        "iconPath": "assets/images/tab-icon03.png",
-        "selectedIconPath": "assets/images/tab-icon03-active.png",
+        "iconPath": "static/images/tab-icon03.png",
+        "selectedIconPath": "static/images/tab-icon03-active.png",
         "text": "我的"
       }
     ]
