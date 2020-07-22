@@ -47,3 +47,8 @@ export const LOAN = {
   name: '贷款申请',
   path: '/pages/loan/index'
 };
+
+export const PASSWORD = {
+  name: '修改密码',
+  path: '/pages/password/index'
+};

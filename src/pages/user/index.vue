@@ -41,7 +41,7 @@
                   <view class="module-value">18130278679</view>
                 </view>
               </view>
-              <view class="module-row row">
+              <view class="module-row row" @click="onHandlePassword">
                 <view class="module-col col-4">
                   <view class="module-label">修改密码</view>
                 </view>
@@ -85,10 +85,13 @@
 
 <script type="text/ecmascript-6">
 
+  import Route from '../../mixins/route';
+  import * as $routes from '../../router';
   import LazyImage from "../../components/lazy-image/lazy-image";
 
   export default {
     components: {LazyImage},
+    mixins: [Route],
     data() {
       return {
         src: require('../../assets/images/user@2x.png')
@@ -97,7 +100,11 @@
     onLoad() {
 
     },
-    methods: {}
+    methods: {
+      onHandlePassword() {
+        this.navigateTo($routes.PASSWORD.path);
+      }
+    }
   }
 </script>
 
