@@ -13,7 +13,7 @@
                   <view class="module-label">连接蓝牙打印机</view>
                 </view>
                 <view class="module-col col-4">
-                  <switch color="#0095FF" @change="onHandleSwitch"/>
+                  <switch class="switch" color="#0095FF" @change="onHandleSwitch"/>
                 </view>
               </view>
               <view class="module-row row">
@@ -22,7 +22,7 @@
                   <view class="module-label small">收款退款时将自动打印小票</view>
                 </view>
                 <view class="module-col col-4">
-                  <check-box :checked="checked" @onHandleChange="onHandleChange"/>
+                  <check-box class="checkbox" :checked="checked" @onHandleChange="onHandleChange"/>
                 </view>
               </view>
               <view class="module-row row">
@@ -51,7 +51,9 @@
   import CheckBox from "../../components/check-box/check-box";
 
   export default {
-    components: {CheckBox},
+    components: {
+      CheckBox
+    },
     data() {
       return {
         checked: false
@@ -105,15 +107,19 @@
                   &.col-4 {
                     line-height: unit(100, rpx);
                     text-align: right;
+                    font-size: 0;
                     .module-text {
                       height: unit(50, rpx);
                       line-height: unit(50, rpx);
                       display: inline-block;
                       margin-right: unit(20, rpx);
-                      font-size: @fontSize28;
+                      font-size: @fontSize32;
                     }
                     .module-next {
                       color: @borderColor1;
+                    }
+                    .checkbox {
+                      margin-right: unit(10, rpx);
                     }
                   }
                 }

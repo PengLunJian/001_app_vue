@@ -52,3 +52,8 @@ export const PASSWORD = {
   name: '修改密码',
   path: '/pages/password/index'
 };
+
+export const REFUND = {
+  name: '退款',
+  path: '/pages/refund/index'
+};

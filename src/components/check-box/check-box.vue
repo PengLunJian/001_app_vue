@@ -37,15 +37,16 @@
     line-height: unit(48, rpx);
     display: inline-block;
     vertical-align: middle;
-    background-color: @borderColor1;
+    background-color: #F0F0F0;
     border-radius: @borderRadius100;
     text-align: center;
-    color: @white;
+    color: @fontColor3;
     .check-icon {
       font-size: @fontSize24;
     }
     &.checked {
       background-color: @theme;
+      color: @white;
     }
   }
 </style>

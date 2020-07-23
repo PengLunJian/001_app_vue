@@ -1,6 +1,12 @@
 {
   "pages": [
     {
+      "path": "pages/order/detail",
+      "style": {
+        "navigationBarTitleText": "订单详情"
+      }
+    },
+    {
       "path": "pages/login/index",
       "style": {
         "navigationStyle": "custom",
@@ -76,9 +82,9 @@
       }
     },
     {
-      "path": "pages/order/detail",
+      "path": "pages/refund/index",
       "style": {
-        "navigationBarTitleText": "订单详情"
+        "navigationBarTitleText": "退款"
       }
     }
   ],
@@ -92,7 +98,7 @@
     "height": "55px",
     "color": "#999999",
     "fontSize": "12px",
-    "iconWidth": "24px",
+    "iconWidth": "20px",
     "borderStyle": "white",
     "selectedColor": "#0095FF",
     "backgroundColor": "#FFFFFF",
