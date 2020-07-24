@@ -1,12 +1,6 @@
 {
   "pages": [
     {
-      "path": "pages/order/detail",
-      "style": {
-        "navigationBarTitleText": "订单详情"
-      }
-    },
-    {
       "path": "pages/login/index",
       "style": {
         "navigationStyle": "custom",
@@ -76,15 +70,24 @@
       }
     },
     {
-      "path": "pages/order/index",
-      "style": {
-        "navigationBarTitleText": "订单列表"
-      }
-    },
-    {
       "path": "pages/refund/index",
       "style": {
         "navigationBarTitleText": "退款"
+      }
+    },
+    {
+      "path": "pages/order/index",
+      "style": {
+        "navigationBarTitleText": "账单查询",
+        "app-plus": {
+          "bounce": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/order/detail",
+      "style": {
+        "navigationBarTitleText": "账单详情"
       }
     }
   ],

@@ -10,7 +10,7 @@
           <view class="module-col col-8">
             <view class="module-title">南京市许老爹餐饮管理有限公司</view>
           </view>
-          <view class="module-col col-2">
+          <view class="module-col col-2" @click="onHandleOrder">
             <view class="module-icon iconfont icon-bill"/>
             <view class="module-text">账单</view>
           </view>
@@ -44,14 +44,22 @@
   </view>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+  import * as $routes from '../../../../router';
+  import Route from '../../../../mixins/route';
+
   export default {
     name: "custom-base",
+    mixins: [Route],
     data() {
       return {}
     },
     props: {},
-    methods: {}
+    methods: {
+      onHandleOrder() {
+        this.navigateTo($routes.ORDER.path);
+      }
+    }
   }
 </script>
 

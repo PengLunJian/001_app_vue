@@ -57,3 +57,13 @@ export const REFUND = {
   name: '退款',
   path: '/pages/refund/index'
 };
+
+export const ORDER = {
+  name: '账单查询',
+  path: '/pages/order/index'
+};
+
+export const DETAIL = {
+  name: '账单详情',
+  path: '/pages/order/detail'
+};
