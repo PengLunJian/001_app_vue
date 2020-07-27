@@ -67,6 +67,7 @@
   @import "../../../../assets/less/common";
 
   .module {
+    margin: 0 !important;
     .module-content {
       background-color: @theme;
       text-align: center;

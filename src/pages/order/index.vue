@@ -20,46 +20,18 @@
         <view class="modal-content">
           <view class="modal-header"></view>
           <view class="modal-body">
-            <view class="modal-row row btn">
-              <view class="modal-col col-6">
-                <view class="modal-text">南京分店</view>
+            <scroll-view class="scroll-view" scroll-y="true">
+              <view class="modal-row row btn" :class="{'active':btnShop.activeIndex===index}"
+                    v-for="(item,index) in btnShop.items" :key="index"
+                    @click="onHandleFilter(index)">
+                <view class="modal-col col-6">
+                  <view class="modal-text">{{item}}</view>
+                </view>
+                <view class="modal-col col-6">
+                  <view class="modal-icon iconfont icon-right"></view>
+                </view>
               </view>
-              <view class="modal-col col-6">
-                <view class="modal-icon iconfont icon-right"></view>
-              </view>
-            </view>
-            <view class="modal-row row btn active">
-              <view class="modal-col col-6">
-                <view class="modal-text">南京分店</view>
-              </view>
-              <view class="modal-col col-6">
-                <view class="modal-icon iconfont icon-right"></view>
-              </view>
-            </view>
-            <view class="modal-row row btn">
-              <view class="modal-col col-6">
-                <view class="modal-text">南京分店</view>
-              </view>
-              <view class="modal-col col-6">
-                <view class="modal-icon iconfont icon-right"></view>
-              </view>
-            </view>
-            <view class="modal-row row btn">
-              <view class="modal-col col-6">
-                <view class="modal-text">南京分店</view>
-              </view>
-              <view class="modal-col col-6">
-                <view class="modal-icon iconfont icon-right"></view>
-              </view>
-            </view>
-            <view class="modal-row row btn">
-              <view class="modal-col col-6">
-                <view class="modal-text">南京分店</view>
-              </view>
-              <view class="modal-col col-6">
-                <view class="modal-icon iconfont icon-right"></view>
-              </view>
-            </view>
+            </scroll-view>
           </view>
           <view class="modal-footer">
             <view class="modal-row row">
@@ -77,8 +49,56 @@
         <view class="modal-mask" @click="onHandleClose"></view>
         <view class="modal-content">
           <view class="modal-header"></view>
-          <view class="modal-body"></view>
-          <view class="modal-footer"></view>
+          <view class="modal-body">
+            <scroll-view class="scroll-view" scroll-y="true">
+              <view class="modal-row row">
+                <view class="modal-col col-12">
+                  <view class="modal-label">收款方式</view>
+                </view>
+                <view class="modal-col col-3">
+                  <view class="modal-btn btn-filter">微信</view>
+                </view>
+                <view class="modal-col col-3">
+                  <view class="modal-btn btn-filter">支付宝</view>
+                </view>
+              </view>
+              <view class="modal-row row">
+                <view class="modal-col col-12">
+                  <view class="modal-label">交易状态</view>
+                </view>
+                <view class="modal-col col-3">
+                  <view class="modal-btn btn-filter">已支付</view>
+                </view>
+                <view class="modal-col col-3">
+                  <view class="modal-btn btn-filter">未支付</view>
+                </view>
+                <view class="modal-col col-3">
+                  <view class="modal-btn btn-filter">已退款</view>
+                </view>
+              </view>
+              <view class="modal-row row">
+                <view class="modal-col col-12">
+                  <view class="modal-label">收款人员</view>
+                </view>
+                <view class="modal-col col-3">
+                  <view class="modal-btn btn-filter active">店员</view>
+                </view>
+                <view class="modal-col col-3">
+                  <view class="modal-btn btn-filter">店长</view>
+                </view>
+              </view>
+            </scroll-view>
+          </view>
+          <view class="modal-footer">
+            <view class="modal-row row">
+              <view class="modal-col col-4">
+                <view class="btn btn-reset" @click="onHandleReset">重置</view>
+              </view>
+              <view class="modal-col col-8">
+                <view class="btn btn-confirm" @click="onHandleConfirm">确认</view>
+              </view>
+            </view>
+          </view>
         </view>
       </view>
       <view class="modal" id="modalC" :class="{'hide':tab.activeIndex!==2}">
@@ -86,30 +106,15 @@
         <view class="modal-content">
           <view class="modal-header"></view>
           <view class="modal-body">
-            <view class="modal-row row active">
-              <view class="modal-col col-6">
-                <view class="modal-text">默认排序</view>
+            <scroll-view class="scroll-view" scroll-y="true">
+              <view class="modal-row row btn" :class="{'active':btnSort.activeIndex===index}"
+                    v-for="(item,index) in btnSort.items" :key="index"
+                    @click="onHandleSort(index)">
+                <view class="modal-col col-12">
+                  <view class="modal-text">{{item.label}}</view>
+                </view>
               </view>
-              <view class="modal-col col-6">
-                <view class="modal-icon iconfont icon-right"></view>
-              </view>
-            </view>
-            <view class="modal-row row">
-              <view class="modal-col col-6">
-                <view class="modal-text">金额从小到大</view>
-              </view>
-              <view class="modal-col col-6">
-                <view class="modal-icon iconfont icon-right"></view>
-              </view>
-            </view>
-            <view class="modal-row row">
-              <view class="modal-col col-6">
-                <view class="modal-text">金额从大到小</view>
-              </view>
-              <view class="modal-col col-6">
-                <view class="modal-icon iconfont icon-right"></view>
-              </view>
-            </view>
+            </scroll-view>
           </view>
           <view class="modal-footer"></view>
         </view>
@@ -133,6 +138,44 @@
         tab: {
           activeIndex: -1,
           items: ['店铺', '筛选', '排序']
+        },
+        btnShop: {
+          activeIndex: -1,
+          items: [
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+            '南京分店',
+          ]
+        },
+        btnSort: {
+          activeIndex: -1,
+          items: [
+            {
+              label: '默认排序',
+              value: 0
+            },
+            {
+              label: '金额从小到大',
+              value: 1
+            },
+            {
+              label: '金额从大到小',
+              value: 2
+            }
+          ]
         }
       }
     },
@@ -153,6 +196,12 @@
           this.tab.activeIndex = index;
           this.isScroll = false;
         }
+      },
+      onHandleFilter(index) {
+        this.btnShop.activeIndex = index;
+      },
+      onHandleSort(index) {
+        this.btnSort.activeIndex = index;
       },
       onHandleClose() {
         this.tab.activeIndex = -1;
@@ -197,7 +246,6 @@
           top: 0;
           left: 0;
           width: 100%;
-          height: unit(600, rpx);
           z-index: 999;
           height: unit(800, rpx);
           padding: unit(100, rpx) 0;
@@ -207,24 +255,9 @@
           .modal-header {
           }
           .modal-body {
-            .modal-row {
-              padding: 0 unit(30, rpx);
-              line-height: unit(100, rpx);
-              border-bottom: 0.5px solid @borderColor1;
-              .modal-text {
-                font-size: @fontSize28;
-              }
-              .modal-icon {
-                display: none !important;
-                font-size: @fontSize24;
-                text-align: right;
-                color: @theme;
-              }
-              &.active {
-                .modal-icon {
-                  display: block !important;
-                }
-              }
+            height: 100%;
+            .scroll-view {
+              height: 100%;
             }
           }
           .modal-footer {
@@ -262,11 +295,90 @@
           }
         }
         &#modalA {
+          .modal-body {
+            .modal-row {
+              padding: 0 unit(30, rpx);
+              line-height: unit(100, rpx);
+              border-bottom: 0.5px solid @borderColor1;
+              .modal-text {
+                font-size: @fontSize28;
+              }
+              .modal-icon {
+                display: none !important;
+                font-size: @fontSize24;
+                text-align: right;
+                color: @theme;
+              }
+              &.active {
+                color: @theme;
+                .modal-icon {
+                  display: block !important;
+                }
+              }
+            }
+          }
         }
         &#modalB {
+          .modal-body {
+            .modal-row {
+              padding: unit(15, rpx);
+              .modal-col {
+                padding: unit(15, rpx);
+                .modal-label {
+                  height: unit(40, rpx);
+                  line-height: unit(40, rpx);
+                  font-size: @fontSize28;
+                  color: @fontColor2;
+                }
+                .btn-filter {
+                  height: unit(60, rpx);
+                  line-height: unit(60, rpx);
+                  border-radius: unit(60, rpx);
+                  background-color: @bgColor;
+                  font-size: @fontSize24;
+                  text-align: center;
+                  color: @fontColor2;
+                  &.active {
+                    background-color: rgba(0, 149, 255, .05);
+                    color: @theme;
+                  }
+                }
+              }
+            }
+          }
         }
         &#modalC {
-
+          .modal-content {
+            height: unit(400, rpx);
+            padding-bottom: 0;
+            .modal-row {
+              padding: 0 unit(30, rpx);
+              line-height: unit(100, rpx);
+              border-bottom: 0.5px solid @borderColor1;
+              text-align: center;
+              .modal-text {
+                font-size: @fontSize28;
+              }
+              .modal-icon {
+                display: none !important;
+                font-size: @fontSize24;
+                text-align: right;
+                color: @theme;
+              }
+              &:last-child {
+                border: none;
+              }
+              &.active {
+                color: @theme;
+              }
+            }
+          }
+          &.hide {
+            .modal-content {
+              visibility: hidden;
+              transform: translateY(unit(-400, rpx));
+            }
+          }
         }
       }
     }
