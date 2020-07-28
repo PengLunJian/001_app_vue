@@ -1,5 +1,5 @@
 const apis = {
-  baseUrl: 'http://192.168.1.51:8080/apis/',
+  baseUrl: 'http://apiflbl.zhifuxia.net.cn',
   method: 'post',
   timeout: 5000,
   dataType: 'json',
@@ -7,7 +7,7 @@ const apis = {
     'Content-Type': 'application/json; charset=UTF-8'
   },
   selectLogin: {
-    url: 'login',
+    url: '/api/login',
     params: {
       username: '',
       password: ''

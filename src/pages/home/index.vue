@@ -1,15 +1,14 @@
 <template>
   <view class="container">
     <view class="content">
-      <view class="header">
-        <view class="title"></view>
-      </view>
+      <view class="header"></view>
       <view class="body">
-        <custom-base/>
-        <echarts/>
-        <custom-item/>
-        <custom-sku :src="imgUrl01" :styl="sku01" :url="url01"/>
-        <custom-sku :src="imgUrl02" :styl="sku02"/>
+        <scroll-view class="scroll-view" scroll-y="true">
+          <custom-base/>
+          <echarts :option="option" title="经营报表>>>"/>
+          <custom-item/>
+          <custom-loan/>
+        </scroll-view>
       </view>
       <view class="footer"></view>
     </view>
@@ -17,30 +16,43 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import customBase from './components/custom-base/custom-base';
+  import customItem from './components/custom-item/custom-item';
+  import CustomLoan from "./components/custom-loan/custom-loan";
+  import Echarts from "../../components/echarts/echarts";
   import Loading from '../../mixins/loading';
   import Toast from '../../mixins/toast';
   import Route from '../../mixins/route';
   import * as $routes from '../../router';
   import controller from './controller';
-  import customBase from './components/custom-base/custom-base';
-  import customItem from './components/custom-item/custom-item';
-  import CustomSku from "./components/custom-sku/custom-sku";
-  import Echarts from "../../components/echarts/echarts";
 
   export default {
     components: {
       Echarts,
-      CustomSku,
+      CustomLoan,
       customBase,
       customItem
     },
     data() {
       return {
-        url01: $routes.LOAN.path,
-        sku01: {'height': '134rpx'},
-        sku02: {'height': '170rpx'},
-        imgUrl01: require('./images/sku01@2x.png'),
-        imgUrl02: require('./images/sku02@2x.png')
+        option: {
+          xAxis: {
+            data: ["07-15", "07-16", "07-17", "07-18", "07-19"]
+          },
+          yAxis: {},
+          series: [
+            {
+              name: '销量',
+              type: 'bar',
+              data: [5, 20, 36, 10, 10],
+              itemStyle: {
+                color: '#0095FF'
+              },
+              barWidth: 20
+            }
+          ]
+        },
+        url: $routes.LOAN.path
       }
     },
     mixins: [Loading, Toast, Route],
@@ -59,6 +71,10 @@
       .header {
       }
       .body {
+        height: 100%;
+        .scroll-view {
+          height: 100%;
+        }
       }
       .footer {
       }

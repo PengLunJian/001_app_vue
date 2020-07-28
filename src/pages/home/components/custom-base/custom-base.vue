@@ -3,7 +3,7 @@
     <view class="module-content">
       <view class="module-header">
         <view class="module-row row">
-          <view class="module-col col-2">
+          <view class="module-col col-2" @click="onHandlePayment">
             <view class="module-icon iconfont icon-collection"/>
             <view class="module-text">收款</view>
           </view>
@@ -18,11 +18,14 @@
       </view>
       <view class="module-body">
         <view class="module-row row">
+          <view class="module-col col-12">
+            <view class="desc">交易金额(元)</view>
+          </view>
           <view class="module-col col-12 price">
             <view class="price">10000.05</view>
           </view>
           <view class="module-col col-12">
-            <view class="desc">当日12:00:00至次日11:59:59 交易金额(元)</view>
+            <view class="desc">当日12:00:00至次日11:59:59</view>
           </view>
         </view>
       </view>
@@ -56,6 +59,9 @@
     },
     props: {},
     methods: {
+      onHandlePayment() {
+        this.navigateTo($routes.PAYMENT.path);
+      },
       onHandleOrder() {
         this.navigateTo($routes.ORDER.path);
       }
@@ -106,7 +112,7 @@
           .module-col {
             padding: unit(15, rpx);
             .price {
-              font-size: @fontSize52;
+              font-size: @fontSize72;
               font-weight: bold;
             }
           }

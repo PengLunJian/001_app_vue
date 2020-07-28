@@ -1,6 +1,6 @@
 <template>
   <view class="keyboard" :class="{'hide':isHide}">
-    <view class="keyboard-mask" @click="onHandleHide"></view>
+    <view class="keyboard-mask" :style="{'backgroundColor':bgMaskColor}" @click="onHandleHide"></view>
     <view class="keyboard-content">
       <view class="keyboard-header"></view>
       <view class="keyboard-body">
@@ -100,6 +100,10 @@
       }
     },
     props: {
+      bgMaskColor: {
+        type: String,
+        default: 'rgba(0,0,0,.5)'
+      },
       isHide: {
         type: Boolean,
         default: true
@@ -112,7 +116,7 @@
       onHandleItem(item) {
         const {value, disable} = item;
         if (!disable) {
-          console.log(value);
+          this.$emit('onHandleValue', value);
         }
       }
     },

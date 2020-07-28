@@ -67,3 +67,8 @@ export const DETAIL = {
   name: '账单详情',
   path: '/pages/order/detail'
 };
+
+export const PAYMENT = {
+  name: '商户收款',
+  path: '/pages/payment/index'
+};

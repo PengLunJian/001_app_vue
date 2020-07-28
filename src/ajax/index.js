@@ -8,19 +8,22 @@ let requestTask = null;
  * @param params
  * @returns {Promise<any>}
  */
-export const request = (url, method, params) => {
-  const {baseUrl, header, timeout} = apis;
-  url = baseUrl + url;
+export const request = (api, method, params) => {
+  const {baseUrl, header, dataType, timeout} = apis;
+  const url = baseUrl + api.url;
   return new Promise((resolve, reject) => {
     requestTask = uni.request({
       url,
       header,
       method,
       timeout,
+      dataType,
       data: params,
       success: (res) => {
+        res = res || {};
         setTimeout(() => {
-          resolve(res);
+          const {data} = res;
+          resolve(data);
         }, 500);
       },
       fail: (err) => {
@@ -37,8 +40,8 @@ export const request = (url, method, params) => {
  * @param params
  * @returns {Promise<any>}
  */
-export const post = (url, params) => {
-  return request(url, 'post', params);
+export const post = (api, params) => {
+  return request(api, 'post', params);
 };
 /**
  *
@@ -46,8 +49,8 @@ export const post = (url, params) => {
  * @param params
  * @returns {Promise<any>}
  */
-export const get = (url, params) => {
-  return request(url, 'get', params);
+export const get = (api, params) => {
+  return request(api, 'get', params);
 };
 /**
  *

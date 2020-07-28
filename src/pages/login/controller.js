@@ -15,21 +15,35 @@ const controller = {
   onHandleLogin() {
     const {isDisable} = this;
     if (!isDisable) {
-      this.reLaunch ($routes.HOME.path);
-      // this.exeAjaxSelectLogin();
+      this.exeAjaxSelectLogin();
     }
   },
   exeAjaxSelectLogin() {
     this.showLoading();
-    this.ajaxSelectLogin()
+    const params = this.getParams();
+    this.ajaxSelectLogin(params)
       .then((res) => {
         this.hideLoading();
+        res = res || {};
+        const {Success, ErrMsg} = res;
+        if (Success !== 1) {
+          this.showToast(ErrMsg);
+          this.reLaunch($routes.HOME.path);
+          return;
+        }
         console.log(res);
       })
       .catch((err) => {
         this.hideLoading();
         console.log(err);
       });
+  },
+  getParams() {
+    const {username, password} = this;
+    return {
+      username,
+      password
+    }
   }
 }
 

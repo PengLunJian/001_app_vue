@@ -89,6 +89,12 @@
       "style": {
         "navigationBarTitleText": "账单详情"
       }
+    },
+    {
+      "path": "pages/payment/index",
+      "style": {
+        "navigationBarTitleText": "商户收款"
+      }
     }
   ],
   "globalStyle": {

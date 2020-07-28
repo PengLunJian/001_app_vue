@@ -5,7 +5,7 @@
       <view class="module-body">
         <view class="module-row row">
           <view class="module-col col-12">
-            <view class="module-img" :style="styl">
+            <view class="module-img">
               <lazy-image :src="src" :styl="{width:'30%'}"/>
             </view>
           </view>
@@ -21,18 +21,13 @@
   import * as $routes from '../../../../router';
 
   export default {
-    name: "custom-sku",
+    name: "custom-loan",
     data() {
-      return {}
+      return {
+        src: require('../../images/sku01@2x.png')
+      }
     },
     mixins: [Route],
-    props: {
-      src: {
-        type: String,
-        default: ''
-      },
-      styl: {}
-    },
     methods: {
       onHandleRoute() {
         this.navigateTo($routes.LOAN.path);
@@ -49,7 +44,7 @@
       .module-header {
       }
       .module-body {
-        .module-row {
+        .module-img {
           height: unit(134, rpx);
         }
       }
