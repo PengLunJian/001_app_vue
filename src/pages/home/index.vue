@@ -3,12 +3,24 @@
     <view class="content">
       <view class="header"></view>
       <view class="body">
-        <scroll-view class="scroll-view" scroll-y="true">
-          <custom-base/>
-          <echarts :option="option" title="经营报表>>>"/>
-          <custom-item/>
-          <custom-loan/>
-        </scroll-view>
+        <view class="context">
+          <scroll-view class="scroll-view" :scroll-y="isScroll">
+            <custom-base/>
+            <view class="module">
+              <view class="module-content">
+                <view class="module-header">
+                  <view class="module-title">经营报表>>></view>
+                </view>
+                <view class="module-body">
+                  <echarts :option="option"/>
+                </view>
+                <view class="module-footer"></view>
+              </view>
+            </view>
+            <custom-item/>
+            <custom-loan/>
+          </scroll-view>
+        </view>
       </view>
       <view class="footer"></view>
     </view>
@@ -16,8 +28,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import customBase from './components/custom-base/custom-base';
-  import customItem from './components/custom-item/custom-item';
+  import CustomBase from './components/custom-base/custom-base';
+  import CustomItem from './components/custom-item/custom-item';
   import CustomLoan from "./components/custom-loan/custom-loan";
   import Echarts from "../../components/echarts/echarts";
   import Loading from '../../mixins/loading';
@@ -30,8 +42,8 @@
     components: {
       Echarts,
       CustomLoan,
-      customBase,
-      customItem
+      CustomBase,
+      CustomItem
     },
     data() {
       return {
@@ -52,6 +64,7 @@
             }
           ]
         },
+        isScroll: true,
         url: $routes.LOAN.path
       }
     },
@@ -66,14 +79,36 @@
   @import "../../assets/less/common";
 
   .container {
+    min-height: 100%;
     .content {
       height: 100vh;
       .header {
       }
       .body {
         height: 100%;
-        .scroll-view {
+        .context {
           height: 100%;
+          .scroll-view {
+            height: 100%;
+            .module {
+              .module-content {
+                .module-header {
+                  .module-title {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 1;
+                    width: 100%;
+                    height: unit(80, rpx);
+                    line-height: unit(80, rpx);
+                    padding: 0 unit(30, rpx);
+                    font-size: @fontSize24;
+                    color: @fontColor2;
+                  }
+                }
+              }
+            }
+          }
         }
       }
       .footer {

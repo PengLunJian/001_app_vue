@@ -24,7 +24,7 @@
     {
       "path": "pages/list/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "对账明细"
       }
     },
     {
