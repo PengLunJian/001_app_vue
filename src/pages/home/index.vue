@@ -12,7 +12,7 @@
                   <view class="module-title">经营报表>>></view>
                 </view>
                 <view class="module-body">
-                  <echarts :option="option"/>
+                  <u-charts :chartData="chartData"/>
                 </view>
                 <view class="module-footer"></view>
               </view>
@@ -31,7 +31,7 @@
   import CustomBase from './components/custom-base/custom-base';
   import CustomItem from './components/custom-item/custom-item';
   import CustomLoan from "./components/custom-loan/custom-loan";
-  import Echarts from "../../components/echarts/echarts";
+  import UCharts from "../../components/ucharts/ucharts";
   import Loading from '../../mixins/loading';
   import Toast from '../../mixins/toast';
   import Route from '../../mixins/route';
@@ -40,7 +40,7 @@
 
   export default {
     components: {
-      Echarts,
+      UCharts,
       CustomLoan,
       CustomBase,
       CustomItem
@@ -65,6 +65,14 @@
           ]
         },
         isScroll: true,
+        chartData: {
+          categories: ["07-15", "07-16", "07-17", "07-18", "07-19"],
+          series: [
+            {
+              data: [7200, 8500, 7000, 9200, 11200]
+            }
+          ]
+        },
         url: $routes.LOAN.path
       }
     },
@@ -94,10 +102,6 @@
               .module-content {
                 .module-header {
                   .module-title {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    z-index: 1;
                     width: 100%;
                     height: unit(80, rpx);
                     line-height: unit(80, rpx);

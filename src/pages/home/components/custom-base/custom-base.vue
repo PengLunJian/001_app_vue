@@ -8,7 +8,7 @@
             <view class="module-text">收款</view>
           </view>
           <view class="module-col col-8">
-            <view class="module-title">南京市许老爹餐饮管理有限公司</view>
+            <view class="module-name">南京市许老爹餐饮管理有限公司</view>
           </view>
           <view class="module-col col-2" @click="onHandleOrder">
             <view class="module-icon iconfont icon-bill"/>
@@ -97,10 +97,11 @@
               }
               &.module-text {
                 font-size: @fontSize26;
-
               }
             }
-            .module-title {
+            .module-name {
+              height: unit(40, rpx);
+              line-height: unit(40, rpx);
               font-size: @fontSize28;
             }
           }

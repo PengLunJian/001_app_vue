@@ -58,7 +58,7 @@
                   <view class="module-desc">07月13日-07月20日收入80000.35元</view>
                 </view>
                 <view class="module-body">
-                  <echarts :option="option" id="echarts01"/>
+                  <u-charts :chartData="chartData"/>
                 </view>
                 <view class="module-footer"></view>
               </view>
@@ -70,7 +70,7 @@
                   <view class="module-desc">07月13日-07月20日收入80000.35元</view>
                 </view>
                 <view class="module-body">
-                  <echarts :option="option" id="echarts02"/>
+                  <u-charts :chartData="chartData"/>
                 </view>
                 <view class="module-footer"></view>
               </view>
@@ -82,7 +82,7 @@
                   <view class="module-desc">07月13日-07月20日收入80000.35元</view>
                 </view>
                 <view class="module-body">
-                  <echarts :option="option" id="echarts03"/>
+                  <u-charts :chartData="chartData"/>
                 </view>
                 <view class="module-footer"></view>
               </view>
@@ -94,7 +94,7 @@
                   <view class="module-desc">07月13日-07月20日收入80000.35元</view>
                 </view>
                 <view class="module-body">
-                  <echarts :option="option" id="echarts04"/>
+                  <u-charts :chartData="chartData"/>
                 </view>
                 <view class="module-footer"></view>
               </view>
@@ -108,11 +108,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Echarts from "../../components/echarts/echarts";
+  import UCharts from "../../components/ucharts/ucharts";
 
   export default {
     components: {
-      Echarts
+      UCharts
     },
     data() {
       return {
@@ -142,7 +142,14 @@
             }
           ]
         },
-        id: 'echarts01'
+        chartData: {
+          categories: ["07-15", "07-16", "07-17", "07-18", "07-19"],
+          series: [
+            {
+              data: [7200, 8500, 7000, 9200, 11200]
+            }
+          ]
+        }
       }
     },
     onLoad() {

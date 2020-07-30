@@ -1,64 +1,57 @@
 <template>
   <view @click="echarts.onClick" :prop="option"
         :change:prop="echarts.updateEcharts"
-        :id="id" class="echarts"></view>
+        id="echarts" class="echarts"></view>
 </template>
 
-<script type="text/ecmascript-6" module="echarts" lang="renderjs">
+<script type="text/ecmascript-6">
   export default {
     name: "echarts",
     components: {},
     data() {
-      return {
-        myChart: null
-      }
+      return {}
     },
     props: {
       option: {
         type: Object,
         default: {}
-      },
-      id: {
-        type: String,
-        default: 'echarts'
       }
     },
+    created() {
+    }
+  }
+</script>
+
+<script type="text/ecmascript-6" module="echarts" lang="renderjs">
+  let myChart;
+  export default {
     methods: {
-      changeOption() {
-        const data = this.option.series[0].data
-        data.forEach((item, index) => {
-          data.splice(index, 1, Math.random() * 40)
-        });
-      },
-      onViewClick(options) {
-        // console.log(options)
-      },
       initEcharts() {
-        const {id, option} = this;
-        const element = document.getElementById(id);
-        this.myChart = echarts.init(element);
-        this.myChart.setOption(option);
+        const element = document.getElementById('echarts');
+        myChart = echarts.init(element);
+        myChart.setOption(this.option);
       },
       updateEcharts(newValue, oldValue, ownerInstance, instance) {
-        this.myChart.setOption(newValue);
+        myChart.setOption(newValue);
       },
       onClick(event, ownerInstance) {
         ownerInstance.callMethod('onViewClick', {
           test: 'test'
         });
+      },
+      onHandleInit() {
+        if (typeof window.echarts === 'function') {
+          this.initEcharts();
+        } else {
+          const script = document.createElement('script');
+          script.src = 'static/libs/echarts/echarts.js';
+          script.onload = this.initEcharts.bind(this);
+          document.head.appendChild(script);
+        }
       }
-    },
-    created() {
     },
     mounted() {
-      if (typeof window.echarts === 'function') {
-        this.initEcharts();
-      } else {
-        const script = document.createElement('script');
-        script.src = 'static/libs/echarts/echarts.js';
-        script.onload = this.initEcharts.bind(this);
-        document.head.appendChild(script);
-      }
+      this.onHandleInit();
     }
   }
 </script>
