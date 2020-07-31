@@ -40,14 +40,14 @@
               <view class="keyboard-col col-3">
                 <view class="keyboard-col-row row">
                   <view class="keyboard-col-col col-12">
-                    <view class="keyboard-col-btn btn">
-                      <view class="keyboard-icon iconfont icon-delete"
-                            @tap="onHandleDelete"></view>
+                    <view class="keyboard-col-btn btn" @click="onHandleDelete">
+                      <view class="keyboard-icon iconfont icon-delete"></view>
                     </view>
                   </view>
                   <view class="keyboard-col-col col-12">
                     <view class="keyboard-col-btn btn btn-confirm"
-                          @tap="onHandleConfirm">确定
+                          :class="{'disable':isDisable}"
+                          @click="onHandleConfirm">确定
                     </view>
                   </view>
                 </view>
@@ -62,9 +62,11 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Toast from '../../mixins/toast';
 
   export default {
     components: {},
+    mixins: [Toast],
     data() {
       return {
         price: '',
@@ -114,7 +116,8 @@
             value: '0'
           }
         ],
-        isScroll: true
+        isScroll: true,
+        isDisable: true
       }
     },
     onLoad() {
@@ -122,14 +125,59 @@
     },
     methods: {
       onHandleButton(item) {
+        const {price} = this;
         const {value} = item;
+        const regExp1 = /\./;
+        const regExp2 = /^[0]$/;
+        const regExp3 = /^\d+\.\d{2}$/;
+        if (regExp1.test(price)) {
+          if (value === '.') {
+            return;
+          }
+        }
+        if (regExp2.test(price)) {
+          if (value !== '.') {
+            return;
+          }
+        }
+        if (regExp3.test(price)) {
+          return;
+        }
+        if (value === '.') {
+          if (price === '') {
+            this.price = '0';
+          }
+        }
         this.price += value;
+        this.isDisable = !this.price;
       },
       onHandleDelete() {
         const len = this.price.length - 1;
         this.price = this.price.substr(0, len);
+        this.isDisable = !this.price;
+      },
+      onHandleDisable() {
+        const {price} = this;
+        if (price) {
+          this.isDisable = true;
+        } else {
+          this.isDisable = false;
+        }
       },
       onHandleConfirm() {
+        const value = parseFloat(price);
+        if (value <= 0) {
+          this.showToast('输入金额错误');
+          return;
+        }
+
+        uni.scanCode({
+          onlyFromCamera: true,
+          success: (res) => {
+            res = res || {};
+            console.log(res);
+          }
+        });
       }
     },
     onLoad() {
@@ -218,9 +266,9 @@
                         background-color: @theme;
                         font-size: @fontSize40;
                         color: @white;
-                      }
-                      &.disable {
-                        background-color: @disable;
+                        &.disable {
+                          opacity: 0.5;
+                        }
                       }
                     }
                   }
