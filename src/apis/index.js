@@ -12,6 +12,38 @@ const apis = {
       username: '',
       password: ''
     }
+  },
+  selectIndex: {
+    url: '/api/index',
+    params: {}
+  },
+  selectOrder: {
+    url: '/api/order',
+    params: {}
+  },
+  selectDetail: {
+    url: '/api/detail',
+    params: {}
+  },
+  updatePassword: {
+    url: '/api/password',
+    params: {}
+  },
+  insertSuggest: {
+    url: '/api/suggest',
+    params: {}
+  },
+  insertPayment: {
+    url: '/api/payment',
+    params: {}
+  },
+  selectUser: {
+    url: '/api/user',
+    params: {}
+  },
+  insertLoan: {
+    url: '/api/loan',
+    params: {}
   }
 }
 

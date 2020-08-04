@@ -25,11 +25,11 @@ const controller = {
       .then((res) => {
         this.hideLoading();
         res = res || {};
-        const {Success, ErrMsg} = res;
-        if (Success !== 1) {
-          this.showToast(ErrMsg);
+        const {success, data} = res;
+        if (success) {
           this.reLaunch($routes.HOME.path);
-          return;
+        } else {
+          this.showToast('用户名或密码错误');
         }
         console.log(res);
       })

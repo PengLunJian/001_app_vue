@@ -49,14 +49,25 @@
       return {
         option: {
           xAxis: {
-            data: ["07-15", "07-16", "07-17", "07-18", "07-19"]
+            data: [
+              "07-15",
+              "07-16",
+              "07-17",
+              "07-18",
+              "07-19"
+            ]
           },
-          yAxis: {},
           series: [
             {
               name: '销量',
               type: 'bar',
-              data: [5, 20, 36, 10, 10],
+              data: [
+                5,
+                20,
+                36,
+                10,
+                10
+              ],
               itemStyle: {
                 color: '#0095FF'
               },
@@ -66,10 +77,22 @@
         },
         isScroll: true,
         chartData: {
-          categories: ["07-15", "07-16", "07-17", "07-18", "07-19"],
+          categories: [
+            "07-15",
+            "07-16",
+            "07-17",
+            "07-18",
+            "07-19"
+          ],
           series: [
             {
-              data: [7200, 8500, 7000, 9200, 11200]
+              data: [
+                7200,
+                8500,
+                7000,
+                9200,
+                11200
+              ]
             }
           ]
         },
@@ -78,6 +101,7 @@
     },
     mixins: [Loading, Toast, Route],
     onLoad() {
+      this.exeAjaxSelectIndex();
     },
     methods: controller
   }

@@ -63,6 +63,7 @@
 
 <script type="text/ecmascript-6">
   import Toast from '../../mixins/toast';
+  import permision from "@/js_sdk/wa-permission/permission.js"
 
   export default {
     components: {},
@@ -156,20 +157,16 @@
         this.price = this.price.substr(0, len);
         this.isDisable = !this.price;
       },
-      onHandleDisable() {
-        const {price} = this;
-        if (price) {
-          this.isDisable = true;
-        } else {
-          this.isDisable = false;
-        }
-      },
       onHandleConfirm() {
-        const value = parseFloat(price);
+        const value = parseFloat(this.price);
         if (value <= 0) {
           this.showToast('输入金额错误');
           return;
         }
+
+        // const camera = permision.judgeIosPermission('camera');
+        // this.showToast(camera);
+        // permision.gotoAppPermissionSetting();
 
         uni.scanCode({
           onlyFromCamera: true,
@@ -215,8 +212,8 @@
                       line-height: unit(120, rpx);
                       .module-value {
                         border-bottom: 1px solid @black;
+                        padding-left: unit(30, rpx);
                         font-size: @fontSize76;
-                        text-align: center;
                       }
                     }
                   }
