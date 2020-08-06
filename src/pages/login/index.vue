@@ -28,10 +28,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Loading from '../../mixins/loading';
-  import Toast from '../../mixins/toast';
-  import Route from '../../mixins/route';
-  import controller from './controller';
+  import Mixin from '../../mixins';
+  import * as $controller from './controller';
 
   export default {
     data() {
@@ -41,10 +39,11 @@
         isDisable: true
       }
     },
-    mixins: [Loading, Toast, Route],
+    mixins: [Mixin],
+    computed: $controller.states,
+    methods: $controller.actions,
     onLoad() {
-    },
-    methods: controller
+    }
   }
 </script>
 

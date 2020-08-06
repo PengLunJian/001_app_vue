@@ -49,9 +49,6 @@
         isDisable: true
       }
     },
-    onLoad() {
-
-    },
     methods: {
       onHandleCheckEmpty() {
         const {

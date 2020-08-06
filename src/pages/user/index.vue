@@ -85,25 +85,25 @@
 
 <script type="text/ecmascript-6">
 
-  import Route from '../../mixins/route';
-  import * as $routes from '../../router';
+  import Mixin from '../../mixins';
   import LazyImage from "../../components/lazy-image/lazy-image";
+  import * as $routes from '../../router';
 
   export default {
     components: {LazyImage},
-    mixins: [Route],
+    mixins: [Mixin],
     data() {
       return {
-        src: require('../../assets/images/user@2x.png')
+        src: require('../mine/images/user@2x.png')
       }
-    },
-    onLoad() {
-
     },
     methods: {
       onHandlePassword() {
         this.navigateTo($routes.PASSWORD.path);
       }
+    },
+    onLoad() {
+
     }
   }
 </script>

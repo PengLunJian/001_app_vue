@@ -1,8 +1,44 @@
 export default {
-  data: {
-    mixin: 'Storage'
+  data() {
+    return {
+      mixin: 'mixin'
+    }
   },
   methods: {
+    showLoading(title) {
+      uni.showLoading({
+        title: title || '正在加载',
+        mask: true
+      });
+    },
+    hideLoading() {
+      uni.hideLoading();
+    },
+    switchTab(url) {
+      uni.switchTab({
+        url
+      });
+    },
+    reLaunch(url) {
+      uni.reLaunch({
+        url
+      });
+    },
+    redirectTo(url) {
+      uni.redirectTo({
+        url
+      });
+    },
+    navigateTo(url) {
+      uni.navigateTo({
+        url
+      });
+    },
+    navigateBack(delta) {
+      uni.navigateBack({
+        delta
+      });
+    },
     setItem(key, value) {
       try {
         uni.setStorageSync(key, value);
@@ -43,9 +79,15 @@ export default {
         console.log(e);
       }
       return result;
+    },
+    showToast(title, icon) {
+      uni.showToast({
+        title,
+        icon: icon || 'none'
+      });
     }
   },
   created() {
-    console.log('created in storage');
+    console.log('created in mixin');
   }
 };

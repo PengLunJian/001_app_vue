@@ -48,12 +48,12 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Mixin from '../../../../mixins';
   import * as $routes from '../../../../router';
-  import Route from '../../../../mixins/route';
 
   export default {
-    name: "custom-base",
-    mixins: [Route],
+    name: "price",
+    mixins: [Mixin],
     data() {
       return {}
     },

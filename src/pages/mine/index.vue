@@ -3,8 +3,8 @@
     <view class="content">
       <view class="header"></view>
       <view class="body">
-        <custom-user/>
-        <custom-list/>
+        <user/>
+        <list/>
       </view>
       <view class="footer"></view>
     </view>
@@ -12,21 +12,20 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import CustomList from "./components/custom-list/custom-list";
-  import CustomUser from "./components/custom-user/custom-user";
+  import List from "./components/list/list";
+  import User from "./components/user/user";
 
   export default {
     components: {
-      CustomUser,
-      CustomList
+      User,
+      List
     },
     data() {
       return {}
     },
+    methods: {},
     onLoad() {
-
-    },
-    methods: {}
+    }
   }
 </script>
 

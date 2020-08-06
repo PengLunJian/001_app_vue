@@ -17,17 +17,17 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Route from '../../../../mixins/route';
+  import Mixin from '../../../../mixins';
   import * as $routes from '../../../../router';
 
   export default {
-    name: "custom-loan",
+    name: "loan",
+    mixins: [Mixin],
     data() {
       return {
         src: require('../../images/sku01@2x.png')
       }
     },
-    mixins: [Route],
     methods: {
       onHandleRoute() {
         this.navigateTo($routes.LOAN.path);

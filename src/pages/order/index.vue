@@ -6,12 +6,14 @@
       </view>
       <view class="body">
         <scroll-view class="scroll-view" :scroll-y="isScroll">
-          <order-item/>
-          <order-item/>
-          <order-item/>
-          <order-item/>
-          <order-item/>
-          <order-item/>
+          <view class="scroll-content">
+            <order-item/>
+            <order-item/>
+            <order-item/>
+            <order-item/>
+            <order-item/>
+            <order-item/>
+          </view>
         </scroll-view>
       </view>
       <view class="footer"></view>
@@ -179,9 +181,6 @@
         }
       }
     },
-    onLoad() {
-
-    },
     methods: {
       onHandleReset() {
       },
@@ -207,6 +206,9 @@
         this.tab.activeIndex = -1;
         this.isScroll = true;
       }
+    },
+    onLoad() {
+
     }
   }
 </script>
@@ -226,6 +228,9 @@
         height: 100%;
         .scroll-view {
           height: 100%;
+          .scroll-content {
+
+          }
         }
       }
       .footer {

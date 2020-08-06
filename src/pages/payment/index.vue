@@ -62,12 +62,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Toast from '../../mixins/toast';
-  import permision from "@/js_sdk/wa-permission/permission.js"
+  import Mixin from '../../mixins';
+  import permision from "../../static/libs/jssdk";
 
   export default {
     components: {},
-    mixins: [Toast],
+    mixins: [Mixin],
     data() {
       return {
         price: '',
@@ -120,9 +120,6 @@
         isScroll: true,
         isDisable: true
       }
-    },
-    onLoad() {
-
     },
     methods: {
       onHandleButton(item) {

@@ -13,7 +13,7 @@ export const ajaxSelectLogin = ({commit}, params) => {
   return new Promise((resolve, reject) => {
     $ajax.post(apis.selectLogin, params)
       .then((res) => {
-        res = $mock.LOGIN;
+        res = $mock.login(params);
         res = res || {};
         const {data, success} = res;
         if (success) {
@@ -40,7 +40,7 @@ export const ajaxSelectIndex = ({commit}, params) => {
   return new Promise((resolve, reject) => {
     $ajax.post(apis.selectIndex, params)
       .then((res) => {
-        res = $mock.INDEX;
+        res = $mock.index();
         res = res || {};
         const {data, success} = res;
         if (success) {

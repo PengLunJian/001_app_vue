@@ -15,10 +15,10 @@
     data() {
       return {}
     },
+    methods: {},
     onLoad() {
 
-    },
-    methods: {}
+    }
   }
 </script>
 

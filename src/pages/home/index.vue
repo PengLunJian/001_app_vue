@@ -3,22 +3,26 @@
     <view class="content">
       <view class="header"></view>
       <view class="body">
-        <view class="context">
+        <empty :isShow="isSuccess&&!isData"/>
+        <error :isShow="isFailure" @refresh="onRefresh"/>
+        <view class="context fade-in" v-if="isSuccess&&isData">
           <scroll-view class="scroll-view" :scroll-y="isScroll">
-            <custom-base/>
-            <view class="module">
-              <view class="module-content">
-                <view class="module-header">
-                  <view class="module-title">经营报表>>></view>
+            <view class="scroll-content">
+              <price/>
+              <view class="module">
+                <view class="module-content">
+                  <view class="module-header">
+                    <view class="module-title">经营报表>>></view>
+                  </view>
+                  <view class="module-body">
+                    <u-charts :chartData="chartData"/>
+                  </view>
+                  <view class="module-footer"></view>
                 </view>
-                <view class="module-body">
-                  <u-charts :chartData="chartData"/>
-                </view>
-                <view class="module-footer"></view>
               </view>
+              <list/>
+              <poster/>
             </view>
-            <custom-item/>
-            <custom-loan/>
           </scroll-view>
         </view>
       </view>
@@ -28,22 +32,24 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import CustomBase from './components/custom-base/custom-base';
-  import CustomItem from './components/custom-item/custom-item';
-  import CustomLoan from "./components/custom-loan/custom-loan";
+  import Mixin from '../../mixins';
   import UCharts from "../../components/ucharts/ucharts";
-  import Loading from '../../mixins/loading';
-  import Toast from '../../mixins/toast';
-  import Route from '../../mixins/route';
+  import Error from "../../components/error/error";
+  import Empty from "../../components/empty/empty";
+  import Poster from "./components/poster/poster";
+  import Price from './components/price/price';
+  import List from './components/list/list';
+  import * as $controller from './controller';
   import * as $routes from '../../router';
-  import controller from './controller';
 
   export default {
     components: {
+      Empty,
+      Error,
       UCharts,
-      CustomLoan,
-      CustomBase,
-      CustomItem
+      Poster,
+      Price,
+      List
     },
     data() {
       return {
@@ -99,11 +105,12 @@
         url: $routes.LOAN.path
       }
     },
-    mixins: [Loading, Toast, Route],
+    mixins: [Mixin],
+    computed: $controller.states,
+    methods: $controller.actions,
     onLoad() {
       this.exeAjaxSelectIndex();
-    },
-    methods: controller
+    }
   }
 </script>
 
@@ -118,20 +125,24 @@
       }
       .body {
         height: 100%;
+        position: relative;
         .context {
           height: 100%;
           .scroll-view {
             height: 100%;
-            .module {
-              .module-content {
-                .module-header {
-                  .module-title {
-                    width: 100%;
-                    height: unit(80, rpx);
-                    line-height: unit(80, rpx);
-                    padding: 0 unit(30, rpx);
-                    font-size: @fontSize24;
-                    color: @fontColor2;
+            .scroll-content {
+              padding-bottom: unit(20, rpx);
+              .module {
+                .module-content {
+                  .module-header {
+                    .module-title {
+                      width: 100%;
+                      height: unit(80, rpx);
+                      line-height: unit(80, rpx);
+                      padding: 0 unit(30, rpx);
+                      font-size: @fontSize24;
+                      color: @fontColor2;
+                    }
                   }
                 }
               }

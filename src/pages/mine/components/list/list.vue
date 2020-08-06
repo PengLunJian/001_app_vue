@@ -21,12 +21,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Route from '../../../../mixins/route';
+  import Mixin from '../../../../mixins';
   import * as $routes from '../../../../router';
 
   export default {
-    name: "custom-list",
-    mixins: [Route],
+    name: "list",
+    mixins: [Mixin],
     data() {
       return {
         items: [

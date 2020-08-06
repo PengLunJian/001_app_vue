@@ -24,16 +24,16 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Route from '../../../../mixins/route';
-  import * as $routes from '../../../../router';
+  import Mixin from '../../../../mixins';
   import lazyImage from '../../../../components/lazy-image/lazy-image';
+  import * as $routes from '../../../../router';
 
   export default {
-    name: "custom-user",
-    mixins: [Route],
+    name: "user",
+    mixins: [Mixin],
     data() {
       return {
-        src: require('../../../../assets/images/user@2x.png')
+        src: require('../../images/user@2x.png')
       }
     },
     components: {
@@ -66,8 +66,6 @@
               width: unit(110, rpx);
               height: unit(110, rpx);
               overflow: hidden;
-              border: 2px solid @white;
-              background-color: @white;
               border-radius: @borderRadius100;
             }
             .module-text {

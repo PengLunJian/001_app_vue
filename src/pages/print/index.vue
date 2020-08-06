@@ -59,9 +59,6 @@
         checked: false
       }
     },
-    onLoad() {
-
-    },
     methods: {
       onHandleSwitch() {
 
@@ -69,6 +66,9 @@
       onHandleChange(value) {
         this.checked = value;
       }
+    },
+    onLoad() {
+
     }
   }
 </script>

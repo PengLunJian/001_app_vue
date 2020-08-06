@@ -78,16 +78,12 @@
 <script type="text/ecmascript-6">
 
   export default {
-    components: {},
     data() {
       return {
         isScroll: true,
         isEnter: false,
         isLeave: false
       }
-    },
-    onLoad() {
-
     },
     methods: {
       onHandleSuccess() {
@@ -101,6 +97,9 @@
         this.isEnter = false;
         this.isLeave = true;
       }
+    },
+    onLoad() {
+
     }
   }
 </script>

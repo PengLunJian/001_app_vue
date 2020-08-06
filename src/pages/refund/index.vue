@@ -66,9 +66,6 @@
         isHide: true
       }
     },
-    onLoad() {
-
-    },
     methods: {
       onHandleHide(){
         this.isHide = true;

@@ -49,9 +49,6 @@
         isDisable: true
       }
     },
-    onLoad() {
-
-    },
     methods: {
       onHandleInput() {
         const {title, textarea, contact, phone} = this;

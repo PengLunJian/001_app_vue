@@ -1,6 +1,15 @@
-import {mapActions} from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
-const controller = {
+export const states = {
+  ...mapState({
+    isLoading: state => state.INDEX.isLoading,
+    isSuccess: state => state.INDEX.isSuccess,
+    isFailure: state => state.INDEX.isFailure,
+    isData: state => state.INDEX.isData
+  }),
+};
+
+export const actions = {
   ...mapActions([
     'ajaxSelectIndex'
   ]),
@@ -21,10 +30,11 @@ const controller = {
         console.log(err);
       });
   },
+  onRefresh() {
+    this.exeAjaxSelectIndex();
+  },
   getParams() {
     const params = {};
     return params;
   }
 };
-
-export default controller;

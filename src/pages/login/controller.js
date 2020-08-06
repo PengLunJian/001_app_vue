@@ -1,7 +1,16 @@
-import {mapActions} from 'vuex';
+import {mapActions, mapState} from 'vuex';
 import * as $routes from '../../router';
 
-const controller = {
+export const states = {
+  ...mapState({
+    isLoading: state => state.LOGIN.isLoading,
+    isSuccess: state => state.LOGIN.isSuccess,
+    isFailure: state => state.LOGIN.isFailure,
+    isData: state => state.LOGIN.isData
+  }),
+};
+
+export const actions = {
   ...mapActions([
     'ajaxSelectLogin'
   ]),
@@ -25,7 +34,7 @@ const controller = {
       .then((res) => {
         this.hideLoading();
         res = res || {};
-        const {success, data} = res;
+        const {success} = res;
         if (success) {
           this.reLaunch($routes.HOME.path);
         } else {
@@ -45,6 +54,4 @@ const controller = {
       password
     }
   }
-}
-
-export default controller;
+};
