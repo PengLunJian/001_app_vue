@@ -26,40 +26,11 @@
           <view class="module-content">
             <view class="module-header"></view>
             <view class="module-body">
-              <view class="module-btn btn">
+              <view class="module-btn btn" v-for="(item,index) in items" :key="index"
+                    @click="onHandleRoute(item)">
                 <view class="module-row row">
                   <view class="module-col col-6">
-                    <view class="module-label">版本说明</view>
-                  </view>
-                  <view class="module-col col-6">
-                    <view class="module-next iconfont icon-next"></view>
-                  </view>
-                </view>
-              </view>
-              <view class="module-btn btn">
-                <view class="module-row row">
-                  <view class="module-col col-6">
-                    <view class="module-label">功能介绍</view>
-                  </view>
-                  <view class="module-col col-6">
-                    <view class="module-next iconfont icon-next"></view>
-                  </view>
-                </view>
-              </view>
-              <view class="module-btn btn">
-                <view class="module-row row">
-                  <view class="module-col col-6">
-                    <view class="module-label">服务协议</view>
-                  </view>
-                  <view class="module-col col-6">
-                    <view class="module-next iconfont icon-next"></view>
-                  </view>
-                </view>
-              </view>
-              <view class="module-btn btn">
-                <view class="module-row row">
-                  <view class="module-col col-6">
-                    <view class="module-label">隐私协议</view>
+                    <view class="module-label">{{item.name}}</view>
                   </view>
                   <view class="module-col col-6">
                     <view class="module-next iconfont icon-next"></view>
@@ -77,20 +48,47 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+  import Mixin from '../../mixins';
+  import * as $routes from '../../router';
   import LazyImage from "../../components/lazy-image/lazy-image";
 
   export default {
-    components: {LazyImage},
+    components: {
+      LazyImage
+    },
+    mixins: [Mixin],
     data() {
       return {
+        items: [
+          {
+            name: '版本说明',
+            path: $routes.WAITING.path
+          },
+          {
+            name: '功能介绍',
+            path: $routes.WAITING.path
+          },
+          {
+            name: '服务协议',
+            path: $routes.WAITING.path
+          },
+          {
+            name: '隐私协议',
+            path: $routes.WAITING.path
+          }
+        ],
         src: require('./images/logo@2x.png')
+      }
+    },
+    methods: {
+      onHandleRoute(item) {
+        const {path} = item;
+        this.navigateTo(path);
       }
     },
     onLoad() {
 
-    },
-    methods: {}
+    }
   }
 </script>
 

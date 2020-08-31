@@ -66,6 +66,8 @@
               width: unit(110, rpx);
               height: unit(110, rpx);
               overflow: hidden;
+              border: 2px solid @white;
+              background-color: @white;
               border-radius: @borderRadius100;
             }
             .module-text {

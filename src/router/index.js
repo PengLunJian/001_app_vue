@@ -72,3 +72,8 @@ export const PAYMENT = {
   name: '商户收款',
   path: '/pages/payment/index'
 };
+
+export const WAITING = {
+  name: '敬请期待',
+  path: '/pages/waiting/index'
+};

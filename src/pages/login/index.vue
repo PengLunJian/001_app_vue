@@ -30,12 +30,14 @@
 <script type="text/ecmascript-6">
   import Mixin from '../../mixins';
   import * as $controller from './controller';
+  import * as utils from '../../utils';
 
   export default {
     data() {
       return {
         username: '',
         password: '',
+        deviceid: '',
         isDisable: true
       }
     },
@@ -43,6 +45,16 @@
     computed: $controller.states,
     methods: $controller.actions,
     onLoad() {
+      const result = this.getSystemInfo();
+      const {model} = result;
+      utils.getDeviceId()
+        .then((res) => {
+          const {uuid} = res;
+          this.deviceid = model + uuid;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 </script>

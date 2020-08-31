@@ -5,6 +5,12 @@ export default {
     }
   },
   methods: {
+    showToast(title, icon) {
+      uni.showToast({
+        title,
+        icon: icon || 'none'
+      });
+    },
     showLoading(title) {
       uni.showLoading({
         title: title || '正在加载',
@@ -80,11 +86,19 @@ export default {
       }
       return result;
     },
-    showToast(title, icon) {
-      uni.showToast({
-        title,
-        icon: icon || 'none'
+    getSystemInfo() {
+      let result = {};
+      uni.getSystemInfo({
+        success: (res) => {
+          res = res || {};
+          result = res;
+        },
+        fail: (err) => {
+          err = err || {};
+          console.log(err);
+        }
       });
+      return result;
     }
   },
   created() {

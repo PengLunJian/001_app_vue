@@ -34,8 +34,9 @@ export const actions = {
       .then((res) => {
         this.hideLoading();
         res = res || {};
-        const {success} = res;
+        const {success, data} = res;
         if (success) {
+          this.setItem('token', data);
           this.reLaunch($routes.HOME.path);
         } else {
           this.showToast('用户名或密码错误');
@@ -48,10 +49,11 @@ export const actions = {
       });
   },
   getParams() {
-    const {username, password} = this;
+    const {username, password, deviceid} = this;
     return {
       username,
-      password
+      password,
+      deviceid
     }
   }
 };

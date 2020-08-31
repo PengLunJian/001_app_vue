@@ -1,4 +1,5 @@
 import apis from '../apis';
+import * as utils from '../utils';
 
 let requestTask = null;
 /**
@@ -9,7 +10,9 @@ let requestTask = null;
  * @returns {Promise<any>}
  */
 export const request = (api, method, params) => {
-  const {baseUrl, header, dataType, timeout} = apis;
+  const {baseUrl, dataType, timeout} = apis;
+  const authorize = utils.getAuthorize();
+  const header = {...apis.header, 'authorize': authorize};
   const url = baseUrl + api.url;
   return new Promise((resolve, reject) => {
     requestTask = uni.request({

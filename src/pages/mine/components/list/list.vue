@@ -32,7 +32,7 @@
         items: [
           {
             name: $routes.SERVICE.name,
-            path: $routes.SERVICE.path
+            path: $routes.WAITING.path
           },
           {
             name: $routes.PRINT.name,

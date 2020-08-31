@@ -1,5 +1,5 @@
 const apis = {
-  baseUrl: 'http://apiflbl.zhifuxia.net.cn',
+  baseUrl: 'http://api.zhifuxia.net.cn',
   method: 'post',
   timeout: 5000,
   dataType: 'json',
@@ -7,10 +7,11 @@ const apis = {
     'Content-Type': 'application/json; charset=UTF-8'
   },
   selectLogin: {
-    url: '/api/login',
+    url: '/account/applogin',
     params: {
       username: '',
-      password: ''
+      password: '',
+      deviceId: ''
     }
   },
   selectIndex: {
@@ -44,6 +45,27 @@ const apis = {
   insertLoan: {
     url: '/api/loan',
     params: {}
+  },
+  payRefund: {
+    url: '/pay/refund',
+    params: {
+      orderid: '',
+      refundpass: '',
+      refundreason: '',
+      sign: ''
+    }
+  },
+  payAcquire: {
+    url: '',
+    params: {
+      scanpayno: '',
+      paymoney: 0,
+      sellerdiscountamount: 0,
+      sellercouponamount: 0,
+      ordertitle: '',
+      ordernote: '',
+      sign: ''
+    }
   }
 }
 

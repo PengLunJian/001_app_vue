@@ -13,7 +13,6 @@ export const ajaxSelectLogin = ({commit}, params) => {
   return new Promise((resolve, reject) => {
     $ajax.post(apis.selectLogin, params)
       .then((res) => {
-        res = $mock.login(params);
         res = res || {};
         const {data, success} = res;
         if (success) {

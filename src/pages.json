@@ -33,7 +33,7 @@
     {
       "path": "pages/service/index",
       "style": {
-        "navigationBarTitleText": "我的客服"
+        "navigationBarTitleText": "在线客服"
       }
     },
     {
@@ -75,7 +75,10 @@
     {
       "path": "pages/refund/index",
       "style": {
-        "navigationBarTitleText": "退款"
+        "navigationBarTitleText": "退款",
+        "app-plus": {
+          "bounce": "none"
+        }
       }
     },
     {
@@ -106,6 +109,15 @@
       "path": "pages/success/index",
       "style": {
         "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/waiting/index",
+      "style": {
+        "navigationBarTitleText": "敬请期待",
+        "app-plus": {
+          "bounce": "none"
+        }
       }
     }
   ],

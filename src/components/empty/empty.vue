@@ -1,8 +1,8 @@
 <template>
   <view class="empty fade-in" v-if="isShow">
     <view class="inner">
-      <view class="image"></view>
-      <view class="label">暂无数据</view>
+      <view class="icon"></view>
+      <view class="text">暂无数据</view>
     </view>
   </view>
 </template>
@@ -40,11 +40,15 @@
     .inner {
       display: inline-block;
       vertical-align: middle;
-      .image {
-        width: unit(200, rpx);
-        height: unit(200, rpx);
+      .icon {
+        width: unit(240, rpx);
+        height: unit(240, rpx);
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-image: url('./images/empty@2x.png');
       }
-      .label {
+      .text {
         height: unit(40, rpx);
         line-height: unit(40, rpx);
         margin-top: unit(10, rpx);
