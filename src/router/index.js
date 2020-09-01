@@ -65,7 +65,7 @@ export const ORDER = {
 
 export const DETAIL = {
   name: '账单详情',
-  path: '/pages/order/detail'
+  path: '/pages/detail/index'
 };
 
 export const PAYMENT = {
@@ -76,4 +76,9 @@ export const PAYMENT = {
 export const WAITING = {
   name: '敬请期待',
   path: '/pages/waiting/index'
+};
+
+export const SUCCESS = {
+  name: '支付成功',
+  path: '/pages/success/index'
 };

@@ -3,49 +3,51 @@
     <view class="content">
       <view class="header"></view>
       <view class="body">
-        <view class="context">
+        <view class="context fade-in">
           <scroll-view class="scroll-view" :scroll-y="isScroll">
-            <view class="module">
-              <view class="module-content">
-                <view class="module-header"></view>
-                <view class="module-body">
-                  <view class="module-row row">
-                    <view class="module-col col-12">
-                      <view class="module-value">￥{{price}}</view>
+            <view class="scroll-content">
+              <view class="module">
+                <view class="module-content">
+                  <view class="module-header"></view>
+                  <view class="module-body">
+                    <view class="module-row row">
+                      <view class="module-col col-12">
+                        <view class="module-value">￥{{price}}</view>
+                      </view>
                     </view>
                   </view>
+                  <view class="module-footer"></view>
                 </view>
-                <view class="module-footer"></view>
               </view>
             </view>
           </scroll-view>
         </view>
       </view>
       <view class="footer"></view>
-      <view class="keyboard">
-        <view class="keyboard-content">
-          <view class="keyboard-header"></view>
-          <view class="keyboard-body">
-            <view class="keyboard-row row">
-              <view class="keyboard-col col-9">
-                <view class="keyboard-col-row row">
-                  <view class="keyboard-col-col col-4"
+      <view class="modal">
+        <view class="modal-content">
+          <view class="modal-header"></view>
+          <view class="modal-body">
+            <view class="modal-row row">
+              <view class="modal-col col-9">
+                <view class="modal-items row">
+                  <view class="modal-item col-4"
                         v-for="(item,index) in items" :key="index">
-                    <view class="keyboard-col-btn btn"
+                    <view class="modal-btn btn"
                           @click="onHandleButton(item)">{{item.label}}
                     </view>
                   </view>
                 </view>
               </view>
-              <view class="keyboard-col col-3">
-                <view class="keyboard-col-row row">
-                  <view class="keyboard-col-col col-12">
-                    <view class="keyboard-col-btn btn" @click="onHandleDelete">
-                      <view class="keyboard-icon iconfont icon-delete"></view>
+              <view class="modal-col col-3">
+                <view class="modal-items row">
+                  <view class="modal-item col-12">
+                    <view class="modal-btn btn" @click="onHandleDelete">
+                      <view class="modal-icon iconfont icon-delete"></view>
                     </view>
                   </view>
-                  <view class="keyboard-col-col col-12">
-                    <view class="keyboard-col-btn btn btn-confirm"
+                  <view class="modal-item col-12">
+                    <view class="modal-btn btn btn-confirm"
                           :class="{'disable':isDisable}"
                           @click="onHandleConfirm">确定
                     </view>
@@ -54,7 +56,7 @@
               </view>
             </view>
           </view>
-          <view class="keyboard-footer"></view>
+          <view class="modal-footer"></view>
         </view>
       </view>
     </view>
@@ -64,13 +66,14 @@
 <script type="text/ecmascript-6">
   import Mixin from '../../mixins';
   import permision from "../../static/libs/jssdk";
+  import * as $controller from './controller';
 
   export default {
-    components: {},
     mixins: [Mixin],
     data() {
       return {
         price: '',
+        scanCode: '',
         items: [
           {
             label: '1',
@@ -121,59 +124,8 @@
         isDisable: true
       }
     },
-    methods: {
-      onHandleButton(item) {
-        const {price} = this;
-        const {value} = item;
-        const regExp1 = /\./;
-        const regExp2 = /^[0]$/;
-        const regExp3 = /^\d+\.\d{2}$/;
-        if (regExp1.test(price)) {
-          if (value === '.') {
-            return;
-          }
-        }
-        if (regExp2.test(price)) {
-          if (value !== '.') {
-            return;
-          }
-        }
-        if (regExp3.test(price)) {
-          return;
-        }
-        if (value === '.') {
-          if (price === '') {
-            this.price = '0';
-          }
-        }
-        this.price += value;
-        this.isDisable = !this.price;
-      },
-      onHandleDelete() {
-        const len = this.price.length - 1;
-        this.price = this.price.substr(0, len);
-        this.isDisable = !this.price;
-      },
-      onHandleConfirm() {
-        const value = parseFloat(this.price);
-        if (value <= 0) {
-          this.showToast('输入金额错误');
-          return;
-        }
-
-        // const camera = permision.judgeIosPermission('camera');
-        // this.showToast(camera);
-        // permision.gotoAppPermissionSetting();
-
-        uni.scanCode({
-          onlyFromCamera: true,
-          success: (res) => {
-            res = res || {};
-            console.log(res);
-          }
-        });
-      }
-    },
+    computed: $controller.states,
+    methods: $controller.actions,
     onLoad() {
     }
   }
@@ -196,26 +148,28 @@
           height: 100%;
           .scroll-view {
             height: 100%;
-            .module {
-              .module-content {
-                .module-header {
-                }
-                .module-body {
-                  padding: unit(120, rpx) unit(60, rpx);
-                  .module-row {
-                    padding: unit(30, rpx);
-                    .module-col {
+            .scroll-content {
+              .module {
+                .module-content {
+                  .module-header {
+                  }
+                  .module-body {
+                    padding: unit(120, rpx) unit(60, rpx);
+                    .module-row {
                       padding: unit(30, rpx);
-                      line-height: unit(120, rpx);
-                      .module-value {
-                        border-bottom: 1px solid @black;
-                        padding-left: unit(30, rpx);
-                        font-size: @fontSize76;
+                      .module-col {
+                        padding: unit(30, rpx);
+                        line-height: unit(120, rpx);
+                        .module-value {
+                          border-bottom: 1px solid @black;
+                          padding-left: unit(30, rpx);
+                          font-size: @fontSize76;
+                        }
                       }
                     }
                   }
-                }
-                .module-footer {
+                  .module-footer {
+                  }
                 }
               }
             }
@@ -224,8 +178,8 @@
       }
       .footer {
       }
-      .keyboard {
-        .keyboard-content {
+      .modal {
+        .modal-content {
           position: fixed;
           width: 100%;
           left: 0;
@@ -233,16 +187,16 @@
           z-index: 1000;
           background-color: @bgColor;
           transition: all 300ms ease;
-          .keyboard-header {
+          .modal-header {
           }
-          .keyboard-body {
-            .keyboard-row {
+          .modal-body {
+            .modal-row {
               padding: unit(10, rpx);
-              .keyboard-col {
-                .keyboard-col-row {
-                  .keyboard-col-col {
+              .modal-col {
+                .modal-items {
+                  .modal-item {
                     padding: unit(10, rpx);
-                    .keyboard-col-btn {
+                    .modal-btn {
                       overflow: hidden;
                       height: unit(100, rpx);
                       line-height: unit(100, rpx);
@@ -251,7 +205,7 @@
                       font-size: @fontSize46;
                       text-align: center;
                       color: @fontColor1;
-                      .keyboard-icon {
+                      .modal-icon {
                         font-size: @fontSize50;
                       }
                       &.btn-confirm {
@@ -268,7 +222,7 @@
                   }
                 }
                 &.col-9 {
-                  .keyboard-col-col {
+                  .modal-item {
                     &:last-child {
                       width: 66.666%;
                     }
@@ -277,7 +231,7 @@
               }
             }
           }
-          .keyboard-footer {
+          .modal-footer {
           }
         }
       }

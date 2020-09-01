@@ -61,6 +61,32 @@ export const ajaxSelectIndex = ({commit}, params) => {
  * @param params
  * @returns {Promise<any>}
  */
+export const ajaxUpdateRefund = ({commit}, params) => {
+  commit(actionTypes.UPDATE_REFUND_REQUEST);
+  return new Promise((resolve, reject) => {
+    $ajax.post(apis.updateRefund, params)
+      .then((res) => {
+        res = res || {};
+        const {data, success} = res;
+        if (success) {
+          commit(actionTypes.UPDATE_REFUND_SUCCESS, data);
+        } else {
+          commit(actionTypes.UPDATE_REFUND_FAILURE);
+        }
+        resolve(res);
+      })
+      .catch((err) => {
+        commit(actionTypes.UPDATE_REFUND_FAILURE);
+        reject(err);
+      });
+  });
+};
+/**
+ *
+ * @param commit
+ * @param params
+ * @returns {Promise<any>}
+ */
 export const ajaxSelectOrder = ({commit}, params) => {
   commit(actionTypes.SELECT_ORDER_REQUEST);
   return new Promise((resolve, reject) => {

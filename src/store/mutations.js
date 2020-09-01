@@ -36,6 +36,44 @@ export const SELECT_INDEX_FAILURE = (state) => {
   state.INDEX.isFailure = true;
 };
 
+export const UPDATE_REFUND_REQUEST = (state) => {
+  state.REFUND.isLoading = true;
+  state.REFUND.isSuccess = false;
+  state.REFUND.isFailure = false;
+};
+
+export const UPDATE_REFUND_SUCCESS = (state, data) => {
+  state.REFUND.isLoading = false;
+  state.REFUND.isSuccess = true;
+  state.REFUND.isFailure = false;
+  state.REFUND.isData = data;
+};
+
+export const UPDATE_REFUND_FAILURE = (state) => {
+  state.REFUND.isLoading = false;
+  state.REFUND.isSuccess = false;
+  state.REFUND.isFailure = true;
+};
+
+export const INSERT_PAYMENT_REQUEST = (state) => {
+  state.PAYMENT.isLoading = true;
+  state.PAYMENT.isSuccess = false;
+  state.PAYMENT.isFailure = false;
+};
+
+export const INSERT_PAYMENT_SUCCESS = (state, data) => {
+  state.PAYMENT.isLoading = false;
+  state.PAYMENT.isSuccess = true;
+  state.PAYMENT.isFailure = false;
+  state.PAYMENT.isData = data;
+};
+
+export const INSERT_PAYMENT_FAILURE = (state) => {
+  state.PAYMENT.isLoading = false;
+  state.PAYMENT.isSuccess = false;
+  state.PAYMENT.isFailure = true;
+};
+
 export const SELECT_ORDER_REQUEST = (state) => {
   state.ORDER.isLoading = true;
   state.ORDER.isSuccess = false;
@@ -110,25 +148,6 @@ export const INSERT_SUGGEST_FAILURE = (state) => {
   state.SUGGEST.isLoading = false;
   state.SUGGEST.isSuccess = false;
   state.SUGGEST.isFailure = true;
-};
-
-export const INSERT_PAYMENT_REQUEST = (state) => {
-  state.PAYMENT.isLoading = true;
-  state.PAYMENT.isSuccess = false;
-  state.PAYMENT.isFailure = false;
-};
-
-export const INSERT_PAYMENT_SUCCESS = (state, data) => {
-  state.PAYMENT.isLoading = false;
-  state.PAYMENT.isSuccess = true;
-  state.PAYMENT.isFailure = false;
-  state.PAYMENT.isData = data;
-};
-
-export const INSERT_PAYMENT_FAILURE = (state) => {
-  state.PAYMENT.isLoading = false;
-  state.PAYMENT.isSuccess = false;
-  state.PAYMENT.isFailure = true;
 };
 
 export const INSERT_LOAN_REQUEST = (state) => {

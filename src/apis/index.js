@@ -1,7 +1,7 @@
 const apis = {
   baseUrl: 'http://api.zhifuxia.net.cn',
   method: 'post',
-  timeout: 5000,
+  timeout: 20000,
   dataType: 'json',
   header: {
     'Content-Type': 'application/json; charset=UTF-8'
@@ -19,12 +19,23 @@ const apis = {
     params: {}
   },
   selectOrder: {
-    url: '/api/order',
-    params: {}
+    url: '/order/orderlist',
+    params: {
+      shopid: 0,
+      siteuserid: 0,
+      paystate: 0,
+      paytype: 0,
+      begindate: '',
+      enddate: '',
+      sorttype: 0,
+      sort: 0
+    }
   },
   selectDetail: {
-    url: '/api/detail',
-    params: {}
+    url: '/order/orderdetail',
+    params: {
+      orderid: ''
+    }
   },
   updatePassword: {
     url: '/api/password',
@@ -32,10 +43,6 @@ const apis = {
   },
   insertSuggest: {
     url: '/api/suggest',
-    params: {}
-  },
-  insertPayment: {
-    url: '/api/payment',
     params: {}
   },
   selectUser: {
@@ -46,7 +53,7 @@ const apis = {
     url: '/api/loan',
     params: {}
   },
-  payRefund: {
+  updateRefund: {
     url: '/pay/refund',
     params: {
       orderid: '',
@@ -55,8 +62,8 @@ const apis = {
       sign: ''
     }
   },
-  payAcquire: {
-    url: '',
+  insertPayment: {
+    url: '/pay/acquire',
     params: {
       scanpayno: '',
       paymoney: 0,

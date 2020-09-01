@@ -105,12 +105,16 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Mixin from '../../mixins';
+  import * as $controller from './controller';
 
   export default {
-    components: {},
     data() {
       return {
-        price: '168.00',
+        orderId: 'ZFX32044906002350043252',
+        price: '0.01',
+        remark: '',
+        sign: '',
         isHide: true,
         items: [
           {
@@ -174,38 +178,9 @@
         isDisable: true
       }
     },
-    methods: {
-      onHandleCancel() {
-        this.isHide = true;
-        this.isScroll = true;
-        setTimeout(() => {
-          this.password = '';
-        }, 300);
-      },
-      onHandleSubmit() {
-      },
-      onHandleButton(item) {
-        const {disable, value} = item;
-        if (!disable && this.password.length < 6) {
-          this.password += value;
-        }
-        this.isDisable = this.password.length < 6;
-      },
-      onHandleDelete() {
-        const len = this.password.length - 1;
-        const str = this.password.substr(0, len);
-        this.password = len <= 0 ? '' : str;
-        this.isDisable = this.password.length < 6;
-      },
-      onHandleConfirm() {
-        this.isHide = false;
-        this.isScroll = false;
-      },
-      getParams() {
-        const params = {};
-        return params;
-      }
-    },
+    mixins: [Mixin],
+    computed: $controller.states,
+    methods: $controller.actions,
     onLoad() {
     }
   }

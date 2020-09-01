@@ -12,6 +12,13 @@ export const INDEX = {
   isData: null
 };
 
+export const REFUND = {
+  isLoading: false,
+  isFailure: false,
+  isSuccess: false,
+  isData: null
+};
+
 export const ORDER = {
   isLoading: false,
   isFailure: false,

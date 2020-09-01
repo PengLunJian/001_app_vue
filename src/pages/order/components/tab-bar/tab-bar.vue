@@ -4,8 +4,10 @@
       <view class="tab-col col-4" :class="{'active':index===tab.activeIndex}"
             v-for="(item,index) in tab.items" :key="index"
             @click="onHandleChange(index)">
-        <view class="tab-text">{{item}}</view>
-        <view class="tab-icon"></view>
+        <view class="tab-item">
+          <view class="tab-text">{{item}}</view>
+          <view class="tab-icon"></view>
+        </view>
       </view>
     </view>
   </view>
@@ -47,26 +49,34 @@
         padding: unit(30, rpx) 0;
         text-align: center;
         color: @fontColor1;
-        .tab-text {
-          display: inline-block;
-          vertical-align: middle;
-          line-height: unit(40, rpx);
-          font-size: @fontSize28;
-        }
-        .tab-icon {
-          display: inline-block;
-          vertical-align: middle;
-          margin-left: unit(10, rpx);
-          transition: all 300ms ease;
-          border-top: unit(12, rpx) solid #000000;
-          border-left: unit(8, rpx) solid @transparent;
-          border-right: unit(8, rpx) solid @transparent;
+        .tab-item {
+          border-right: 0.5px solid @borderColor1;
+          .tab-text {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: unit(40, rpx);
+            font-size: @fontSize28;
+          }
+          .tab-icon {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: unit(10, rpx);
+            transition: all 300ms ease;
+            border-top: unit(12, rpx) solid #000000;
+            border-left: unit(8, rpx) solid @transparent;
+            border-right: unit(8, rpx) solid @transparent;
+          }
         }
         &.active {
           color: @theme;
           .tab-icon {
             border-top-color: @theme;
             transform: rotate(180deg);
+          }
+        }
+        &:last-child {
+          .tab-item {
+            border: none;
           }
         }
       }

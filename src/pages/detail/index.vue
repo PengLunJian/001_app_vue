@@ -70,25 +70,22 @@
 
 <script type="text/ecmascript-6">
   import Mixin from '../../mixins';
-  import * as $routes from '../../router';
+  import * as $controller from './controller';
 
   export default {
     data() {
       return {
+        orderid: '',
         isScroll: true
       }
     },
     mixins: [Mixin],
-    methods: {
-      onHandleRefund() {
-        this.navigateTo($routes.REFUND.path);
-      },
-      onHandlePrint() {
-        this.navigateTo($routes.PRINT.path);
-      }
-    },
-    onLoad() {
-
+    computed: $controller.states,
+    methods: $controller.actions,
+    onLoad(option) {
+      const {orderid} = option;
+      this.orderid = orderid;
+      this.exeAjaxSelectDetail();
     }
   }
 </script>

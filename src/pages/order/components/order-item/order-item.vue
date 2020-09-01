@@ -5,15 +5,16 @@
       <view class="module-body">
         <view class="module-row row">
           <view class="module-col col-2">
-            <view class="module-icon iconfont icon-alipay02"></view>
+            <view v-if="item.paytype==='支付宝'" class="module-icon iconfont icon-alipay"></view>
+            <view v-if="item.paytype==='微信'" class="module-icon iconfont icon-wechat"></view>
           </view>
           <view class="module-col col-5">
-            <view class="module-text">财务专员</view>
-            <view class="module-time">2020/07/24 10:25</view>
+            <view class="module-text">{{item.siteusername}}</view>
+            <view class="module-time">{{item.paytime}}</view>
           </view>
           <view class="module-col col-5">
-            <view class="module-price">￥6590.00</view>
-            <view class="module-state">已付款</view>
+            <view class="module-price">￥{{item.ordermoney}}</view>
+            <view class="module-state">{{item.paystate}}</view>
           </view>
         </view>
       </view>
@@ -32,10 +33,17 @@
     data() {
       return {};
     },
-    props: {},
+    props: {
+      item: {
+        type: Object,
+        default: {}
+      }
+    },
     methods: {
       onHandleDetail() {
-        this.navigateTo($routes.DETAIL.path);
+        const {orderid} = this.item;
+        const query = '?orderid=' + orderid;
+        this.navigateTo($routes.DETAIL.path + query);
       }
     }
   }
@@ -55,22 +63,26 @@
             padding: unit(15, rpx);
             line-height: unit(60, rpx);
             .module-icon {
-              height: unit(120, rpx);
-              line-height: unit(120, rpx);
-              &.icon-alipay02 {
-                font-size: @fontSize80;
-                color: @theme;
+              width: unit(80, rpx);
+              height: unit(80, rpx);
+              margin-top: unit(20, rpx);
+              line-height: unit(80, rpx);
+              border-radius: @borderRadius100;
+              font-size: @fontSize56;
+              text-align: center;
+              color: @white;
+              &.icon-alipay {
+                background-color: #0095FF;
               }
               &.icon-wechat {
-                font-size: @fontSize72;
-                color: #09BB07;
+                background-color: #09BB07;
               }
             }
             .module-text {
               font-size: @fontSize32;
             }
             .module-time {
-              font-size: @fontSize26;
+              font-size: @fontSize28;
               color: @fontColor3;
             }
             .module-price {

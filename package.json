@@ -56,6 +56,8 @@
     "core-js": "^3.6.5",
     "echarts": "^4.8.0",
     "flyio": "^0.6.2",
+    "js-base64": "^3.4.5",
+    "js-md5": "^0.7.3",
     "mpvue-echarts": "^0.3.2",
     "regenerator-runtime": "^0.12.1",
     "vue": "^2.6.11",

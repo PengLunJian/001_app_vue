@@ -27,6 +27,5 @@ export const getAuthorize = () => {
   } catch (e) {
     console.log(e);
   }
-  console.log('Bearer ' + token);
   return 'Bearer ' + token;
 };

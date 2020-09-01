@@ -91,7 +91,7 @@
       }
     },
     {
-      "path": "pages/order/detail",
+      "path": "pages/detail/index",
       "style": {
         "navigationBarTitleText": "账单详情"
       }

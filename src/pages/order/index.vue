@@ -7,12 +7,7 @@
       <view class="body">
         <scroll-view class="scroll-view" :scroll-y="isScroll">
           <view class="scroll-content">
-            <order-item/>
-            <order-item/>
-            <order-item/>
-            <order-item/>
-            <order-item/>
-            <order-item/>
+            <order-item v-for="(item,index) in isData" :item="item" :key="index"/>
           </view>
         </scroll-view>
       </view>
@@ -128,12 +123,15 @@
 <script type="text/ecmascript-6">
   import OrderItem from "./components/order-item/order-item";
   import TabBar from "./components/tab-bar/tab-bar";
+  import Mixin from '../../mixins';
+  import * as $controller from './controller';
 
   export default {
     components: {
       TabBar,
       OrderItem
     },
+    mixins: [Mixin],
     data() {
       return {
         isScroll: true,
@@ -181,34 +179,10 @@
         }
       }
     },
-    methods: {
-      onHandleReset() {
-      },
-      onHandleConfirm() {
-      },
-      onHandleChange(index) {
-        const {activeIndex} = this.tab;
-        if (activeIndex === index) {
-          this.tab.activeIndex = -1;
-          this.isScroll = true;
-        } else {
-          this.tab.activeIndex = index;
-          this.isScroll = false;
-        }
-      },
-      onHandleFilter(index) {
-        this.btnShop.activeIndex = index;
-      },
-      onHandleSort(index) {
-        this.btnSort.activeIndex = index;
-      },
-      onHandleClose() {
-        this.tab.activeIndex = -1;
-        this.isScroll = true;
-      }
-    },
+    computed: $controller.states,
+    methods: $controller.actions,
     onLoad() {
-
+      this.exeAjaxSelectOrder();
     }
   }
 </script>
