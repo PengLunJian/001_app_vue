@@ -17,7 +17,7 @@
                       <view class="module-col col-12">
                         <view class="module-input row">
                           <view class="module-label">￥</view>
-                          <view class="module-value">{{price}}</view>
+                          <view class="module-value">{{isDetail.ordermoney}}</view>
                         </view>
                       </view>
                     </view>
@@ -26,7 +26,7 @@
                         <view class="module-label">实收金额</view>
                       </view>
                       <view class="module-col col-8">
-                        <view class="module-value">168.00</view>
+                        <view class="module-value">{{isDetail.realpayamount}}</view>
                       </view>
                     </view>
                     <view class="module-row row">
@@ -34,7 +34,7 @@
                         <view class="module-label">优惠金额</view>
                       </view>
                       <view class="module-col col-8">
-                        <view class="module-value">0.0</view>
+                        <view class="module-value">{{isDetail.discountamount}}</view>
                       </view>
                     </view>
                     <view class="module-row row">
@@ -42,7 +42,7 @@
                         <view class="module-label">支付方式</view>
                       </view>
                       <view class="module-col col-8">
-                        <view class="module-value">支付宝</view>
+                        <view class="module-value">{{isDetail.paytype}}</view>
                       </view>
                     </view>
                   </view>
@@ -65,7 +65,7 @@
                 <view class="modal-title">请输入密码</view>
               </view>
               <view class="modal-col col-12">
-                <input class="modal-input" v-model="password" type="password" disabled
+                <input class="modal-input" v-model="refundpass" type="password" disabled
                        placeholder="请输入6位退款密码"/>
               </view>
             </view>
@@ -111,9 +111,8 @@
   export default {
     data() {
       return {
-        orderId: 'ZFX32044906002350043252',
-        price: '0.01',
-        remark: '',
+        refundpass: '',
+        refundreason: '',
         sign: '',
         isHide: true,
         items: [
@@ -173,7 +172,6 @@
             disable: false
           }
         ],
-        password: '',
         isScroll: true,
         isDisable: true
       }

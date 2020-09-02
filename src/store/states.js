@@ -23,7 +23,11 @@ export const ORDER = {
   isLoading: false,
   isFailure: false,
   isSuccess: false,
-  isData: null
+  isData: {
+    pageindex: 1,
+    rows: [],
+    totalcount: 0
+  }
 };
 
 export const DETAIL = {

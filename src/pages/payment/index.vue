@@ -161,7 +161,7 @@
                         padding: unit(30, rpx);
                         line-height: unit(120, rpx);
                         .module-value {
-                          border-bottom: 1px solid @black;
+                          border-bottom: 2px solid @black;
                           padding-left: unit(30, rpx);
                           font-size: @fontSize76;
                         }

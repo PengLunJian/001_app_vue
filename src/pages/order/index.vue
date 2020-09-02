@@ -5,11 +5,20 @@
         <tab-bar :tab="tab" @change="onHandleChange"/>
       </view>
       <view class="body">
-        <scroll-view class="scroll-view" :scroll-y="isScroll">
-          <view class="scroll-content">
-            <order-item v-for="(item,index) in isData" :item="item" :key="index"/>
-          </view>
-        </scroll-view>
+        <error :isShow="isFailure&&!isOrder.rows.length" @refresh="onRefresh"/>
+        <empty :isShow="isSuccess&&!isOrder.rows.length"/>
+        <view class="context fade-in" v-if="isOrder.rows.length">
+          <scroll-view class="scroll-view"
+                       :scroll-y="isScroll"
+                       @scrolltolower="onHandleScrollToLower">
+            <view class="scroll-content">
+              <view class="items">
+                <order-item v-for="(item,index) in isOrder.rows" :item="item" :key="index"/>
+              </view>
+              <loading-more :length="isOrder.rows.length" :totalCount="isOrder.totalcount"/>
+            </view>
+          </scroll-view>
+        </view>
       </view>
       <view class="footer"></view>
       <view class="modal" id="modalA" :class="{'hide':tab.activeIndex!==0}">
@@ -121,6 +130,9 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Empty from "../../components/empty/empty";
+  import Error from "../../components/error/error";
+  import LoadingMore from "../../components/loading-more/loading-more";
   import OrderItem from "./components/order-item/order-item";
   import TabBar from "./components/tab-bar/tab-bar";
   import Mixin from '../../mixins';
@@ -128,6 +140,9 @@
 
   export default {
     components: {
+      Error,
+      Empty,
+      LoadingMore,
       TabBar,
       OrderItem
     },
@@ -176,12 +191,15 @@
               value: 2
             }
           ]
-        }
+        },
+        pageindex: 1,
+        pagesize: 10
       }
     },
     computed: $controller.states,
     methods: $controller.actions,
     onLoad() {
+      this.SELECT_ORDER_REPLACE();
       this.exeAjaxSelectOrder();
     }
   }
@@ -195,15 +213,19 @@
     min-height: 100vh;
     .content {
       height: 100vh;
-      padding-top: unit(100, rpx);
       .header {
       }
       .body {
         height: 100%;
-        .scroll-view {
+        position: relative;
+        .context {
           height: 100%;
-          .scroll-content {
+          padding-top: unit(100, rpx);
+          .scroll-view {
+            height: 100%;
+            .scroll-content {
 
+            }
           }
         }
       }

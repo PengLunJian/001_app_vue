@@ -75,7 +75,6 @@ export const all = (arr) => {
  *
  */
 export const abort = () => {
-  if (!requestTask) return;
   requestTask.abort();
   requestTask = null;
 };

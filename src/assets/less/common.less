@@ -110,6 +110,7 @@ button {
 }
 
 .btn {
+  overflow: hidden;
   position: relative;
   &:before {
     content: '';
@@ -163,5 +164,17 @@ button {
   100% {
     opacity: 0;
     visibility: hidden;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

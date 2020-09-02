@@ -9,7 +9,7 @@ export const states = {
     isLoading: state => state.PAYMENT.isLoading,
     isSuccess: state => state.PAYMENT.isSuccess,
     isFailure: state => state.PAYMENT.isFailure,
-    isData: state => state.PAYMENT.isData
+    isPayment: state => state.PAYMENT.isData
   }),
 };
 

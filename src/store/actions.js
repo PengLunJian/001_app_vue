@@ -70,6 +70,7 @@ export const ajaxUpdateRefund = ({commit}, params) => {
         const {data, success} = res;
         if (success) {
           commit(actionTypes.UPDATE_REFUND_SUCCESS, data);
+          commit(actionTypes.UPDATE_REFUND_REPLACE, params);
         } else {
           commit(actionTypes.UPDATE_REFUND_FAILURE);
         }

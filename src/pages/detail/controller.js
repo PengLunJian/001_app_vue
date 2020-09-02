@@ -6,7 +6,7 @@ export const states = {
     isLoading: state => state.DETAIL.isLoading,
     isSuccess: state => state.DETAIL.isSuccess,
     isFailure: state => state.DETAIL.isFailure,
-    isData: state => state.DETAIL.isData
+    isDetail: state => state.DETAIL.isData
   }),
 };
 
@@ -27,7 +27,6 @@ export const actions = {
       .then((res) => {
         this.hideLoading();
         res = res || {};
-        const {success} = res;
         console.log(res);
       })
       .catch((err) => {
