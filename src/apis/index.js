@@ -38,20 +38,35 @@ const apis = {
     }
   },
   updatePassword: {
-    url: '/api/password',
+    url: '/account/appchangepassword',
+    params: {
+      oldpassword: '',
+      newpassword: ''
+    }
+  },
+  selectUser: {
+    url: '/account/appmyinfo',
     params: {}
   },
   insertSuggest: {
-    url: '/api/suggest',
-    params: {}
-  },
-  selectUser: {
-    url: '/api/user',
-    params: {}
+    url: '/pay/addfeedback',
+    params: {
+      title: '',
+      content: '',
+      name: '',
+      phone: ''
+    }
   },
   insertLoan: {
-    url: '/api/loan',
-    params: {}
+    url: '/pay/addloanapply',
+    params: {
+      name: '',
+      idcard: '',
+      mobile: '',
+      businesshours: '',
+      monthturnover: '',
+      businessaddress: ''
+    }
   },
   updateRefund: {
     url: '/pay/refund',

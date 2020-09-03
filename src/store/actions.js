@@ -207,7 +207,7 @@ export const ajaxSelectUser = ({commit}, params) => {
         resolve(res);
       })
       .catch((err) => {
-        commit(actionTypes.INSERT_LOAN_FAILURE);
+        commit(actionTypes.SELECT_USER_FAILURE);
         reject(err);
       });
   });

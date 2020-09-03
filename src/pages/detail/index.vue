@@ -3,6 +3,8 @@
     <view class="content">
       <view class="header"></view>
       <view class="body">
+        <error :isShow="isFailure" @refresh="onRefresh"/>
+        <empty :isShow="isSuccess&&!isDetail"/>
         <view class="context fade-in" v-if="isSuccess">
           <scroll-view class="scroll-view" :scroll-y="isScroll">
             <view class="scroll-content">

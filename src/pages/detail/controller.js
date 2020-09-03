@@ -35,6 +35,9 @@ export const actions = {
         console.log(err);
       });
   },
+  onRefresh() {
+    this.exeAjaxSelectDetail();
+  },
   getParams() {
     const {orderid} = this;
     const params = {

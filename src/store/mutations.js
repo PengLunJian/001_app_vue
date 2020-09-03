@@ -320,3 +320,35 @@ export const INSERT_LOAN_FAILURE = (state) => {
   state.LOAN.isSuccess = false;
   state.LOAN.isFailure = true;
 };
+/**
+ *
+ * @param state
+ * @constructor
+ */
+export const SELECT_USER_REQUEST = (state) => {
+  state.USER.isLoading = true;
+  state.USER.isSuccess = false;
+  state.USER.isFailure = false;
+};
+/**
+ *
+ * @param state
+ * @param data
+ * @constructor
+ */
+export const SELECT_USER_SUCCESS = (state, data) => {
+  state.USER.isLoading = false;
+  state.USER.isSuccess = true;
+  state.USER.isFailure = false;
+  state.USER.isData = data;
+};
+/**
+ *
+ * @param state
+ * @constructor
+ */
+export const SELECT_USER_FAILURE = (state) => {
+  state.USER.isLoading = false;
+  state.USER.isSuccess = false;
+  state.USER.isFailure = true;
+};

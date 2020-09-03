@@ -15,15 +15,22 @@ export const actions = {
     'ajaxSelectLogin'
   ]),
   onHandleCheckEmpty() {
+    let result = false;
     const {username, password} = this;
-    this.isDisable = !(username && password);
+    if (!username) {
+      this.showToast('请输入手机');
+    } else if (!password) {
+      this.showToast('请输入密码');
+    } else {
+      result = true;
+    }
+    return result;
   },
   onHandlePassword() {
-    this.navigateTo($routes.PASSWORD.path);
+    this.navigateTo($routes.WAITING.path);
   },
   onHandleLogin() {
-    const {isDisable} = this;
-    if (!isDisable) {
+    if (this.onHandleCheckEmpty()) {
       this.exeAjaxSelectLogin();
     }
   },
@@ -45,6 +52,7 @@ export const actions = {
       })
       .catch((err) => {
         this.hideLoading();
+        this.showToast('网络异常，请重试');
         console.log(err);
       });
   },

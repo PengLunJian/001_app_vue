@@ -1,7 +1,10 @@
-import {mapActions} from 'vuex';
-import * as $routes from '../../router';
+import {mapState} from 'vuex';
 
-const controller = {
-}
-
-export default controller;
+export const states = {
+  ...mapState({
+    isLoading: state => state.USER.isLoading,
+    isSuccess: state => state.USER.isSuccess,
+    isFailure: state => state.USER.isFailure,
+    isUser: state => state.USER.isData
+  }),
+};

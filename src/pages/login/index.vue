@@ -1,25 +1,29 @@
 <template>
   <view class="container">
-    <view class="content">
+    <view class="content fade-in">
       <view class="header">
         <view class="title">智付侠</view>
       </view>
       <view class="body">
-        <view class="form-group">
-          <label class="form-label iconfont icon-mobile"></label>
-          <input class="form-input" v-model="username" type="number" placeholder="请输入手机号"
-                 @input="onHandleCheckEmpty">
-        </view>
-        <view class="form-group">
-          <label class="form-label iconfont icon-lock"></label>
-          <input class="form-input" v-model="password" type="password" placeholder="请输入登录密码"
-                 @input="onHandleCheckEmpty">
-        </view>
-        <view class="form-group">
-          <label class="form-text" @click="onHandlePassword">忘记密码?</label>
-        </view>
-        <view class="form-group">
-          <view class="btn btn-login" :class="{disable:isDisable}" @click="onHandleLogin">登录</view>
+        <view class="context">
+          <view class="form-group">
+            <label class="form-label iconfont icon-mobile"></label>
+            <input class="form-input" v-model="username" type="number"
+                   placeholder="请输入手机">
+          </view>
+          <view class="form-group">
+            <label class="form-label iconfont icon-lock"></label>
+            <input class="form-input" v-model="password" type="password"
+                   placeholder="请输入密码">
+          </view>
+          <view class="form-group">
+            <view class="form-forgot">
+              <label class="form-text" @click="onHandlePassword">忘记密码</label>
+            </view>
+          </view>
+          <view class="form-group">
+            <view class="btn btn-login" @click="onHandleLogin">登录</view>
+          </view>
         </view>
       </view>
       <view class="footer"></view>
@@ -38,7 +42,6 @@
         username: '',
         password: '',
         deviceid: '',
-        isDisable: true
       }
     },
     mixins: [Mixin],
@@ -62,67 +65,81 @@
 <style lang="less">
   @import "../../assets/less/common";
 
-  @height: unit(80, rpx);
+  @height: unit(105, rpx);
   .container {
+    min-height: 100vh;
     .content {
       height: 100vh;
       background-color: @white;
       .header {
+        background-color: @theme;
         .title {
-          height: unit(400, rpx);
-          background-size: auto 16%;
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-image: url('../../assets/images/logo@2x.png');
-          text-indent: -999999px;
+          height: unit(480, rpx);
           line-height: @height;
+          background-size: auto 15%;
+          background-repeat: no-repeat;
+          background-position: center unit(180, rpx);
+          background-image: url('../../assets/images/logo@2x.png');
           padding: 0 unit(30, rpx);
+          text-indent: -999999px;
           font-size: @fontSize50;
           font-weight: bold;
           color: @fontColor1;
         }
       }
       .body {
-        padding: 0 unit(60, rpx);
-        .form-group {
-          display: flex;
+        padding: 0 unit(45, rpx);
+        .context {
           position: relative;
-          margin-bottom: unit(40, rpx);
+          top: unit(-100, rpx);
+          padding: unit(100, rpx) unit(45, rpx);
+          box-shadow: 0 0 15px @boxShadow05;
+          border-radius: @borderRadius20;
           background-color: @white;
-          .form-label {
-            display: block;
-            width: @height;
-            height: @height;
-            line-height: @height;
-            font-size: @fontSize36;
-            text-align: center;
-            color: @theme;
-          }
-          .form-input {
-            width: 80%;
-            height: @height;
-            border-bottom: 1px solid @borderColor1;
-            font-size: @fontSize28;
-          }
-          .form-text {
-            padding-left: @height;
-            font-size: @fontSize26;
-            color: @theme;
-          }
-          .btn-login {
-            width: 80%;
-            margin: 0 auto;
-            height: @height;
-            overflow: hidden;
-            line-height: @height;
-            border-radius: @height;
-            background-color: @theme;
-            font-size: @fontSize32;
-            letter-spacing: 2px;
-            text-align: center;
-            color: @white;
-            &.disable {
-              background-color: @disable;
+          font-size: @fontSize32;
+          .form-group {
+            position: relative;
+            margin-bottom: unit(60, rpx);
+            .form-label {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: @height;
+              height: @height;
+              line-height: @height;
+              font-size: @fontSize44;
+              text-align: center;
+            }
+            .form-input {
+              height: @height;
+              padding-left: @height;
+              border-radius: @height;
+              background-color: @bgColor;
+            }
+            .form-forgot {
+              padding-right: unit(10, rpx);
+              text-align: right;
+              .form-text {
+                text-decoration: underline;
+              }
+            }
+            .form-text {
+              height: unit(40, rpx);
+              line-height: unit(40, rpx);
+            }
+            .btn-login {
+              height: @height;
+              overflow: hidden;
+              line-height: @height;
+              border-radius: @height;
+              background-color: @theme;
+              font-size: @fontSize36;
+              letter-spacing: 2px;
+              text-align: center;
+              color: @white;
+            }
+            &:last-child {
+              margin: 0;
             }
           }
         }

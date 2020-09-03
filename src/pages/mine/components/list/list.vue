@@ -31,16 +31,16 @@
       return {
         items: [
           {
-            name: $routes.SERVICE.name,
-            path: $routes.WAITING.path
-          },
-          {
             name: $routes.PRINT.name,
             path: $routes.PRINT.path
           },
           {
             name: $routes.SUGGEST.name,
             path: $routes.SUGGEST.path
+          },
+          {
+            name: $routes.PASSWORD.name,
+            path: $routes.PASSWORD.path
           },
           {
             name: $routes.ABOUT.name,
@@ -56,8 +56,12 @@
     props: {},
     methods: {
       onHandleRoute(item) {
-        const {path} = item;
-        this.navigateTo(path);
+        const {path, name} = item;
+        if (name === '退出登录') {
+          this.reLaunch(path);
+        } else {
+          this.navigateTo(path);
+        }
       }
     }
   }

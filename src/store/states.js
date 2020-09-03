@@ -37,6 +37,13 @@ export const DETAIL = {
   isData: null
 };
 
+export const USER = {
+  isLoading: false,
+  isFailure: false,
+  isSuccess: false,
+  isData: null
+};
+
 export const LOAN = {
   isLoading: false,
   isFailure: false,

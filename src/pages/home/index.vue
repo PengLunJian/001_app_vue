@@ -108,6 +108,9 @@
     mixins: [Mixin],
     computed: $controller.states,
     methods: $controller.actions,
+    onShow() {
+      console.log('onShow');
+    },
     onLoad() {
       this.exeAjaxSelectIndex();
     }
