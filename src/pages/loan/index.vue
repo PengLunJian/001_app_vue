@@ -35,14 +35,12 @@
                     <view class="form-group">
                       <label class="form-label">月营业额</label>
                       <input class="form-input" v-model="monthturnover" type="number"
-                             placeholder="请输入您的月营业额"
-                             @input="onHandleCheckEmpty"/>
+                             placeholder="请输入您的月营业额"/>
                     </view>
                     <view class="form-group">
                       <label class="form-label">经营地址</label>
                       <input class="form-input" v-model="businessaddress" type="text"
-                             placeholder="请输入您的经营地址"
-                             @input="onHandleCheckEmpty"/>
+                             placeholder="请输入您的经营地址"/>
                     </view>
                   </view>
                   <view class="module-footer">

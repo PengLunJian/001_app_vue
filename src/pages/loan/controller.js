@@ -16,7 +16,6 @@ export const actions = {
   onHandleSelectDate(e) {
     const {value} = e.detail;
     this.businesshours = value;
-    this.onHandleCheckEmpty();
   },
   onHandleCheckEmpty() {
     let result = false;

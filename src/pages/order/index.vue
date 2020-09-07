@@ -29,7 +29,7 @@
             <scroll-view class="scroll-view" scroll-y="true">
               <view class="modal-row row btn" :class="{'active':btnShop.activeIndex===index}"
                     v-for="(item,index) in btnShop.items" :key="index"
-                    @click="onHandleFilter(index)">
+                    @click="onHandleShop(index)">
                 <view class="modal-col col-6">
                   <view class="modal-text">{{item}}</view>
                 </view>
@@ -61,36 +61,30 @@
                 <view class="modal-col col-12">
                   <view class="modal-label">收款方式</view>
                 </view>
-                <view class="modal-col col-3">
-                  <view class="modal-btn btn-filter">微信</view>
-                </view>
-                <view class="modal-col col-3">
-                  <view class="modal-btn btn-filter">支付宝</view>
+                <view class="modal-col col-3" v-for="(item,index) in btnMethod.items" :key="index">
+                  <view class="modal-btn btn-filter" :class="{'active':index===btnMethod.activeIndex}"
+                        @click="onHandleMethod(index)">{{item.label}}
+                  </view>
                 </view>
               </view>
               <view class="modal-row row">
                 <view class="modal-col col-12">
                   <view class="modal-label">交易状态</view>
                 </view>
-                <view class="modal-col col-3">
-                  <view class="modal-btn btn-filter">已支付</view>
-                </view>
-                <view class="modal-col col-3">
-                  <view class="modal-btn btn-filter">未支付</view>
-                </view>
-                <view class="modal-col col-3">
-                  <view class="modal-btn btn-filter">已退款</view>
+                <view class="modal-col col-3" v-for="(item,index) in btnStatus.items" :key="index">
+                  <view class="modal-btn btn-filter" :class="{'active':index===btnStatus.activeIndex}"
+                        @click="onHandleStatus(index)">{{item.label}}
+                  </view>
                 </view>
               </view>
               <view class="modal-row row">
                 <view class="modal-col col-12">
                   <view class="modal-label">收款人员</view>
                 </view>
-                <view class="modal-col col-3">
-                  <view class="modal-btn btn-filter active">店员</view>
-                </view>
-                <view class="modal-col col-3">
-                  <view class="modal-btn btn-filter">店长</view>
+                <view class="modal-col col-3" v-for="(item,index) in btnPerson.items" :key="index">
+                  <view class="modal-btn btn-filter" :class="{'active':index===btnPerson.activeIndex}"
+                        @click="onHandlePerson(index)">{{item.label}}
+                  </view>
                 </view>
               </view>
             </scroll-view>
@@ -177,18 +171,95 @@
         },
         btnSort: {
           activeIndex: -1,
+          value: {
+            sorttype: 0,
+            sort: 0
+          },
           items: [
             {
               label: '默认排序',
-              value: 0
+              value: {
+                sorttype: 0,
+                sort: 0
+              }
             },
             {
               label: '金额从小到大',
-              value: 1
+              value: {
+                sorttype: 1,
+                sort: 1
+              }
             },
             {
               label: '金额从大到小',
+              value: {
+                sorttype: 1,
+                sort: 2
+              }
+            },
+            {
+              label: '时间由远到近',
+              value: {
+                sorttype: 2,
+                sort: 1
+              }
+            },
+            {
+              label: '时间由近到远',
+              value: {
+                sorttype: 2,
+                sort: 2
+              }
+            }
+          ]
+        },
+        btnMethod: {
+          activeIndex: -1,
+          value: 0,
+          items: [
+            {
+              label: '微信',
+              value: 1
+            },
+            {
+              label: '支付宝',
               value: 2
+            },
+            {
+              label: '其它',
+              value: 3
+            }
+          ]
+        },
+        btnStatus: {
+          activeIndex: -1,
+          value: 0,
+          items: [
+            {
+              label: '已支付',
+              value: 1
+            },
+            {
+              label: '未支付',
+              value: 2
+            },
+            {
+              label: '已退款',
+              value: 3
+            }
+          ]
+        },
+        btnPerson: {
+          activeIndex: -1,
+          value: 0,
+          items: [
+            {
+              label: '店员',
+              value: '店员'
+            },
+            {
+              label: '店长',
+              value: '店长'
             }
           ]
         },
@@ -200,6 +271,7 @@
     methods: $controller.actions,
     onLoad() {
       this.SELECT_ORDER_REPLACE();
+      this.exeAjaxSelectShops();
       this.exeAjaxSelectOrder();
     }
   }
@@ -350,7 +422,7 @@
         }
         &#modalC {
           .modal-content {
-            height: unit(400, rpx);
+            height: unit(600, rpx);
             padding-bottom: 0;
             .modal-row {
               padding: 0 unit(30, rpx);
@@ -377,7 +449,7 @@
           &.hide {
             .modal-content {
               visibility: hidden;
-              transform: translateY(unit(-400, rpx));
+              transform: translateY(unit(-600, rpx));
             }
           }
         }

@@ -88,6 +88,16 @@ const apis = {
       ordernote: '',
       sign: ''
     }
+  },
+  selectShops: {
+    url: '/pay/currentsiteshop',
+    params: {}
+  },
+  selectClerk: {
+    url: '/pay/currentsiteuser',
+    params: {
+      shopid: 0
+    }
   }
 }
 

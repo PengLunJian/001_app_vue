@@ -1,4 +1,4 @@
-<script>
+<script type="text/ecmascript-6">
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')

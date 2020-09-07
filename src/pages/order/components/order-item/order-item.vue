@@ -5,8 +5,8 @@
       <view class="module-body">
         <view class="module-row row">
           <view class="module-col col-2">
-            <view v-if="item.paytype==='支付宝'" class="module-icon iconfont icon-alipay"></view>
-            <view v-if="item.paytype==='微信'" class="module-icon iconfont icon-wechat"></view>
+            <view class="module-icon iconfont"
+                  :class="{'icon-wechat':item.paytype==='微信','icon-alipay':item.paytype==='支付宝','icon-money':item.paytype!=='支付宝'&&item.paytype!=='微信'}"></view>
           </view>
           <view class="module-col col-5">
             <view class="module-text">{{item.siteusername}}</view>
@@ -71,11 +71,14 @@
               font-size: @fontSize56;
               text-align: center;
               color: @white;
-              &.icon-alipay {
-                background-color: #0095FF;
+              &.icon-money {
+                background-color: #FF7B29;
               }
               &.icon-wechat {
                 background-color: #09BB07;
+              }
+              &.icon-alipay {
+                background-color: #0095FF;
               }
             }
             .module-text {

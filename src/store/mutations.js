@@ -197,6 +197,70 @@ export const SELECT_ORDER_REPLACE = (state) => {
  * @param state
  * @constructor
  */
+export const SELECT_SHOPS_REQUEST = (state) => {
+  state.SHOPS.isLoading = true;
+  state.SHOPS.isSuccess = false;
+  state.SHOPS.isFailure = false;
+};
+/**
+ *
+ * @param state
+ * @param data
+ * @constructor
+ */
+export const SELECT_SHOPS_SUCCESS = (state, data) => {
+  state.SHOPS.isLoading = false;
+  state.SHOPS.isSuccess = true;
+  state.SHOPS.isFailure = false;
+  state.SHOPS.isData = data;
+};
+/**
+ *
+ * @param state
+ * @constructor
+ */
+export const SELECT_SHOPS_FAILURE = (state) => {
+  state.SHOPS.isLoading = false;
+  state.SHOPS.isSuccess = false;
+  state.SHOPS.isFailure = true;
+};
+/**
+ *
+ * @param state
+ * @constructor
+ */
+export const SELECT_CLERK_REQUEST = (state) => {
+  state.CLERK.isLoading = true;
+  state.CLERK.isSuccess = false;
+  state.CLERK.isFailure = false;
+};
+/**
+ *
+ * @param state
+ * @param data
+ * @constructor
+ */
+export const SELECT_CLERK_SUCCESS = (state, data) => {
+  state.CLERK.isLoading = false;
+  state.CLERK.isSuccess = true;
+  state.CLERK.isFailure = false;
+  state.CLERK.isData = data;
+};
+/**
+ *
+ * @param state
+ * @constructor
+ */
+export const SELECT_CLERK_FAILURE = (state) => {
+  state.CLERK.isLoading = false;
+  state.CLERK.isSuccess = false;
+  state.CLERK.isFailure = true;
+};
+/**
+ *
+ * @param state
+ * @constructor
+ */
 export const SELECT_DETAIL_REQUEST = (state) => {
   state.DETAIL.isLoading = true;
   state.DETAIL.isSuccess = false;

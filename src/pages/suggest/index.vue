@@ -3,34 +3,41 @@
     <view class="content">
       <view class="header"></view>
       <view class="body">
-        <view class="module">
-          <view class="module-content">
-            <view class="module-header"></view>
-            <view class="module-body">
-              <view class="form-group">
-                <label class="form-label">反馈标题</label>
-                <input class="form-input" v-model="title" @input="onHandleInput" placeholder="请输入标题"/>
-              </view>
-              <view class="form-group">
-                <label class="form-label">问题和建议</label>
-                <view class="textarea">
-                <textarea class="form-input" v-model="textarea" @input="onHandleInput"
+        <view class="context fade-in">
+          <scroll-view class="scroll-view" :scroll-y="isScroll">
+            <view class="scroll-content">
+              <view class="module">
+                <view class="module-content">
+                  <view class="module-header"></view>
+                  <view class="module-body">
+                    <view class="form-group">
+                      <label class="form-label">标题</label>
+                      <input class="form-input" v-model="title" placeholder="请输入反馈标题"/>
+                    </view>
+                    <view class="form-group">
+                      <label class="form-label">姓名</label>
+                      <input class="form-input" v-model="name" placeholder="请输入您的姓名"/>
+                    </view>
+                    <view class="form-group">
+                      <label class="form-label">电话</label>
+                      <input class="form-input" v-model="phone" placeholder="请输入您的电话"/>
+                    </view>
+                    <view class="form-group">
+                      <label class="form-label">建议</label>
+                      <view class="content">
+                <textarea class="form-input"
+                          v-model="content"
                           placeholder="请将您遇到的问题或建议反馈给我们，我们会尽快为您解决。"/>
+                      </view>
+                    </view>
+                  </view>
+                  <view class="module-footer">
+                    <view class="btn btn-confirm" @click="onHandleConfirm">提交</view>
+                  </view>
                 </view>
               </view>
-              <view class="form-group">
-                <label class="form-label">联系人</label>
-                <input class="form-input" v-model="contact" @input="onHandleInput" placeholder="请输入您的称呼"/>
-              </view>
-              <view class="form-group">
-                <label class="form-label">联系方式</label>
-                <input class="form-input" v-model="phone" @input="onHandleInput" placeholder="请输入您的联系方式"/>
-              </view>
             </view>
-            <view class="module-footer">
-              <view class="btn btn-confirm" :class="{'disable':isDisable}" @click="onHandleConfirm">提交</view>
-            </view>
-          </view>
+          </scroll-view>
         </view>
       </view>
       <view class="footer"></view>
@@ -39,28 +46,22 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Mixin from '../../mixins';
+  import * as $controller from './controller';
+
   export default {
     data() {
       return {
         title: '',
-        textarea: '',
-        contact: '',
+        name: '',
         phone: '',
-        isDisable: true
+        content: '',
+        isScroll: true
       }
     },
-    methods: {
-      onHandleInput() {
-        const {title, textarea, contact, phone} = this;
-        this.isDisable = !(title && textarea && contact && phone);
-      },
-      onHandleConfirm() {
-        const {title, textarea, contact, phone, isDisable} = this;
-        if (!isDisable) {
-
-        }
-      }
-    },
+    mixins: [Mixin],
+    computed: $controller.states,
+    methods: $controller.actions,
     onLoad() {
     }
   }
@@ -69,60 +70,71 @@
 <style lang="less">
   @import "../../assets/less/common";
 
-  @height: unit(100, rpx);
+  @height: unit(110, rpx);
   .container {
+    min-height: 100vh;
     .content {
+      height: 100vh;
       .header {
       }
       .body {
-        .module {
-          background-color: @transparent;
-          .module-content {
-            .module-header {
-            }
-            .module-body {
-              .form-group {
-                background-color: @white;
-                .form-label {
-                  display: block;
-                  height: unit(70, rpx);
-                  line-height: unit(70, rpx);
-                  background-color: @bgColor;
-                  padding: 0 unit(30, rpx);
-                  font-size: @fontSize28;
-                  font-weight: bold;
-                }
-                .form-input {
-                  height: @height;
-                  padding: 0 unit(30, rpx);
-                  font-size: @fontSize28;
-                  color: @fontColor1;
-                }
-                .textarea {
-                  height: unit(300, rpx);
-                  padding: unit(30, rpx);
-                  .form-input {
-                    padding: 0;
-                    width: 100%;
-                    height: 100%;
+        height: 100%;
+        .context {
+          height: 100%;
+          .scroll-view {
+            height: 100%;
+            .scroll-content {
+              .module {
+                background-color: @transparent;
+                .module-content {
+                  .module-header {
                   }
-                }
-              }
-            }
-            .module-footer {
-              padding: unit(60, rpx);
-              .btn-confirm {
-                overflow: hidden;
-                height: @height;
-                line-height: @height;
-                border-radius: @borderRadius15;
-                background-color: @theme;
-                font-size: @fontSize32;
-                letter-spacing: 2px;
-                text-align: center;
-                color: @white;
-                &.disable {
-                  background-color: @disable;
+                  .module-body {
+                    .form-group {
+                      background-color: @white;
+                      .form-label {
+                        display: block;
+                        height: unit(70, rpx);
+                        line-height: unit(70, rpx);
+                        background-color: @bgColor;
+                        padding: 0 unit(30, rpx);
+                        font-size: @fontSize28;
+                        font-weight: bold;
+                      }
+                      .form-input {
+                        height: @height;
+                        padding: 0 unit(30, rpx);
+                        font-size: @fontSize32;
+                        color: @fontColor1;
+                      }
+                      .content {
+                        height: unit(300, rpx);
+                        padding: unit(30, rpx);
+                        .form-input {
+                          padding: 0;
+                          width: 100%;
+                          height: 100%;
+                        }
+                      }
+                    }
+                  }
+                  .module-footer {
+                    padding: unit(60, rpx);
+                    .btn-confirm {
+                      overflow: hidden;
+                      height: @height;
+                      line-height: @height;
+                      border-radius: @borderRadius15;
+                      background-color: @theme;
+                      font-size: @fontSize36;
+                      letter-spacing: 2px;
+                      text-align: center;
+                      color: @white;
+                      &.disable {
+                        background-color: @disable;
+                      }
+                    }
+                  }
                 }
               }
             }

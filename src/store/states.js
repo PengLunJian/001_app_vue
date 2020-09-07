@@ -30,6 +30,20 @@ export const ORDER = {
   }
 };
 
+export const SHOPS = {
+  isLoading: false,
+  isFailure: false,
+  isSuccess: false,
+  isData: null
+};
+
+export const CLERK = {
+  isLoading: false,
+  isFailure: false,
+  isSuccess: false,
+  isData: null
+};
+
 export const DETAIL = {
   isLoading: false,
   isFailure: false,

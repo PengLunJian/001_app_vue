@@ -264,6 +264,58 @@ export const ajaxInsertPayment = ({commit}, params) => {
       });
   });
 };
+/**
+ *
+ * @param commit
+ * @param params
+ * @returns {Promise<any>}
+ */
+export const ajaxSelectShops = ({commit}, params) => {
+  commit(actionTypes.SELECT_SHOPS_REQUEST);
+  return new Promise((resolve, reject) => {
+    $ajax.post(apis.selectShops, params)
+      .then((res) => {
+        res = res || {};
+        const {data, success} = res;
+        if (success) {
+          commit(actionTypes.SELECT_SHOPS_SUCCESS, data);
+        } else {
+          commit(actionTypes.SELECT_SHOPS_FAILURE);
+        }
+        resolve(res);
+      })
+      .catch((err) => {
+        commit(actionTypes.SELECT_SHOPS_FAILURE);
+        reject(err);
+      });
+  });
+};
+/**
+ *
+ * @param commit
+ * @param params
+ * @returns {Promise<any>}
+ */
+export const ajaxSelectClerk = ({commit}, params) => {
+  commit(actionTypes.SELECT_CLERK_REQUEST);
+  return new Promise((resolve, reject) => {
+    $ajax.post(apis.selectClerk, params)
+      .then((res) => {
+        res = res || {};
+        const {data, success} = res;
+        if (success) {
+          commit(actionTypes.SELECT_CLERK_SUCCESS, data);
+        } else {
+          commit(actionTypes.SELECT_CLERK_FAILURE);
+        }
+        resolve(res);
+      })
+      .catch((err) => {
+        commit(actionTypes.SELECT_CLERK_FAILURE);
+        reject(err);
+      });
+  });
+};
 
 const ajaxPromiseMethod1 = () => {
   return new Promise((resolve) => {
