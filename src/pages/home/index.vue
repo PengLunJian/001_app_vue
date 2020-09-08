@@ -8,7 +8,7 @@
         <view class="context fade-in" v-if="isSuccess&&isData">
           <scroll-view class="scroll-view" :scroll-y="isScroll">
             <view class="scroll-content">
-              <price/>
+              <total :total="isTotal"/>
               <view class="module">
                 <view class="module-content">
                   <view class="module-header">
@@ -20,7 +20,7 @@
                   <view class="module-footer"></view>
                 </view>
               </view>
-              <list/>
+              <items :items="isItems"/>
               <poster/>
             </view>
           </scroll-view>
@@ -37,8 +37,8 @@
   import Error from "../../components/error/error";
   import Empty from "../../components/empty/empty";
   import Poster from "./components/poster/poster";
-  import Price from './components/price/price';
-  import List from './components/list/list';
+  import Total from './components/total/total';
+  import Items from './components/items/items';
   import * as $controller from './controller';
   import * as $routes from '../../router';
 
@@ -48,8 +48,8 @@
       Error,
       UCharts,
       Poster,
-      Price,
-      List
+      Total,
+      Items
     },
     data() {
       return {

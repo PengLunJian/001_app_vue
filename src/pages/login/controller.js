@@ -43,7 +43,8 @@ export const actions = {
         res = res || {};
         const {success, data} = res;
         if (success) {
-          this.setItem('token', data);
+          const {token} = data;
+          this.setItem('token', token);
           this.reLaunch($routes.HOME.path);
         } else {
           this.showToast('用户名或密码错误');

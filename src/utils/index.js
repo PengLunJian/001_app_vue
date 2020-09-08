@@ -20,7 +20,7 @@ export const getDeviceId = () => {
  *
  * @returns {string}
  */
-export const getAuthorize = () => {
+export const getToken = () => {
   let token = '';
   try {
     token = uni.getStorageSync('token');
@@ -28,4 +28,15 @@ export const getAuthorize = () => {
     console.log(e);
   }
   return 'Bearer ' + token;
+};
+/**
+ *
+ * @param key
+ */
+export const removeStorage = (key) => {
+  try {
+    uni.removeStorageSync(key);
+  } catch (e) {
+    console.log(e);
+  }
 };

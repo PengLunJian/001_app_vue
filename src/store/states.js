@@ -9,7 +9,11 @@ export const INDEX = {
   isLoading: false,
   isFailure: false,
   isSuccess: false,
-  isData: null
+  isData: {
+    total: {},
+    chart: {},
+    items: []
+  }
 };
 
 export const REFUND = {

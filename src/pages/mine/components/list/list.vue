@@ -23,6 +23,7 @@
 <script type="text/ecmascript-6">
   import Mixin from '../../../../mixins';
   import * as $routes from '../../../../router';
+  import * as utils from '../../../../utils';
 
   export default {
     name: "list",
@@ -58,6 +59,7 @@
       onHandleRoute(item) {
         const {path, name} = item;
         if (name === '退出登录') {
+          utils.removeStorage('token');
           this.reLaunch(path);
         } else {
           this.navigateTo(path);

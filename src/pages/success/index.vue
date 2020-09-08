@@ -3,7 +3,7 @@
     <view class="content">
       <view class="header"></view>
       <view class="body">
-        <view class="context fade-in">
+        <view class="context fade-in" v-if="isSuccess">
           <scroll-view class="scroll-view" :scroll-y="isScroll">
             <view class="scroll-content">
               <view class="module">
@@ -19,25 +19,27 @@
                   <view class="module-body">
                     <view class="module-row row">
                       <view class="module-col col-12">
-                        <view class="module-value price">￥16880.5</view>
+                        <view class="module-value price">￥{{isData.paymoney}}</view>
                       </view>
                     </view>
                     <view class="module-row row">
                       <view class="module-col col-6">
                         <view class="module-label">收款方</view>
-                        <view class="module-value">广德米图广告传媒</view>
                       </view>
                       <view class="module-col col-6">
                         <view class="module-label">收款金额</view>
-                        <view class="module-value">￥16880.5</view>
                       </view>
-                    </view>
-                    <view class="module-row row">
+                      <view class="module-col col-6">
+                        <view class="module-value">{{isData.sitename}}</view>
+                      </view>
+                      <view class="module-col col-6">
+                        <view class="module-value">￥{{isData.paymoney}}</view>
+                      </view>
                       <view class="module-col col-6">
                         <view class="module-label">付款方式</view>
                       </view>
                       <view class="module-col col-6">
-                        <view class="module-value">支付宝</view>
+                        <view class="module-value">{{isData.paytype}}</view>
                       </view>
                     </view>
                   </view>
@@ -91,58 +93,55 @@
           background-color: @white;
           .scroll-view {
             height: 100%;
-            .module {
-              .module-content {
-                padding: unit(100, rpx) 0;
-                text-align: center;
-                .module-header {
-                  .module-icon {
-                    font-size: unit(100, rpx);
-                    color: @theme;
+            .scroll-content {
+              .module {
+                .module-content {
+                  padding: unit(100, rpx) 0;
+                  text-align: center;
+                  .module-header {
+                    .module-icon {
+                      font-size: unit(100, rpx);
+                      color: @theme;
+                    }
+                    .module-text {
+                      height: unit(40, rpx);
+                      line-height: unit(40, rpx);
+                      font-size: @fontSize32;
+                      color: @theme;
+                    }
                   }
-                  .module-text {
-                    height: unit(40, rpx);
-                    line-height: unit(40, rpx);
-                    font-size: @fontSize32;
-                    color: @theme;
-                  }
-                }
-                .module-body {
-                  .module-row {
-                    .module-col {
-                      padding: unit(30, rpx);
-                      line-height: unit(50, rpx);
-                      font-size: @fontSize28;
-                      .module-label {
-                      }
-                      .module-value {
-                        color: @fontColor1;
-                        &.price {
-                          line-height: unit(200, rpx);
-                          font-size: @fontSize72;
+                  .module-body {
+                    .module-row {
+                      padding: unit(15, rpx);
+                      .module-col {
+                        padding: unit(15, rpx);
+                        font-size: @fontSize32;
+                        text-align: center;
+                        .module-label {
+                          color: @fontColor3;
+                        }
+                        .module-value {
+                          color: @fontColor1;
+                          &.price {
+                            line-height: unit(200, rpx);
+                            font-size: @fontSize72;
+                          }
                         }
                       }
                     }
-                    &:last-child {
-                      .module-label {
-                        text-align: left;
-                      }
-                      .module-value {
-                        text-align: right;
-                      }
-                    }
                   }
-                }
-                .module-footer {
-                  .btn-confirm {
-                    width: unit(320, rpx);
-                    height: unit(90, rpx);
-                    line-height: unit(90, rpx);
-                    margin: unit(60, rpx) auto;
-                    border-radius: @borderRadius15;
-                    background-color: @theme;
-                    font-size: @fontSize32;
-                    color: @white;
+                  .module-footer {
+                    .btn-confirm {
+                      width: unit(320, rpx);
+                      height: unit(100, rpx);
+                      line-height: unit(100, rpx);
+                      margin: unit(60, rpx) auto;
+                      border-radius: @borderRadius15;
+                      background-color: @theme;
+                      font-size: @fontSize36;
+                      letter-spacing: 2px;
+                      color: @white;
+                    }
                   }
                 }
               }

@@ -23,7 +23,8 @@ export const actions = {
   onHandleReset() {
     const {activeIndex} = this.tab;
     if (activeIndex === 0) {
-
+      this.btnShop.value = 0;
+      this.btnShop.activeIndex = -1;
     } else if (activeIndex === 1) {
       this.btnMethod.value = 0;
       this.btnMethod.activeIndex = -1;
@@ -31,12 +32,16 @@ export const actions = {
       this.btnStatus.activeIndex = -1;
       this.btnPerson.value = 0;
       this.btnPerson.activeIndex = -1;
+
+      this.begindate = '';
+      this.enddate = '';
     }
   },
   onHandleConfirm() {
     this.pageindex = 0;
     this.onHandleClose();
     this.SELECT_ORDER_REPLACE();
+    this.exeAjaxSelectClerk();
     this.exeAjaxSelectOrder();
   },
   onHandleChange(index) {
@@ -50,7 +55,14 @@ export const actions = {
     }
   },
   onHandleShop(index) {
-    this.btnShop.activeIndex = index;
+    const {items, activeIndex} = this.btnShop;
+    if (activeIndex === index) {
+      this.btnShop.activeIndex = -1;
+      this.btnShop.value = 0;
+    } else {
+      this.btnShop.activeIndex = index;
+      this.btnShop.value = items[index].shopid;
+    }
   },
   onHandleSort(index) {
     const {items, activeIndex} = this.btnSort;
@@ -84,7 +96,22 @@ export const actions = {
     }
   },
   onHandlePerson(index) {
-    this.btnPerson.activeIndex = index;
+    const {items, activeIndex} = this.btnPerson;
+    if (activeIndex === index) {
+      this.btnPerson.activeIndex = -1;
+      this.btnPerson.value = 0;
+    } else {
+      this.btnPerson.activeIndex = index;
+      this.btnPerson.value = items[index].siteuserid;
+    }
+  },
+  onHandleChangeDate(e) {
+    const {id, value} = e.target;
+    if (id === 'beginDate') {
+      this.begindate = value;
+    } else if (id === 'endDate') {
+      this.enddate = value;
+    }
   },
   onHandleClose() {
     this.tab.activeIndex = -1;
@@ -102,8 +129,10 @@ export const actions = {
     this.ajaxSelectShops()
       .then((res) => {
         res = res || {};
-        const {success} = res;
-        if (!success) {
+        const {success, data} = res;
+        if (success) {
+          this.btnShop.items = data || [];
+        } else {
           this.showToast('加载失败，请重试');
         }
         console.log(res);
@@ -137,12 +166,15 @@ export const actions = {
       });
   },
   exeAjaxSelectClerk() {
-    const params = {shopid: 0};
+    const {value} = this.btnShop;
+    const params = {shopid: value};
     this.ajaxSelectClerk(params)
       .then((res) => {
         res = res || {};
-        const {success} = res;
-        if (!success) {
+        const {success, data} = res;
+        if (success) {
+          this.btnPerson.items = data || [];
+        } else {
           this.showToast('加载失败，请重试');
         }
         console.log(res);
@@ -161,17 +193,21 @@ export const actions = {
       pagesize,
       btnMethod,
       btnStatus,
-      btnSort
+      btnPerson,
+      btnShop,
+      btnSort,
+      begindate,
+      enddate
     } = this;
     const params = {
       pageindex,
       pagesize,
-      shopid: 0,
-      siteuserid: 0,
+      shopid: btnShop.value,
+      siteuserid: btnPerson.value,
       paystate: btnStatus.value,
       paytype: btnMethod.value,
-      begindate: '',
-      enddate: '',
+      begindate: begindate,
+      enddate: enddate,
       sorttype: btnSort.value.sorttype,
       sort: btnSort.value.sort
     };

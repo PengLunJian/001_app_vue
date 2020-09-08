@@ -98,6 +98,28 @@ const apis = {
     params: {
       shopid: 0
     }
+  },
+  selectChart: {
+    url: '/report/indexfivepayamount',
+    params: {}
+  },
+  selectRecom: {
+    url: '/report/indexfiveorder',
+    params: {}
+  },
+  selectTotal: {
+    url: '/report/incomecntcustomer',
+    params: {
+      begindate: '',
+      enddate: ''
+    }
+  },
+  selectRecon: {
+    url: '/report/orderreport',
+    params: {
+      begindate: '',
+      enddate: ''
+    }
   }
 }
 

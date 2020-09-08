@@ -2,10 +2,10 @@ import {mapState} from 'vuex';
 
 export const states = {
   ...mapState({
-    isLoading: state => state.ORDER.isLoading,
-    isSuccess: state => state.ORDER.isSuccess,
-    isFailure: state => state.ORDER.isFailure,
-    isOrder: state => state.ORDER.isData
+    isLoading: state => state.PAYMENT.isLoading,
+    isSuccess: state => state.PAYMENT.isSuccess,
+    isFailure: state => state.PAYMENT.isFailure,
+    isData: state => state.PAYMENT.isData
   }),
 };
 

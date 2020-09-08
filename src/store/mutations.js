@@ -47,10 +47,16 @@ export const SELECT_INDEX_REQUEST = (state) => {
  * @constructor
  */
 export const SELECT_INDEX_SUCCESS = (state, data) => {
+  const {sitename} = state.LOGIN.isData || {};
+  const data1 = data[0].data || {};
+  const total = {...data1, sitename};
+  const chart = data[1].data || {};
+  const items = data[2].data || [];
+  const newData = {total, chart, items};
   state.INDEX.isLoading = false;
   state.INDEX.isSuccess = true;
   state.INDEX.isFailure = false;
-  state.INDEX.isData = data;
+  state.INDEX.isData = newData;
 };
 /**
  *
@@ -130,10 +136,12 @@ export const INSERT_PAYMENT_REQUEST = (state) => {
  * @constructor
  */
 export const INSERT_PAYMENT_SUCCESS = (state, data) => {
+  const {sitename} = state.LOGIN.isData;
+  const newData = {...data, sitename};
   state.PAYMENT.isLoading = false;
   state.PAYMENT.isSuccess = true;
   state.PAYMENT.isFailure = false;
-  state.PAYMENT.isData = data;
+  state.PAYMENT.isData = newData;
 };
 /**
  *

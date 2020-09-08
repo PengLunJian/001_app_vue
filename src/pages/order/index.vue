@@ -27,11 +27,12 @@
           <view class="modal-header"></view>
           <view class="modal-body">
             <scroll-view class="scroll-view" scroll-y="true">
+              <empty :isShow="!btnShop.items.length"/>
               <view class="modal-row row btn" :class="{'active':btnShop.activeIndex===index}"
                     v-for="(item,index) in btnShop.items" :key="index"
                     @click="onHandleShop(index)">
                 <view class="modal-col col-6">
-                  <view class="modal-text">{{item}}</view>
+                  <view class="modal-text">{{item.shopname}}</view>
                 </view>
                 <view class="modal-col col-6">
                   <view class="modal-icon iconfont icon-right"></view>
@@ -57,33 +58,57 @@
           <view class="modal-header"></view>
           <view class="modal-body">
             <scroll-view class="scroll-view" scroll-y="true">
-              <view class="modal-row row">
-                <view class="modal-col col-12">
-                  <view class="modal-label">收款方式</view>
-                </view>
-                <view class="modal-col col-3" v-for="(item,index) in btnMethod.items" :key="index">
-                  <view class="modal-btn btn-filter" :class="{'active':index===btnMethod.activeIndex}"
-                        @click="onHandleMethod(index)">{{item.label}}
+              <view class="scroll-content">
+                <view class="modal-row row">
+                  <view class="modal-col col-12">
+                    <view class="modal-label">收款方式</view>
+                  </view>
+                  <view class="modal-col col-3" v-for="(item,index) in btnMethod.items" :key="index">
+                    <view class="modal-btn btn-filter" :class="{'active':index===btnMethod.activeIndex}"
+                          @click="onHandleMethod(index)">{{item.label}}
+                    </view>
                   </view>
                 </view>
-              </view>
-              <view class="modal-row row">
-                <view class="modal-col col-12">
-                  <view class="modal-label">交易状态</view>
-                </view>
-                <view class="modal-col col-3" v-for="(item,index) in btnStatus.items" :key="index">
-                  <view class="modal-btn btn-filter" :class="{'active':index===btnStatus.activeIndex}"
-                        @click="onHandleStatus(index)">{{item.label}}
+                <view class="modal-row row">
+                  <view class="modal-col col-12">
+                    <view class="modal-label">交易状态</view>
+                  </view>
+                  <view class="modal-col col-3" v-for="(item,index) in btnStatus.items" :key="index">
+                    <view class="modal-btn btn-filter" :class="{'active':index===btnStatus.activeIndex}"
+                          @click="onHandleStatus(index)">{{item.label}}
+                    </view>
                   </view>
                 </view>
-              </view>
-              <view class="modal-row row">
-                <view class="modal-col col-12">
-                  <view class="modal-label">收款人员</view>
+                <view class="modal-row row" v-if="btnPerson.items.length">
+                  <view class="modal-col col-12">
+                    <view class="modal-label">收款人员</view>
+                  </view>
+                  <view class="modal-col col-3" v-for="(item,index) in btnPerson.items" :key="index">
+                    <view class="modal-btn btn-filter" :class="{'active':index===btnPerson.activeIndex}"
+                          @click="onHandlePerson(index)">{{item.siteusername}}
+                    </view>
+                  </view>
                 </view>
-                <view class="modal-col col-3" v-for="(item,index) in btnPerson.items" :key="index">
-                  <view class="modal-btn btn-filter" :class="{'active':index===btnPerson.activeIndex}"
-                        @click="onHandlePerson(index)">{{item.label}}
+                <view class="modal-row row">
+                  <view class="modal-col col-12">
+                    <view class="modal-label">开始日期</view>
+                  </view>
+                  <view class="modal-col col-6">
+                    <picker mode="date" id="beginDate" :value="begindate" @change="onHandleChangeDate">
+                      <input class="modal-input" v-model="begindate" disabled
+                             placeholder="账单查询开始日期"/>
+                    </picker>
+                  </view>
+                </view>
+                <view class="modal-row row">
+                  <view class="modal-col col-12">
+                    <view class="modal-label">结束日期</view>
+                  </view>
+                  <view class="modal-col col-6">
+                    <picker mode="date" id="endDate" :value="enddate" @change="onHandleChangeDate">
+                      <input class="modal-input" v-model="enddate" disabled
+                             placeholder="账单查询结束日期"/>
+                    </picker>
                   </view>
                 </view>
               </view>
@@ -150,24 +175,8 @@
         },
         btnShop: {
           activeIndex: -1,
-          items: [
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-            '南京分店',
-          ]
+          value: 0,
+          items: []
         },
         btnSort: {
           activeIndex: -1,
@@ -198,14 +207,14 @@
               }
             },
             {
-              label: '时间由远到近',
+              label: '时间从远到近',
               value: {
                 sorttype: 2,
                 sort: 1
               }
             },
             {
-              label: '时间由近到远',
+              label: '时间从近到远',
               value: {
                 sorttype: 2,
                 sort: 2
@@ -252,19 +261,12 @@
         btnPerson: {
           activeIndex: -1,
           value: 0,
-          items: [
-            {
-              label: '店员',
-              value: '店员'
-            },
-            {
-              label: '店长',
-              value: '店长'
-            }
-          ]
+          items: []
         },
         pageindex: 1,
-        pagesize: 10
+        pagesize: 10,
+        begindate: '',
+        enddate: ''
       }
     },
     computed: $controller.states,
@@ -272,6 +274,7 @@
     onLoad() {
       this.SELECT_ORDER_REPLACE();
       this.exeAjaxSelectShops();
+      this.exeAjaxSelectClerk();
       this.exeAjaxSelectOrder();
     }
   }
@@ -393,27 +396,39 @@
         }
         &#modalB {
           .modal-body {
-            .modal-row {
-              padding: unit(15, rpx);
-              .modal-col {
-                padding: unit(15, rpx);
-                .modal-label {
-                  height: unit(40, rpx);
-                  line-height: unit(40, rpx);
-                  font-size: @fontSize28;
-                  color: @fontColor2;
-                }
-                .btn-filter {
-                  height: unit(60, rpx);
-                  line-height: unit(60, rpx);
-                  border-radius: unit(60, rpx);
-                  background-color: @bgColor;
-                  font-size: @fontSize24;
-                  text-align: center;
-                  color: @fontColor2;
-                  &.active {
-                    background-color: rgba(0, 149, 255, .05);
-                    color: @theme;
+            .scroll-view {
+              .scroll-content {
+                padding-bottom: unit(40, rpx);
+                .modal-row {
+                  padding: unit(15, rpx);
+                  .modal-col {
+                    padding: unit(15, rpx);
+                    .modal-label {
+                      height: unit(40, rpx);
+                      line-height: unit(40, rpx);
+                      font-size: @fontSize28;
+                      color: @fontColor2;
+                    }
+                    .modal-input {
+                      height: unit(80, rpx);
+                      padding: 0 unit(30, rpx);
+                      border-radius: unit(80, rpx);
+                      background-color: @bgColor;
+                      font-size: @fontSize26;
+                    }
+                    .btn-filter {
+                      height: unit(60, rpx);
+                      line-height: unit(60, rpx);
+                      border-radius: unit(60, rpx);
+                      background-color: @bgColor;
+                      font-size: @fontSize24;
+                      text-align: center;
+                      color: @fontColor2;
+                      &.active {
+                        background-color: rgba(0, 149, 255, .05);
+                        color: @theme;
+                      }
+                    }
                   }
                 }
               }

@@ -5,7 +5,10 @@ export const states = {
     isLoading: state => state.INDEX.isLoading,
     isSuccess: state => state.INDEX.isSuccess,
     isFailure: state => state.INDEX.isFailure,
-    isData: state => state.INDEX.isData
+    isData: state => state.INDEX.isData,
+    isTotal: state => state.INDEX.isData.total,
+    isChart: state => state.INDEX.isData.chart,
+    isItems: state => state.INDEX.isData.items
   }),
 };
 
@@ -15,15 +18,11 @@ export const actions = {
   ]),
   exeAjaxSelectIndex() {
     this.showLoading();
-    const params = this.getParams();
-    this.ajaxSelectIndex(params)
+    this.ajaxSelectIndex()
       .then((res) => {
-        this.hideLoading();
         res = res || {};
-        const {success, data} = res;
-        if (success) {
-          console.log(data);
-        }
+        this.hideLoading();
+        console.log(res);
       })
       .catch((err) => {
         this.hideLoading();

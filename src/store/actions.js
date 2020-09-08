@@ -34,27 +34,6 @@ export const ajaxSelectLogin = ({commit}, params) => {
  * @param params
  * @returns {Promise<any>}
  */
-export const ajaxSelectIndex = ({commit}, params) => {
-  commit(actionTypes.SELECT_INDEX_REQUEST);
-  return new Promise((resolve, reject) => {
-    $ajax.post(apis.selectIndex, params)
-      .then((res) => {
-        res = $mock.index();
-        res = res || {};
-        const {data, success} = res;
-        if (success) {
-          commit(actionTypes.SELECT_INDEX_SUCCESS, data);
-        } else {
-          commit(actionTypes.SELECT_INDEX_FAILURE);
-        }
-        resolve(res);
-      })
-      .catch((err) => {
-        commit(actionTypes.SELECT_INDEX_FAILURE);
-        reject(err);
-      });
-  });
-};
 /**
  *
  * @param commit
@@ -252,7 +231,9 @@ export const ajaxInsertPayment = ({commit}, params) => {
         res = res || {};
         const {data, success} = res;
         if (success) {
-          commit(actionTypes.INSERT_PAYMENT_SUCCESS, data);
+          const {paymoney} = params;
+          const newData = {...data, paymoney};
+          commit(actionTypes.INSERT_PAYMENT_SUCCESS, newData);
         } else {
           commit(actionTypes.INSERT_PAYMENT_FAILURE);
         }
@@ -316,37 +297,59 @@ export const ajaxSelectClerk = ({commit}, params) => {
       });
   });
 };
-
-const ajaxPromiseMethod1 = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(10)
-    }, 5000);
-  });
+/**
+ *
+ * @returns {Promise<any>}
+ */
+const ajaxSelectRecom = () => {
+  return $ajax.post(apis.selectRecom);
 }
-
-const ajaxPromiseMethod2 = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(20)
-    }, 3000);
-  });
+/**
+ *
+ * @returns {Promise<any>}
+ */
+const ajaxSelectChart = () => {
+  return $ajax.post(apis.selectChart);
 }
-
-export const ajaxPromiseAll = () => {
+/**
+ *
+ * @returns {Promise<any>}
+ */
+const ajaxSelectTotal = () => {
+  const params = {
+    begindate: '2020-08-01 12:00:00',
+    enddate: '2020-09-08 11:59:59'
+  };
+  return $ajax.post(apis.selectTotal, params);
+}
+/**
+ *
+ * @param commit
+ * @returns {Promise<any>}
+ */
+export const ajaxSelectIndex = ({commit}) => {
+  commit(actionTypes.SELECT_INDEX_REQUEST);
   return new Promise((resolve, reject) => {
     $ajax.all([
-      ajaxPromiseMethod1(),
-      ajaxPromiseMethod2()
+      ajaxSelectTotal(),
+      ajaxSelectChart(),
+      ajaxSelectRecom()
     ])
       .then((res) => {
         res = res || {};
+        const success = res[0].success
+          && res[1].success
+          && res[2].success;
+        if (success) {
+          commit(actionTypes.SELECT_INDEX_SUCCESS, res);
+        } else {
+          commit(actionTypes.SELECT_INDEX_FAILURE);
+        }
         resolve(res);
-        console.log(res);
       })
       .catch((err) => {
+        commit(actionTypes.SELECT_INDEX_FAILURE);
         reject(err);
-        console.log(err);
       })
   });
 }

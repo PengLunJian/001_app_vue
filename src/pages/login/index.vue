@@ -39,8 +39,8 @@
   export default {
     data() {
       return {
-        username: '',
-        password: '',
+        username: '6',
+        password: '123456',
         deviceid: '',
       }
     },
@@ -74,11 +74,11 @@
       .header {
         background-color: @theme;
         .title {
-          height: unit(480, rpx);
+          height: unit(400, rpx);
           line-height: @height;
           background-size: auto 15%;
           background-repeat: no-repeat;
-          background-position: center unit(180, rpx);
+          background-position: center unit(140, rpx);
           background-image: url('../../assets/images/logo@2x.png');
           padding: 0 unit(30, rpx);
           text-indent: -999999px;
@@ -94,7 +94,7 @@
           top: unit(-100, rpx);
           padding: unit(100, rpx) unit(45, rpx);
           box-shadow: 0 0 15px @boxShadow05;
-          border-radius: @borderRadius20;
+          border-radius: @borderRadius30;
           background-color: @white;
           font-size: @fontSize32;
           .form-group {

@@ -11,8 +11,8 @@ let requestTask = null;
  */
 export const request = (api, method, params) => {
   const {baseUrl, dataType, timeout} = apis;
-  const authorize = utils.getAuthorize();
-  const header = {...apis.header, 'Authorization': authorize};
+  const token = utils.getToken();
+  const header = {...apis.header, 'Authorization': token};
   const url = baseUrl + api.url;
   return new Promise((resolve, reject) => {
     requestTask = uni.request({
@@ -75,6 +75,7 @@ export const all = (arr) => {
  *
  */
 export const abort = () => {
+  if (!requestTask) return;
   requestTask.abort();
   requestTask = null;
 };

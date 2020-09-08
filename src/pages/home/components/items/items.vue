@@ -1,5 +1,5 @@
 <template>
-  <view class="module">
+  <view class="module" v-if="items.length">
     <view class="module-content">
       <view class="module-header"></view>
       <view class="module-body">
@@ -27,11 +27,16 @@
 
 <script type="text/ecmascript-6">
   export default {
-    name: "list",
+    name: "items",
     data() {
       return {};
     },
-    props: {},
+    props: {
+      items: {
+        type: Array,
+        default: []
+      }
+    },
     methods: {}
   }
 </script>
