@@ -19,7 +19,7 @@
                   <view class="module-body">
                     <view class="module-row row">
                       <view class="module-col col-12">
-                        <view class="module-value price">￥{{isData.paymoney}}</view>
+                        <view class="module-value price">￥{{isData.paymoney||0.00}}</view>
                       </view>
                     </view>
                     <view class="module-row row">
@@ -30,16 +30,16 @@
                         <view class="module-label">收款金额</view>
                       </view>
                       <view class="module-col col-6">
-                        <view class="module-value">{{isData.sitename}}</view>
+                        <view class="module-value">{{isData.sitename||'暂无数据'}}</view>
                       </view>
                       <view class="module-col col-6">
-                        <view class="module-value">￥{{isData.paymoney}}</view>
+                        <view class="module-value">￥{{isData.paymoney||0.00}}</view>
                       </view>
                       <view class="module-col col-6">
                         <view class="module-label">付款方式</view>
                       </view>
                       <view class="module-col col-6">
-                        <view class="module-value">{{isData.paytype}}</view>
+                        <view class="module-value">{{isData.paytype||'暂无数据'}}</view>
                       </view>
                     </view>
                   </view>

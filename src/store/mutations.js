@@ -1,3 +1,5 @@
+import * as utils from '../utils';
+
 /**
  *
  * @param state
@@ -50,8 +52,34 @@ export const SELECT_INDEX_SUCCESS = (state, data) => {
   const {sitename} = state.LOGIN.isData || {};
   const data1 = data[0].data || {};
   const total = {...data1, sitename};
-  const chart = data[1].data || {};
-  const items = data[2].data || [];
+
+  const series = [];
+  const categories = [];
+  (data[1].data || []).map((item) => {
+    const {paydate, totalmoney} = item;
+    const dateStr = paydate.substr(5, 5);
+    categories.push(dateStr);
+    series.push(totalmoney);
+  });
+
+  const chart = {
+    categories,
+    series: [
+      {
+        data: series
+      }
+    ]
+  };
+
+  const items = (data[2].data || []).map((item) => {
+    const {paytime} = item;
+    const time = utils.formatTime(paytime);
+    return {
+      ...item,
+      time
+    }
+  });
+
   const newData = {total, chart, items};
   state.INDEX.isLoading = false;
   state.INDEX.isSuccess = true;
@@ -136,7 +164,7 @@ export const INSERT_PAYMENT_REQUEST = (state) => {
  * @constructor
  */
 export const INSERT_PAYMENT_SUCCESS = (state, data) => {
-  const {sitename} = state.LOGIN.isData;
+  const {sitename} = state.LOGIN.isData || {};
   const newData = {...data, sitename};
   state.PAYMENT.isLoading = false;
   state.PAYMENT.isSuccess = true;

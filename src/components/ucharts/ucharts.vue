@@ -49,7 +49,7 @@
             show: false
           },
           fontSize: 11,
-          animation: true,
+          animation: false,
           background: '#FFFFFF',
           pixelRatio: pixelRatio,
           categories: categories,

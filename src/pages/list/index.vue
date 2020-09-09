@@ -3,7 +3,8 @@
     <view class="content">
       <view class="header"></view>
       <view class="body">
-        <view class="context">
+        <waiting/>
+        <view class="context fade-in" v-if="isShow">
           <view class="scroll-view" :scroll-y="isScroll">
             <view class="scroll-content">
               <view class="module">
@@ -111,9 +112,11 @@
 
 <script type="text/ecmascript-6">
   import UCharts from "../../components/ucharts/ucharts";
+  import Waiting from "../../components/waiting/waiting";
 
   export default {
     components: {
+      Waiting,
       UCharts
     },
     data() {
@@ -126,6 +129,7 @@
             '月报'
           ]
         },
+        isShow: false,
         isScroll: true,
         option: {
           xAxis: {
@@ -176,6 +180,7 @@
       }
       .body {
         height: 100%;
+        position: relative;
         .context {
           height: 100%;
           .scroll-view {

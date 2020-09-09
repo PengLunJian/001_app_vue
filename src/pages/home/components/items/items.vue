@@ -3,20 +3,15 @@
     <view class="module-content">
       <view class="module-header"></view>
       <view class="module-body">
-        <view class="module-row row">
+        <view class="module-row row" v-for="(item,index) in items" :key="index">
           <view class="module-col col-1">
-            <view class="module-icon iconfont icon-alipay"></view>
+            <view class="module-icon iconfont"
+                  :class="{'icon-alipay':item.paytype==='支付宝','icon-wechat':item.paytype==='微信','icon-money':item.paytype!=='微信'&&item.paytype!=='支付宝'}"></view>
           </view>
           <view class="module-col col-11">
-            <view class="module-desc ellipsis">支付宝收款45.56元 1分钟前</view>
-          </view>
-        </view>
-        <view class="module-row row">
-          <view class="module-col col-1">
-            <view class="module-icon iconfont icon-wechat"></view>
-          </view>
-          <view class="module-col col-11">
-            <view class="module-desc ellipsis">微信发生一笔退款23.56元 30分钟前</view>
+            <view class="module-desc ellipsis">
+              {{item.paytype}}{{item.paystate==='已支付'?'发生一笔收款':'发生一笔退款'}}{{item.ordermoney}}元 {{item.time}}
+            </view>
           </view>
         </view>
       </view>
@@ -26,6 +21,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+
   export default {
     name: "items",
     data() {
@@ -37,6 +33,7 @@
         default: []
       }
     },
+    computed: {},
     methods: {}
   }
 </script>
@@ -56,12 +53,21 @@
             height: unit(60, rpx);
             line-height: unit(60, rpx);
             .module-icon {
+              width: unit(40, rpx);
+              height: unit(40, rpx);
+              margin: unit(10, rpx) 0;
+              line-height: unit(40, rpx);
+              border-radius: @borderRadius100;
+              text-align: center;
+              color: @white;
               &.icon-alipay {
-                font-size: @fontSize36;
-                color: @iconAlipay;
+                background-color: @iconAlipay;
               }
               &.icon-wechat {
-                color: @iconWechat;
+                background-color: @iconWechat;
+              }
+              &.icon-money {
+                background-color: @iconMoney;
               }
             }
             .module-desc {

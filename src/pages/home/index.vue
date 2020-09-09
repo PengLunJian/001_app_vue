@@ -15,7 +15,7 @@
                     <view class="module-title">经营报表>>></view>
                   </view>
                   <view class="module-body">
-                    <u-charts :chartData="chartData"/>
+                    <u-charts :chartData="isChart"/>
                   </view>
                   <view class="module-footer"></view>
                 </view>
@@ -53,34 +53,6 @@
     },
     data() {
       return {
-        option: {
-          xAxis: {
-            data: [
-              "07-15",
-              "07-16",
-              "07-17",
-              "07-18",
-              "07-19"
-            ]
-          },
-          series: [
-            {
-              name: '销量',
-              type: 'bar',
-              data: [
-                5,
-                20,
-                36,
-                10,
-                10
-              ],
-              itemStyle: {
-                color: '#0095FF'
-              },
-              barWidth: 20
-            }
-          ]
-        },
         isScroll: true,
         chartData: {
           categories: [

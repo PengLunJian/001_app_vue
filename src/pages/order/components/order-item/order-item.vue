@@ -72,13 +72,13 @@
               text-align: center;
               color: @white;
               &.icon-money {
-                background-color: #FF7B29;
+                background-color: @iconMoney;
               }
               &.icon-wechat {
-                background-color: #09BB07;
+                background-color: @iconWechat
               }
               &.icon-alipay {
-                background-color: #0095FF;
+                background-color: @iconAlipay
               }
             }
             .module-text {

@@ -1,6 +1,6 @@
 import apis from '../apis';
 import * as $ajax from '../ajax';
-import * as $mock from '../mock';
+import * as utils from '../utils';
 import * as actionTypes from './actionTypes';
 
 /**
@@ -316,9 +316,18 @@ const ajaxSelectChart = () => {
  * @returns {Promise<any>}
  */
 const ajaxSelectTotal = () => {
+  const dayTime = 1 * 24 * 60 * 60 * 1000;
+  const offsetTime1 = new Date().getTime();
+  const offsetTime2 = offsetTime1 + dayTime;
+  const date1 = new Date(offsetTime1);
+  const date2 = new Date(offsetTime2);
+  const dateStr1 = utils.dateFormat(date1, 'yyyy-mm-dd');
+  const dateStr2 = utils.dateFormat(date2, 'yyyy-mm-dd');
+  const begindate = dateStr1 + ' 12:00:00';
+  const enddate = dateStr2 + ' 11:59:59';
   const params = {
-    begindate: '2020-08-01 12:00:00',
-    enddate: '2020-09-08 11:59:59'
+    begindate,
+    enddate
   };
   return $ajax.post(apis.selectTotal, params);
 }
