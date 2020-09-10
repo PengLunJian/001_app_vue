@@ -12,7 +12,9 @@
     {
       "path": "pages/home/index",
       "style": {
-        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "智付侠商户管理系统",
+        "navigationBarBackgroundColor": "#0095FF",
         "app-plus": {
           "bounce": "none"
         }
@@ -31,9 +33,9 @@
       }
     },
     {
-      "path": "pages/service/index",
+      "path": "pages/forgot/index",
       "style": {
-        "navigationBarTitleText": "在线客服"
+        "navigationBarTitleText": "忘记密码"
       }
     },
     {
@@ -75,7 +77,7 @@
     {
       "path": "pages/refund/index",
       "style": {
-        "navigationBarTitleText": "退款",
+        "navigationBarTitleText": "商户退款",
         "app-plus": {
           "bounce": "none"
         }

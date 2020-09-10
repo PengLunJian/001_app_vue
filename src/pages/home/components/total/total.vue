@@ -8,7 +8,7 @@
             <view class="module-text">收款</view>
           </view>
           <view class="module-col col-6">
-            <view class="module-name ellipsis">{{total.sitename||'暂无数据'}}</view>
+            <view class="module-name ellipsis">当日交易金额(元)</view>
           </view>
           <view class="module-col col-3" @click="onHandleOrder">
             <view class="module-icon iconfont icon-bill"/>
@@ -19,13 +19,7 @@
       <view class="module-body">
         <view class="module-row row">
           <view class="module-col col-12">
-            <view class="desc">交易金额(元)</view>
-          </view>
-          <view class="module-col col-12 price">
             <view class="price">{{total.totalmoney||0}}</view>
-          </view>
-          <view class="module-col col-12">
-            <view class="desc">当日12:00:00至次日11:59:59</view>
           </view>
         </view>
       </view>
@@ -83,7 +77,7 @@
       text-align: center;
       color: @white;
       .module-header {
-        padding-top: unit(50, rpx);
+        padding-top: unit(30, rpx);
         .module-row {
           .module-col {
             text-align: center;
@@ -110,6 +104,7 @@
         }
       }
       .module-body {
+        padding: unit(20, rpx) 0;
         .module-row {
           padding: unit(15, rpx);
           .module-col {
@@ -123,11 +118,12 @@
         }
       }
       .module-footer {
+        padding-bottom: unit(30, rpx);
         .module-row {
-          padding: unit(30, rpx);
+          padding: unit(30, rpx) 0;
           .module-col {
-            height: unit(32, rpx);
-            line-height: unit(32, rpx);
+            height: unit(40, rpx);
+            line-height: unit(40, rpx);
             border-right: 0.5px solid @white;
             font-size: @fontSize28;
             .large {

@@ -15,6 +15,7 @@ export const actions = {
   ]),
   onHandleCheckEmpty() {
     let result = false;
+    const regExp = /^1\d{10}$/;
     const {title, name, phone, content} = this;
     if (!title) {
       this.showToast('请输入反馈标题');
@@ -22,6 +23,8 @@ export const actions = {
       this.showToast('请输入您的姓名');
     } else if (!phone) {
       this.showToast('请输入您的电话');
+    } else if (!regExp.test(phone)) {
+      this.showToast('手机号格式不正确');
     } else if (!content) {
       this.showToast('请输入问题或建议');
     } else {

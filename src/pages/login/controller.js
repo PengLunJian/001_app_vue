@@ -18,7 +18,7 @@ export const actions = {
     let result = false;
     const {username, password} = this;
     if (!username) {
-      this.showToast('请输入手机');
+      this.showToast('请输入账号');
     } else if (!password) {
       this.showToast('请输入密码');
     } else {
@@ -27,7 +27,7 @@ export const actions = {
     return result;
   },
   onHandlePassword() {
-    this.navigateTo($routes.WAITING.path);
+    this.navigateTo($routes.FORGOT.path);
   },
   onHandleLogin() {
     if (this.onHandleCheckEmpty()) {

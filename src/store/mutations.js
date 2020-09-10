@@ -138,7 +138,11 @@ export const UPDATE_REFUND_REPLACE = (state, data) => {
   const {orderid} = data;
   const oldData = state.DETAIL.isData;
   const oldRows = state.ORDER.isData.rows;
-  const newData = {...oldData, paystate: '已退款'};
+  const newData = {
+    ...oldData,
+    paystate: '已退款',
+    isDisable: true
+  };
   const newRows = (oldRows || []).map((item) => {
     const tempObj = item.orderid === orderid ?
       {...item, paystate: '已退款'} : item;
@@ -164,8 +168,17 @@ export const INSERT_PAYMENT_REQUEST = (state) => {
  * @constructor
  */
 export const INSERT_PAYMENT_SUCCESS = (state, data) => {
+  const {ordermoney} = data;
   const {sitename} = state.LOGIN.isData || {};
   const newData = {...data, sitename};
+
+  const oldIndex = state.INDEX.isData || {};
+  const oldTotal = isIndex || {};
+  const {totalmoney} = total || {};
+  const newTotalMoney = parseFloat(totalmoney) + parseFloat(ordermoney);
+  state.INDEX.isData = {};
+
+
   state.PAYMENT.isLoading = false;
   state.PAYMENT.isSuccess = true;
   state.PAYMENT.isFailure = false;
@@ -309,10 +322,23 @@ export const SELECT_DETAIL_REQUEST = (state) => {
  * @constructor
  */
 export const SELECT_DETAIL_SUCCESS = (state, data) => {
+  const {paytime, paystate} = data;
+  const date = new Date();
+  const dateStr = utils.dateFormat(date, 'yyyy/mm/dd');
+  const targetTime = new Date(paytime.replace(/-/g, '/')).getTime();
+  const beginTime = new Date(dateStr + ' 00:00:00').getTime();
+  const endTime = date.getTime();
+  const isDisable = !(
+    (beginTime <= targetTime)
+    && (targetTime <= endTime)
+    && (paystate === '已支付')
+  );
+  const newData = {...data, isDisable};
+
   state.DETAIL.isLoading = false;
   state.DETAIL.isSuccess = true;
   state.DETAIL.isFailure = false;
-  state.DETAIL.isData = data;
+  state.DETAIL.isData = newData;
 };
 /**
  *

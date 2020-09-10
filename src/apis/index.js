@@ -69,7 +69,7 @@ const apis = {
     }
   },
   updateRefund: {
-    url: '/pay/refund',
+    url: '/pay/apprefund',
     params: {
       orderid: '',
       refundpass: '',
@@ -78,7 +78,7 @@ const apis = {
     }
   },
   insertPayment: {
-    url: '/pay/acquire',
+    url: '/pay/appacquire',
     params: {
       scanpayno: '',
       paymoney: 0,

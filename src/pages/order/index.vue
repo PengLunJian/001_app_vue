@@ -91,23 +91,18 @@
                 </view>
                 <view class="modal-row row">
                   <view class="modal-col col-12">
-                    <view class="modal-label">开始日期</view>
+                    <view class="modal-label">支付时间</view>
                   </view>
                   <view class="modal-col col-6">
                     <picker mode="date" id="beginDate" :value="begindate" @change="onHandleChangeDate">
                       <input class="modal-input" v-model="begindate" disabled
-                             placeholder="账单查询开始日期"/>
+                             placeholder="账单开始日期"/>
                     </picker>
-                  </view>
-                </view>
-                <view class="modal-row row">
-                  <view class="modal-col col-12">
-                    <view class="modal-label">结束日期</view>
                   </view>
                   <view class="modal-col col-6">
                     <picker mode="date" id="endDate" :value="enddate" @change="onHandleChangeDate">
                       <input class="modal-input" v-model="enddate" disabled
-                             placeholder="账单查询结束日期"/>
+                             placeholder="账单结束日期"/>
                     </picker>
                   </view>
                 </view>
@@ -149,12 +144,12 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Mixin from '../../mixins';
   import Empty from "../../components/empty/empty";
   import Error from "../../components/error/error";
   import LoadingMore from "../../components/loading-more/loading-more";
   import OrderItem from "./components/order-item/order-item";
   import TabBar from "./components/tab-bar/tab-bar";
-  import Mixin from '../../mixins';
   import * as $controller from './controller';
 
   export default {
@@ -411,10 +406,7 @@
                     }
                     .modal-input {
                       height: unit(80, rpx);
-                      padding: 0 unit(30, rpx);
-                      border-radius: unit(80, rpx);
-                      background-color: @bgColor;
-                      font-size: @fontSize26;
+                      font-size: @fontSize28;
                     }
                     .btn-filter {
                       height: unit(60, rpx);
@@ -423,7 +415,7 @@
                       background-color: @bgColor;
                       font-size: @fontSize24;
                       text-align: center;
-                      color: @fontColor2;
+                      color: @fontColor3;
                       &.active {
                         background-color: rgba(0, 149, 255, .05);
                         color: @theme;

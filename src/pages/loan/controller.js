@@ -19,6 +19,8 @@ export const actions = {
   },
   onHandleCheckEmpty() {
     let result = false;
+    const regExpPhone = /^1\d{10}$/;
+    const regExpIdCard = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
     const {
       name, idcard, mobile,
       businesshours, monthturnover, businessaddress
@@ -27,8 +29,12 @@ export const actions = {
       this.showToast('请输入您的姓名');
     } else if (!idcard) {
       this.showToast('请输入您的证件号码');
+    } else if (!regExpIdCard.test(idcard)) {
+      this.showToast('身份证号格式不正确');
     } else if (!mobile) {
       this.showToast('请输入您的手机号');
+    } else if (!regExpPhone.test(mobile)) {
+      this.showToast('手机号格式不正确');
     } else if (!businesshours) {
       this.showToast('请输入您的营业时间');
     } else if (!monthturnover) {

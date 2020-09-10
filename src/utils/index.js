@@ -4,14 +4,41 @@
  */
 export const getDeviceId = () => {
   return new Promise((resolve, reject) => {
-    plus.device.getInfo({
+    uni.getSystemInfo({
       success: (res) => {
         res = res || {};
-        resolve(res);
+        const {platform, model} = res;
+        if (platform === 'ios') {
+          plus.device.getInfo({
+            success: (res) => {
+              res = res || {};
+              const {uuid} = res;
+              const deviceId = model + uuid;
+              resolve(deviceId);
+            },
+            fail: (err) => {
+              err = err || {};
+              reject(err);
+            }
+          });
+        } else {
+          plus.device.getAAID({
+            success: (res) => {
+              res = res || {};
+              const {aaid} = res;
+              const deviceId = model + aaid;
+              resolve(deviceId);
+            },
+            fail: (err) => {
+              console.log(err);
+              reject(err);
+            }
+          });
+        }
       },
       fail: (err) => {
         err = err || {};
-        reject(err);
+        console.log(err);
       }
     });
   });
@@ -112,6 +139,15 @@ export const dateFormat = (date, format) => {
       break;
     case 'yyyy-mm-dd':
       dateStr = year + '-' + monthStr + '-' + dayStr;
+      break;
+    case 'yyyy-mm-dd hh':
+      dateStr = year + '-' + monthStr + '-' + dayStr + ' ' + hourStr;
+      break;
+    case 'yyyy-mm-dd hh:mm':
+      dateStr = year + '-' + monthStr + '-' + dayStr + ' ' + hourStr + ':' + minuteStr;
+      break;
+    case 'yyyy-mm-dd hh:mm:ss':
+      dateStr = year + '-' + monthStr + '-' + dayStr + ' ' + hourStr + ':' + minuteStr + ':' + secondStr;
       break;
     case 'zh-cn':
       dateStr = year + '年' + monthStr + '月' + dayStr + '日';

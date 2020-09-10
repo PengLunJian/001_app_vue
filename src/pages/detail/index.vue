@@ -52,12 +52,12 @@
                   <view class="module-footer">
                     <view class="module-row row">
                       <view class="module-col col-6">
-                        <view class="btn btn-refund" v-if="isDetail.paystate==='已支付'"
+                        <view class="btn btn-refund" v-if="!isDetail.isDisable"
                               @click="onHandleRefund">退款
                         </view>
                         <view class="btn btn-refund"
-                              :class="{'disable':isDetail.paystate!=='已支付'}"
-                              v-if="isDetail.paystate!=='已支付'">退款
+                              :class="{'disable':isDetail.isDisable}"
+                              v-if="isDetail.isDisable">退款
                         </view>
                       </view>
                       <view class="module-col col-6">

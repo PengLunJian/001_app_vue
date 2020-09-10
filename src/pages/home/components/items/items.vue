@@ -53,21 +53,15 @@
             height: unit(60, rpx);
             line-height: unit(60, rpx);
             .module-icon {
-              width: unit(40, rpx);
-              height: unit(40, rpx);
-              margin: unit(10, rpx) 0;
-              line-height: unit(40, rpx);
-              border-radius: @borderRadius100;
-              text-align: center;
-              color: @white;
               &.icon-alipay {
-                background-color: @iconAlipay;
+                font-size: @fontSize36;
+                color: @iconAlipay;
               }
               &.icon-wechat {
-                background-color: @iconWechat;
+                color: @iconWechat;
               }
               &.icon-money {
-                background-color: @iconMoney;
+                color: @iconMoney;
               }
             }
             .module-desc {

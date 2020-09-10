@@ -58,12 +58,7 @@
             disableGrid: true,
           },
           yAxis: {
-            gridType: 'dash',
-            min: 1000,
-            max: 12000,
-            format: (val) => {
-              return parseInt(val / 1000) + 'k';
-            }
+            gridType: 'dash'
           },
           dataLabel: true,
           width: cWidth,

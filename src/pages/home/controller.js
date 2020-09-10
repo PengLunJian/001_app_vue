@@ -21,6 +21,11 @@ export const actions = {
     this.ajaxSelectIndex()
       .then((res) => {
         res = res || {};
+        const {isTotal} = this || {};
+        const {sitename} = isTotal || {};
+        uni.setNavigationBarTitle({
+          title: sitename || '智付侠商户管理系统'
+        });
         this.hideLoading();
         console.log(res);
       })

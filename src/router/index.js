@@ -18,9 +18,9 @@ export const MINE = {
   path: '/pages/mine/index'
 };
 
-export const SERVICE = {
-  name: '在线客服',
-  path: '/pages/service/index'
+export const FORGOT = {
+  name: '忘记密码',
+  path: '/pages/forgot/index'
 };
 
 export const SUGGEST = {
@@ -54,7 +54,7 @@ export const PASSWORD = {
 };
 
 export const REFUND = {
-  name: '退款',
+  name: '商户退款',
   path: '/pages/refund/index'
 };
 

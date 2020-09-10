@@ -54,26 +54,6 @@
     data() {
       return {
         isScroll: true,
-        chartData: {
-          categories: [
-            "07-15",
-            "07-16",
-            "07-17",
-            "07-18",
-            "07-19"
-          ],
-          series: [
-            {
-              data: [
-                7200,
-                8500,
-                7000,
-                9200,
-                11200
-              ]
-            }
-          ]
-        },
         url: $routes.LOAN.path
       }
     },
