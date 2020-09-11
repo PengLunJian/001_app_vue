@@ -27,9 +27,12 @@
       }
     },
     {
-      "path": "pages/list/index",
+      "path": "pages/bill/index",
       "style": {
-        "navigationBarTitleText": "对账明细"
+        "navigationBarTitleText": "对账明细",
+        "app-plus": {
+          "bounce": "none"
+        }
       }
     },
     {
@@ -145,7 +148,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/list/index",
+        "pagePath": "pages/bill/index",
         "iconPath": "static/images/tab-icon02.png",
         "selectedIconPath": "static/images/tab-icon02-active.png",
         "text": "对账"

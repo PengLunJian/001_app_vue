@@ -15,6 +15,7 @@ export const states = {
 
 export const actions = {
   ...mapActions([
+    'ajaxSelectIndex',
     'ajaxInsertPayment'
   ]),
   onHandleButton(item) {
@@ -77,6 +78,16 @@ export const actions = {
       }
     });
   },
+  exeAjaxSelectIndex() {
+    this.ajaxSelectIndex()
+      .then((res) => {
+        res = res || {};
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   exeAjaxInsertPayment() {
     this.showLoading();
     const params = this.getParams();
@@ -86,6 +97,7 @@ export const actions = {
         res = res || {};
         const {success} = res;
         if (success) {
+          this.exeAjaxSelectIndex();
           this.navigateTo($routes.SUCCESS.path);
         } else {
           this.showToast('收款失败，请重试');

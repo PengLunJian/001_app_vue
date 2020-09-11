@@ -15,6 +15,7 @@ export const states = {
 
 export const actions = {
   ...mapActions([
+    'ajaxSelectIndex',
     'ajaxUpdateRefund'
   ]),
   onHandleCancel() {
@@ -47,6 +48,16 @@ export const actions = {
     this.isHide = false;
     this.isScroll = false;
   },
+  exeAjaxSelectIndex() {
+    this.ajaxSelectIndex()
+      .then((res) => {
+        res = res || {};
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   exeAjaxUpdateRefund() {
     this.showLoading();
     const params = this.getParams();
@@ -57,6 +68,7 @@ export const actions = {
         const {success} = res;
         if (success) {
           this.showToast('退款成功');
+          this.exeAjaxSelectIndex();
           setTimeout(() => {
             this.navigateBack(1);
           }, 1000);

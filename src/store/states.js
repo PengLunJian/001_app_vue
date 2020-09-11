@@ -5,6 +5,16 @@ export const LOGIN = {
   isData: null
 };
 
+export const BILL = {
+  isLoading: false,
+  isFailure: false,
+  isSuccess: false,
+  isData: {
+    total: {},
+    chart: {},
+  }
+};
+
 export const INDEX = {
   isLoading: false,
   isFailure: false,

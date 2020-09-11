@@ -79,8 +79,14 @@
 <script type="text/ecmascript-6">
   import Mixin from '../../mixins';
   import * as $controller from './controller';
+  import Error from "../../components/error/error";
+  import Empty from "../../components/empty/empty";
 
   export default {
+    components: {
+      Empty,
+      Error
+    },
     data() {
       return {
         orderid: '',

@@ -315,15 +315,15 @@ const ajaxSelectChart = () => {
  *
  * @returns {Promise<any>}
  */
-const ajaxSelectTotal = () => {
+const ajaxSelectTotal = (params) => {
   const date = utils.dateFormat(new Date(), 'yyyy-mm-dd');
-  const begindate = date + ' 00:00:00';
-  const enddate = date + ' 23:59:59';
-  const params = {
+  const begindate = params ? params.begindate : date + ' 00:00:00';
+  const enddate = params ? params.enddate : date + ' 23:59:59';
+  const data = {
     begindate,
     enddate
   };
-  return $ajax.post(apis.selectTotal, params);
+  return $ajax.post(apis.selectTotal, data);
 }
 /**
  *
@@ -352,6 +352,41 @@ export const ajaxSelectIndex = ({commit}) => {
       })
       .catch((err) => {
         commit(actionTypes.SELECT_INDEX_FAILURE);
+        reject(err);
+      })
+  });
+}
+/**
+ *
+ * @returns {Promise<any>}
+ */
+const ajaxSelectTable = (params) => {
+  return $ajax.post(apis.selectBill, params);
+}
+/**
+ *
+ * @param commit
+ * @returns {Promise<any>}
+ */
+export const ajaxSelectBill = ({commit}, params) => {
+  commit(actionTypes.SELECT_BILL_REQUEST);
+  return new Promise((resolve, reject) => {
+    $ajax.all([
+      ajaxSelectTotal(params),
+      ajaxSelectTable(params),
+    ])
+      .then((res) => {
+        res = res || {};
+        const success = res[0].success && res[1].success;
+        if (success) {
+          commit(actionTypes.SELECT_BILL_SUCCESS, res);
+        } else {
+          commit(actionTypes.SELECT_BILL_FAILURE);
+        }
+        resolve(res);
+      })
+      .catch((err) => {
+        commit(actionTypes.SELECT_BILL_FAILURE);
         reject(err);
       })
   });

@@ -168,16 +168,8 @@ export const INSERT_PAYMENT_REQUEST = (state) => {
  * @constructor
  */
 export const INSERT_PAYMENT_SUCCESS = (state, data) => {
-  const {ordermoney} = data;
   const {sitename} = state.LOGIN.isData || {};
   const newData = {...data, sitename};
-
-  const oldIndex = state.INDEX.isData || {};
-  const oldTotal = isIndex || {};
-  const {totalmoney} = total || {};
-  const newTotalMoney = parseFloat(totalmoney) + parseFloat(ordermoney);
-  state.INDEX.isData = {};
-
 
   state.PAYMENT.isLoading = false;
   state.PAYMENT.isSuccess = true;
@@ -477,4 +469,39 @@ export const SELECT_USER_FAILURE = (state) => {
   state.USER.isLoading = false;
   state.USER.isSuccess = false;
   state.USER.isFailure = true;
+};
+/**
+ *
+ * @param state
+ * @constructor
+ */
+export const SELECT_BILL_REQUEST = (state) => {
+  state.BILL.isLoading = true;
+  state.BILL.isSuccess = false;
+  state.BILL.isFailure = false;
+};
+/**
+ *
+ * @param state
+ * @param data
+ * @constructor
+ */
+export const SELECT_BILL_SUCCESS = (state, data) => {
+  const total = data[0].data || {};
+  const chart = data[1].data || {};
+  const newData = {total, chart};
+  state.BILL.isLoading = false;
+  state.BILL.isSuccess = true;
+  state.BILL.isFailure = false;
+  state.BILL.isData = newData;
+};
+/**
+ *
+ * @param state
+ * @constructor
+ */
+export const SELECT_BILL_FAILURE = (state) => {
+  state.BILL.isLoading = false;
+  state.BILL.isSuccess = false;
+  state.BILL.isFailure = true;
 };

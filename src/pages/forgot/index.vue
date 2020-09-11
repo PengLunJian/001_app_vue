@@ -15,8 +15,8 @@
                     <view class="module-items">
                       <view class="module-item">1、联系您的老板直接找回</view>
                       <view class="module-item">
-                        2、联系财务专员登录商户后台，首先进入基础设置->角色设置->查看收银员账号密码,后台登录地址
-                        （<label class="important">https://sh.zhifuxia.net.cn</label>）
+                        2、联系财务专员登录商户后台，首先进入基础设置->角色设置->查看收银员账号密码,后台登录地址：
+                        <label class="important">https://sh.zhifuxia.net.cn</label>
                       </view>
                     </view>
                   </view>

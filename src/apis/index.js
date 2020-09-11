@@ -120,6 +120,13 @@ const apis = {
       begindate: '',
       enddate: ''
     }
+  },
+  selectBill: {
+    url: '/report/orderreport',
+    params: {
+      begindate: '',
+      enddate: ''
+    }
   }
 }
 
