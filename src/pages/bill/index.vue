@@ -12,7 +12,7 @@
                   <view class="module-body">
                     <view class="module-row row">
                       <view class="module-col col-12">
-                        <view class="tab-bar" v-if="false">
+                        <view class="tab-bar">
                           <view class="tab-row row">
                             <view class="tab-col col-4" :class="{'active':index===tab.activeIndex}"
                                   v-for="(item,index) in tab.items" :key="index"
