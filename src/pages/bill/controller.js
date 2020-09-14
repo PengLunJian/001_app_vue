@@ -15,52 +15,26 @@ export const actions = {
     ...mapActions([
         'ajaxSelectBill'
     ]),
-    onHandleConfirm(e) {
-        this.isScroll = true;
-        this.showPicker = false;
-        if (e) {
-            const {value} = e || {};
-            this.rangetime = [
-                utils.dateFormat(value[0], 'yyyy-mm-dd hh:mm:ss'),
-                utils.dateFormat(value[1], 'yyyy-mm-dd hh:mm:ss'),
-            ];
-        }
-        this.exeAjaxSelectBill();
-    },
-    onHandleCancel() {
-        this.isScroll = true;
-        this.showPicker = false;
-    },
     onHandleInitDate() {
         const date = new Date();
-        const dateRange = utils.dateFormat(date, 'yyyy-mm-dd');
-        this.rangetime = [
-            dateRange + ' 00:00:00',
-            dateRange + ' 23:59:59',
-        ];
+        const dateStr = utils.dateFormat(date, 'yyyy-mm-dd');
+        this.begindate = dateStr + ' 00:00:00';
+        this.enddate = dateStr + ' 23:59:59';
     },
     onHandleTabChange(index) {
-        const days = [1, 7, 30];
         this.tab.activeIndex = index;
-        const offsetTime = days[index] * 24 * 60 * 60 * 1000;
+        const value = this.tab.items[index].value;
+        const offsetTime = value * 24 * 60 * 60 * 1000;
 
-        const date = new Date();
-        const endTime = date.getTime();
+        const endTime = new Date().getTime();
         const beginTime = endTime - offsetTime;
 
-        const beginDate = utils.dateFormat(new Date(beginTime), 'yyyy-mm-dd hh:mm:ss');
-        const endDate = utils.dateFormat(new Date(endTime), 'yyyy-mm-dd hh:mm:ss');
-        this.rangetime = [
-            beginDate,
-            endDate,
-        ];
+        this.begindate = utils.dateFormat(new Date(beginTime), 'yyyy-mm-dd hh:mm:ss');
+        this.enddate = utils.dateFormat(new Date(endTime), 'yyyy-mm-dd hh:mm:ss');
         this.exeAjaxSelectBill();
     },
-    onShowDatePicker(type) {
-        this.type = type;
-        this.isScroll = false;
-        this.showPicker = true;
-        this.value = this[type];
+    onHandleChangeDate() {
+
     },
     exeAjaxSelectBill() {
         this.showLoading();
@@ -87,10 +61,10 @@ export const actions = {
         this.exeAjaxSelectBill();
     },
     getParams() {
-        const {rangetime} = this;
+        const {begindate, enddate} = this;
         const params = {
-            begindate: rangetime[0],
-            enddate: rangetime[1]
+            begindate,
+            enddate
         }
         return params;
     }
