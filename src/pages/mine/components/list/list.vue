@@ -59,7 +59,10 @@
       onHandleRoute(item) {
         const {path, name} = item;
         if (name === '退出登录') {
-          utils.removeStorage('token');
+          this.removeItem('token');
+          this.removeItem('siteName');
+          this.removeItem('username');
+          this.removeItem('password');
           this.reLaunch(path);
         } else {
           this.navigateTo(path);

@@ -17,8 +17,18 @@
                    placeholder="请输入密码">
           </view>
           <view class="form-group">
-            <view class="form-forgot">
-              <label class="form-text" @click="onHandlePassword">忘记密码</label>
+            <view class="form-row row">
+              <view class="form-col col-6">
+                <view class="form-checkbox" @click="onHandleCheckbox">
+                  <check-box :checked="checked"/>
+                  <label class="form-text">记住账号</label>
+                </view>
+              </view>
+              <view class="form-col col-6">
+                <view class="form-forgot">
+                  <label class="form-text" @click="onHandlePassword">忘记密码</label>
+                </view>
+              </view>
             </view>
           </view>
           <view class="form-group">
@@ -36,28 +46,26 @@
 
 <script type="text/ecmascript-6">
   import Mixin from '../../mixins';
-  import * as utils from '../../utils';
+  import CheckBox from "../../components/check-box/check-box";
   import * as $controller from './controller';
 
   export default {
+    components: {
+      CheckBox
+    },
     data() {
       return {
-        username: '6',
-        password: '123456',
+        username: '',
+        password: '',
         deviceid: '',
+        checked: false
       }
     },
     mixins: [Mixin],
     computed: $controller.states,
     methods: $controller.actions,
     onLoad() {
-      utils.getDeviceId()
-        .then((res) => {
-          this.deviceid = res;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.onHandleInitData();
     }
   }
 </script>
@@ -116,6 +124,13 @@
               border-radius: @height;
               background-color: @bgColor;
             }
+            .form-checkbox {
+              display: inline-block;
+              .form-text {
+                display: inline-block;
+                margin-left: unit(10, rpx);
+              }
+            }
             .form-forgot {
               padding-right: unit(10, rpx);
               text-align: right;
@@ -124,8 +139,9 @@
               }
             }
             .form-text {
-              height: unit(40, rpx);
-              line-height: unit(40, rpx);
+              height: unit(48, rpx);
+              line-height: unit(48, rpx);
+              vertical-align: middle;
             }
             .form-desc {
               font-size: @fontSize24;

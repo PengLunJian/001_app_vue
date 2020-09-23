@@ -50,8 +50,10 @@ export const SELECT_INDEX_REQUEST = (state) => {
  */
 export const SELECT_INDEX_SUCCESS = (state, data) => {
   const {sitename} = state.LOGIN.isData || {};
+  const siteName = sitename ?
+    sitename : utils.getStorage('siteName');
   const data1 = data[0].data || {};
-  const total = {...data1, sitename};
+  const total = {...data1, sitename: siteName};
 
   const series = [];
   const categories = [];
@@ -488,7 +490,8 @@ export const SELECT_BILL_REQUEST = (state) => {
  */
 export const SELECT_BILL_SUCCESS = (state, data) => {
   const total = data[0].data || {};
-  const chart = data[1].data || {};
+  const series = utils.getChartDataPie(data[1].data);
+  const chart = series.length ? {series} : null;
   const newData = {total, chart};
   state.BILL.isLoading = false;
   state.BILL.isSuccess = true;
@@ -504,4 +507,18 @@ export const SELECT_BILL_FAILURE = (state) => {
   state.BILL.isLoading = false;
   state.BILL.isSuccess = false;
   state.BILL.isFailure = true;
+};
+/**
+ *
+ * @param state
+ * @constructor
+ */
+export const SELECT_BILL_REPLACE = (state) => {
+  state.BILL.isLoading = false;
+  state.BILL.isSuccess = false;
+  state.BILL.isFailure = false;
+  state.BILL.isData = {
+    total: {},
+    chart: null
+  };
 };

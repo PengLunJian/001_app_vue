@@ -11,7 +11,7 @@ export const BILL = {
   isSuccess: false,
   isData: {
     total: {},
-    chart: {},
+    chart: null,
   }
 };
 

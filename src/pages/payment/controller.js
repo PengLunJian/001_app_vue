@@ -95,12 +95,14 @@ export const actions = {
       .then((res) => {
         this.hideLoading();
         res = res || {};
-        const {success} = res;
+        const {success, msg} = res;
         if (success) {
           this.exeAjaxSelectIndex();
           this.navigateTo($routes.SUCCESS.path);
         } else {
-          this.showToast('收款失败，请重试');
+          const message = msg.indexOf('限额') !== -1
+            ? '交易失败，已达到今日限额。' : '交易失败，请重试';
+          this.showToast(message);
         }
         console.log(res);
       })

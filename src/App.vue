@@ -1,21 +1,34 @@
 <script type="text/ecmascript-6">
-	export default {
-		onLaunch: function() {
-			console.log('App Launch')
-		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
-		}
-	}
+  import * as utils from './utils';
+  import * as $routes from './router';
+
+  export default {
+    onLaunch: () => {
+      const systemTime = Date.now();
+      const username = utils.getStorage('username');
+      const password = utils.getStorage('password');
+      const expireTime = utils.getStorage('expireTime') || 0;
+      const isExpire = expireTime > systemTime;
+      const isBoolean = isExpire && username && password;
+      const path = isBoolean ? $routes.HOME.path : $routes.LOGIN.path;
+      utils.reLaunch(path);
+      setTimeout(() => {
+        plus.navigator.closeSplashscreen();
+      }, 3000);
+    },
+    onShow: () => {
+      console.log('App Show')
+    },
+    onHide: () => {
+      console.log('App Hide')
+    }
+  }
 </script>
 
 <style lang="less">
-	.container{
-		.content{
-			
-		}
-	}
+  .container {
+    .content {
+
+    }
+  }
 </style>

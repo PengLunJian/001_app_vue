@@ -45,16 +45,38 @@ export const getDeviceId = () => {
 };
 /**
  *
- * @returns {string}
+ * @param key
+ * @param value
  */
-export const getToken = () => {
-  let token = '';
+export const setStorage = (key, value) => {
   try {
-    token = uni.getStorageSync('token');
+    uni.setStorageSync(key, value);
   } catch (e) {
     console.log(e);
   }
-  return 'Bearer ' + token;
+};
+/**
+ *
+ * @param key
+ * @returns {string}
+ */
+export const getStorage = (key) => {
+  let result = '';
+  try {
+    result = uni.getStorageSync(key);
+  } catch (e) {
+    console.log(e);
+  }
+  return result;
+};
+/**
+ *
+ * @param url
+ */
+export const reLaunch = (url) => {
+  uni.reLaunch({
+    url
+  });
 };
 /**
  *
@@ -156,3 +178,35 @@ export const dateFormat = (date, format) => {
   newDate = null;
   return dateStr;
 };
+/**
+ *
+ * @param items
+ * @returns {*[]}
+ */
+export const getChartDataPie = (items) => {
+  let result = [
+    {
+      name: '支付宝',
+      data: 0
+    },
+    {
+      name: '微信',
+      data: 0
+    },
+    {
+      name: '其他',
+      data: 0
+    },
+  ];
+  (items || []).map((item) => {
+    const {paytype} = item;
+    if (paytype === '支付宝') {
+      result[0].data++;
+    } else if (paytype === '微信') {
+      result[1].data++;
+    } else {
+      result[2].data++;
+    }
+  });
+  return result;
+}

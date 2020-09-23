@@ -25,13 +25,13 @@ export const actions = {
     if (activeIndex === 0) {
       this.btnShop.value = 0;
       this.btnShop.activeIndex = -1;
+      this.btnPerson.value = 0;
+      this.btnPerson.activeIndex = -1;
     } else if (activeIndex === 1) {
       this.btnMethod.value = 0;
       this.btnMethod.activeIndex = -1;
       this.btnStatus.value = 0;
       this.btnStatus.activeIndex = -1;
-      this.btnPerson.value = 0;
-      this.btnPerson.activeIndex = -1;
 
       this.begindate = '';
       this.enddate = '';
@@ -41,7 +41,6 @@ export const actions = {
     this.pageindex = 0;
     this.onHandleClose();
     this.SELECT_ORDER_REPLACE();
-    this.exeAjaxSelectClerk();
     this.exeAjaxSelectOrder();
   },
   onHandleChange(index) {
@@ -57,12 +56,15 @@ export const actions = {
   onHandleShop(index) {
     const {items, activeIndex} = this.btnShop;
     if (activeIndex === index) {
-      this.btnShop.activeIndex = -1;
       this.btnShop.value = 0;
+      this.btnShop.activeIndex = -1;
     } else {
       this.btnShop.activeIndex = index;
       this.btnShop.value = items[index].shopid;
     }
+    this.btnPerson.value = 0;
+    this.btnPerson.activeIndex = -1;
+    this.exeAjaxSelectClerk();
   },
   onHandleSort(index) {
     const {items, activeIndex} = this.btnSort;
@@ -166,11 +168,13 @@ export const actions = {
       });
   },
   exeAjaxSelectClerk() {
+    this.showLoading();
     const {value} = this.btnShop;
     const params = {shopid: value};
     this.ajaxSelectClerk(params)
       .then((res) => {
         res = res || {};
+        this.hideLoading();
         const {success, data} = res;
         if (success) {
           this.btnPerson.items = data || [];
@@ -180,6 +184,7 @@ export const actions = {
         console.log(res);
       })
       .catch((err) => {
+        this.hideLoading();
         this.showToast('网络异常，请重试');
         console.log(err);
       });

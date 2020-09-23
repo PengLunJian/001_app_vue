@@ -1,5 +1,6 @@
 import apis from '../apis';
 import * as utils from '../utils';
+import * as $routes from '../router';
 
 let requestTask = null;
 /**
@@ -11,7 +12,7 @@ let requestTask = null;
  */
 export const request = (api, method, params) => {
   const {baseUrl, dataType, timeout} = apis;
-  const token = utils.getToken();
+  const token = 'Bearer ' + utils.getStorage('token');
   const header = {...apis.header, 'Authorization': token};
   const url = baseUrl + api.url;
   return new Promise((resolve, reject) => {

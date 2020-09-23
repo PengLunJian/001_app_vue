@@ -28,14 +28,25 @@
           <view class="modal-body">
             <scroll-view class="scroll-view" scroll-y="true">
               <empty :isShow="!btnShop.items.length"/>
-              <view class="modal-row row btn" :class="{'active':btnShop.activeIndex===index}"
-                    v-for="(item,index) in btnShop.items" :key="index"
-                    @click="onHandleShop(index)">
-                <view class="modal-col col-6">
-                  <view class="modal-text">{{item.shopname}}</view>
-                </view>
-                <view class="modal-col col-6">
-                  <view class="modal-icon iconfont icon-right"></view>
+              <view class="modal-shop">
+                <view class="modal-row row">
+                  <view class="modal-col col-6">
+                    <scroll-view class="scroll-view" scroll-y="true">
+                      <view class="modal-btn btn" :class="{'active':btnShop.activeIndex===index}"
+                            v-for="(item,index) in btnShop.items" :key="index"
+                            @click="onHandleShop(index)">
+                        <view class="modal-text">{{item.shopname}}</view>
+                      </view>
+                    </scroll-view>
+                  </view>
+                  <view class="modal-col col-6">
+                    <scroll-view class="scroll-view" scroll-y="true">
+                      <view class="modal-btn btn" v-for="(item,index) in btnPerson.items" :key="index"
+                            :class="{'active':index===btnPerson.activeIndex}"
+                            @click="onHandlePerson(index)">{{item.siteusername}}
+                      </view>
+                    </scroll-view>
+                  </view>
                 </view>
               </view>
             </scroll-view>
@@ -76,16 +87,6 @@
                   <view class="modal-col col-3" v-for="(item,index) in btnStatus.items" :key="index">
                     <view class="modal-btn btn-filter" :class="{'active':index===btnStatus.activeIndex}"
                           @click="onHandleStatus(index)">{{item.label}}
-                    </view>
-                  </view>
-                </view>
-                <view class="modal-row row" v-if="btnPerson.items.length">
-                  <view class="modal-col col-12">
-                    <view class="modal-label">收款人员</view>
-                  </view>
-                  <view class="modal-col col-3" v-for="(item,index) in btnPerson.items" :key="index">
-                    <view class="modal-btn btn-filter" :class="{'active':index===btnPerson.activeIndex}"
-                          @click="onHandlePerson(index)">{{item.siteusername}}
                     </view>
                   </view>
                 </view>
@@ -367,23 +368,36 @@
         }
         &#modalA {
           .modal-body {
-            .modal-row {
-              padding: 0 unit(30, rpx);
-              line-height: unit(100, rpx);
-              border-bottom: 0.5px solid @borderColor1;
-              .modal-text {
-                font-size: @fontSize28;
-              }
-              .modal-icon {
-                display: none !important;
-                font-size: @fontSize24;
-                text-align: right;
-                color: @theme;
-              }
-              &.active {
-                color: @theme;
-                .modal-icon {
-                  display: block !important;
+            height: 100%;
+            .modal-shop {
+              height: 100%;
+              .modal-row {
+                height: 100%;
+                .modal-col {
+                  height: 100%;
+                  .modal-btn {
+                    padding: 0 unit(30, rpx);
+                    line-height: unit(100, rpx);
+                    .modal-text {
+                      font-size: @fontSize28;
+                    }
+                    .modal-icon {
+                      display: none !important;
+                      font-size: @fontSize24;
+                      text-align: right;
+                      color: @theme;
+                    }
+                    &.active {
+                      color: @theme;
+                      background-color: @bgColor;
+                      .modal-icon {
+                        display: block !important;
+                      }
+                    }
+                  }
+                  &:last-child {
+                    background-color: @bgColor;
+                  }
                 }
               }
             }

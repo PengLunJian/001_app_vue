@@ -1,5 +1,6 @@
 import {mapActions, mapState} from 'vuex';
 import * as $routes from '../../router';
+import * as utils from '../../utils';
 
 export const states = {
   ...mapState({
@@ -29,6 +30,26 @@ export const actions = {
   onHandlePassword() {
     this.navigateTo($routes.FORGOT.path);
   },
+  onHandleInitData() {
+    const username = this.getItem('username');
+    const password = this.getItem('password');
+    if (username && password) {
+      this.username = username;
+      this.password = password;
+      this.checked = true;
+    }
+    utils.getDeviceId()
+      .then((res) => {
+        this.deviceid = res;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  onHandleCheckbox() {
+    const {checked} = this;
+    this.checked = !checked;
+  },
   onHandleLogin() {
     if (this.onHandleCheckEmpty()) {
       this.exeAjaxSelectLogin();
@@ -43,11 +64,21 @@ export const actions = {
         res = res || {};
         const {success, data} = res;
         if (success) {
-          const {token} = data;
+          const {token, expiretime, sitename} = data;
+          const {checked, username, password} = this;
           this.setItem('token', token);
+          this.setItem('siteName', sitename);
+          this.setItem('expireTime', expiretime);
           this.reLaunch($routes.HOME.path);
+          if (checked) {
+            this.setItem('username', username);
+            this.setItem('password', password);
+          } else {
+            this.removeItem('username');
+            this.removeItem('password');
+          }
         } else {
-          this.showToast('用户名或密码错误');
+          this.showToast('账号或密码错误');
         }
         console.log(res);
       })
