@@ -6,6 +6,12 @@ const apis = {
   header: {
     'Content-Type': 'application/json; charset=UTF-8'
   },
+  selectToken: {
+    url: '/account/apprefreshtoken',
+    params: {
+      token: ''
+    }
+  },
   selectLogin: {
     url: '/account/applogin',
     params: {

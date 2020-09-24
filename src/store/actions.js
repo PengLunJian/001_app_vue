@@ -6,6 +6,28 @@ import * as actionTypes from './actionTypes';
 /**
  *
  * @param commit
+ * @param params
+ * @returns {Promise<any>}
+ */
+export const ajaxSelectToken = (params) => {
+  return new Promise((resolve, reject) => {
+    $ajax.post(apis.selectToken, params)
+      .then((res) => {
+        res = res || {};
+        const {data, success} = res;
+        if (success) {
+        } else {
+        }
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+/**
+ *
+ * @param commit
  * @returns {Promise<any>}
  */
 export const ajaxSelectLogin = ({commit}, params) => {

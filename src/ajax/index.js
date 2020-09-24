@@ -1,8 +1,8 @@
 import apis from '../apis';
 import * as utils from '../utils';
-import * as $routes from '../router';
 
 let requestTask = null;
+let isRefreshToken = false;
 /**
  *
  * @param url
