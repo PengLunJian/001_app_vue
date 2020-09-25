@@ -31,6 +31,7 @@ export const actions = {
     this.navigateTo($routes.FORGOT.path);
   },
   onHandleInitData() {
+    this.setItem('isExpire', true);
     const username = this.getItem('username');
     const password = this.getItem('password');
     if (username && password) {

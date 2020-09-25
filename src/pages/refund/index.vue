@@ -62,7 +62,7 @@
           <view class="modal-header">
             <view class="modal-row row">
               <view class="modal-col col-12">
-                <view class="modal-title">请输入密码</view>
+                <view class="modal-title">密码输入</view>
               </view>
               <view class="modal-col col-12">
                 <input class="modal-input" v-model="refundpass" type="password" disabled
