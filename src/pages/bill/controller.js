@@ -1,4 +1,5 @@
 import {mapActions, mapMutations, mapState} from 'vuex';
+import * as $routes from '../../router';
 import * as utils from '../../utils';
 
 export const states = {
@@ -30,17 +31,22 @@ export const actions = {
     'SELECT_BILL_REPLACE'
   ]),
   onHandleInitDate() {
-    const endTime = new Date().getTime();
-    const beginTime = endTime - 1 * 24 * 60 * 60 * 1000;
-    this.begindate = utils.dateFormat(new Date(beginTime), 'yyyy-mm-dd hh:mm:ss');
+    const dayTime = 24 * 60 * 60 * 1000;
+    const systemTime = utils.dateFormat(new Date(), 'yyyy-mm-dd');
+    this.begindate = systemTime + ' 00:00:00';
+    const dateStr = this.begindate.replace(/-/g, '/');
+    const endTime = new Date(dateStr).getTime() + dayTime;
     this.enddate = utils.dateFormat(new Date(endTime), 'yyyy-mm-dd hh:mm:ss');
   },
   onHandleTabChange(index) {
     this.tab.activeIndex = index;
+    const dayTime = 24 * 60 * 60 * 1000;
     const value = this.tab.items[index].value;
     const offsetTime = value * 24 * 60 * 60 * 1000;
 
-    const endTime = new Date().getTime();
+    const systemTime = utils.dateFormat(new Date(), 'yyyy-mm-dd');
+    const dateStr = systemTime.replace(/-/g, '/');
+    const endTime = new Date(dateStr).getTime() + dayTime;
     const beginTime = endTime - offsetTime;
 
     this.begindate = utils.dateFormat(new Date(beginTime), 'yyyy-mm-dd hh:mm:ss');
@@ -48,7 +54,7 @@ export const actions = {
     this.exeAjaxSelectBill();
   },
   onHandleChangeDate() {
-
+    this.navigateTo($routes.DATETIME.path);
   },
   exeAjaxSelectBill() {
     this.showLoading();

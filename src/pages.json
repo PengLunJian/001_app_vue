@@ -36,6 +36,15 @@
       }
     },
     {
+      "path": "pages/dateTime/index",
+      "style": {
+        "navigationBarTitleText": "选择时间",
+        "app-plus": {
+          "bounce": "none"
+        }
+      }
+    },
+    {
       "path": "pages/forgot/index",
       "style": {
         "navigationBarTitleText": "忘记密码"

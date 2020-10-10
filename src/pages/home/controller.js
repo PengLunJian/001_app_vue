@@ -14,6 +14,7 @@ export const states = {
 
 export const actions = {
   ...mapActions([
+    'ajaxUpdateApp',
     'ajaxSelectIndex'
   ]),
   exeAjaxSelectIndex() {

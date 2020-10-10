@@ -1,3 +1,6 @@
+import * as $routes from '../router';
+import {ajaxUpdateVersion} from '../store/actions';
+
 /**
  *
  * @returns {Promise<any>}
@@ -45,39 +48,54 @@ export const getDeviceId = () => {
 };
 /**
  *
- * @param key
- * @param value
  */
-export const setStorage = (key, value) => {
-  try {
-    uni.setStorageSync(key, value);
-  } catch (e) {
-    console.log(e);
-  }
-};
-/**
- *
- * @param key
- * @returns {string}
- */
-export const getStorage = (key) => {
-  let result = '';
-  try {
-    result = uni.getStorageSync(key);
-  } catch (e) {
-    console.log(e);
-  }
-  return result;
-};
-/**
- *
- * @param url
- */
-export const reLaunch = (url) => {
+export const onHandleAutoLogin = () => {
+  const systemTime = Date.now();
+  const username = uni.getStorageSync('username');
+  const password = uni.getStorageSync('password');
+  const expireTime = uni.getStorageSync('expireTime') || 0;
+  const isExpire = expireTime > systemTime;
+  const isBoolean = isExpire && username && password;
+  const path = isBoolean ? $routes.HOME.path : $routes.LOGIN.path;
   uni.reLaunch({
-    url
+    url: path
   });
-};
+  setTimeout(() => {
+    plus.navigator.closeSplashscreen();
+  }, 3000);
+}
+/**
+ *
+ */
+export const onHandleVersion = () => {
+  const params = {
+    appid: plus.runtime.appid,
+    version: plus.runtime.version
+  };
+  ajaxUpdateVersion(params)
+    .then((res) => {
+      res = res || {};
+      const {success, data} = res;
+      if (success) {
+        uni.showModal({
+          title: '发现新版本',
+          content: '升级后可体验更多功能',
+          success: (res) => {
+            res = res || {};
+            const {confirm} = res;
+            if (confirm) {
+              const {url} = data;
+              plus.runtime.openURL(url);
+            }
+          }
+        })
+      }
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
 /**
  *
  * @param key

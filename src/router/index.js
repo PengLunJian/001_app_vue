@@ -8,9 +8,14 @@ export const HOME = {
   path: '/pages/home/index'
 };
 
-export const LIST = {
+export const BILL = {
   name: '对账',
-  path: '/pages/list/index'
+  path: '/pages/bill/index'
+};
+
+export const DATETIME = {
+  name: '选择时间',
+  path: '/pages/dateTime/index'
 };
 
 export const MINE = {

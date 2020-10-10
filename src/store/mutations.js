@@ -51,7 +51,7 @@ export const SELECT_INDEX_REQUEST = (state) => {
 export const SELECT_INDEX_SUCCESS = (state, data) => {
   const {sitename} = state.LOGIN.isData || {};
   const siteName = sitename ?
-    sitename : utils.getStorage('siteName');
+    sitename : uni.getStorageSync('siteName');
   const data1 = data[0].data || {};
   const total = {...data1, sitename: siteName};
 

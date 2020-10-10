@@ -14,7 +14,7 @@
                   </view>
                   <view class="module-info">
                     <view class="module-desc">智付侠</view>
-                    <view class="module-desc">1.0.0</view>
+                    <view class="module-desc">{{version}}</view>
                   </view>
                 </view>
               </view>
@@ -87,7 +87,7 @@
       }
     },
     onLoad() {
-
+      this.version = plus.runtime.version;
     }
   }
 </script>

@@ -6,6 +6,13 @@ const apis = {
   header: {
     'Content-Type': 'application/json; charset=UTF-8'
   },
+  updateVersion: {
+    url: '/account/appupdate',
+    params: {
+      appid: '',
+      version: ''
+    }
+  },
   selectToken: {
     url: '/account/apprefreshtoken',
     params: {

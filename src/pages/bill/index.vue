@@ -119,6 +119,17 @@
     },
     computed: $controller.states,
     methods: $controller.actions,
+    onShow() {
+      const begindate = this.getItem('begindate');
+      const enddate = this.getItem('enddate');
+      if (begindate && enddate) {
+        this.begindate = begindate;
+        this.enddate = enddate;
+        this.exeAjaxSelectBill();
+        this.removeItem('begindate');
+        this.removeItem('enddate');
+      }
+    },
     onLoad() {
       this.SELECT_BILL_REPLACE();
       this.onHandleInitDate();
